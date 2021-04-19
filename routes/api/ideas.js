@@ -63,7 +63,6 @@ router.post("/",
 router.patch("/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const ideaBody = req.body.body;
 
     const { isValid, errors } = validateIdeaInput(req.body);
 
@@ -72,8 +71,7 @@ router.patch("/:id",
     };
 
     Idea
-      .findById(req.params.id)
-      .update({'body': ideaBody})
+      .findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then(idea => res.json(idea))
       .catch(err => res.status(400).json(err));
   }
@@ -85,9 +83,9 @@ router.delete("/:id",
   passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     Idea
-      .findById(req.params.id)
-      .remove()
+      .findByIdAndDelete(req.params.id)
       .then(idea => res.json(idea)) // dunno what to put here
+      .catch(err => res.status(400).json(err));
   });
 
 module.exports = router;
