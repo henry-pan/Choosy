@@ -61,7 +61,14 @@ router.post("/",
 // Idea update route
 
 
-// Idea delete route
-
+// Delete idea by id (not currently restricted to a user)
+router.delete("/:id", 
+  passport.authenticate("jwt", { session: false }), 
+  (req, res) => {
+    
+    Idea
+      .findById(req.params.id)
+      .then(idea => res.json(idea)) // dunno what to put here
+  });
 
 module.exports = router;
