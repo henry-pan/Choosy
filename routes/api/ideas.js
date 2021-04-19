@@ -59,7 +59,24 @@ router.post("/",
   });
 
 // Idea update route
+router.patch("/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const ideaBody = req.body.body;
 
+    const { isValid, errors } = validateIdeaInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    };
+
+    Idea
+      .findById(req.params.id)
+      .update({'body': ideaBody})
+      .then(idea => res.json(idea))
+      .catch(err => res.status(400).json(err));
+  }
+);
 
 // Delete idea by id (not currently restricted to a user)
 router.delete("/:id", 
