@@ -65,7 +65,6 @@ router.post("/",
 router.delete("/:id", 
   passport.authenticate("jwt", { session: false }), 
   (req, res) => {
-    
     Idea
       .findById(req.params.id)
       .then(idea => res.json(idea)) // dunno what to put here
