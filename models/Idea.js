@@ -15,7 +15,7 @@ const IdeaSchema = new Schema({
     required: true
   },
   score: {
-    type: Integer,
+    type: Number
   },
   date: {
     type: Date,

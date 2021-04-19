@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const Idea = require("../../models/Idea")
-const validateIdeaInput = require("../../validation/idea")
+const validateIdeaInput = require("../../validation/ideas")
 
 router.get("/test", (req, res) => res.json({ msg: "This is the ideas route" }));
 
