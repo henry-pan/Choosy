@@ -8,6 +8,7 @@ router.get("/test", (req, res) => res.json({ msg: "This is the ideas route" }));
 
 // did not add password.authenticate because it doesn't matter whether a user is logged in or not
 // gets all ideas
+// TESTED
 router.get("/", (req, res) => {
   Idea
     .find()
@@ -18,6 +19,7 @@ router.get("/", (req, res) => {
 
 // gets all the ideas by a given user
 // nest this under room route later?
+// TESTED
 router.get("/user/:user_id", (req, res) => { // note the :user_id wildcard
   Idea
     .find({ user: req.params.user_id })
@@ -25,6 +27,8 @@ router.get("/user/:user_id", (req, res) => { // note the :user_id wildcard
     .catch(err => res.status(400).json(err));
 });
 
+
+// TESTED
 // gets a specific idea by its id
 router.get("/:id", (req, res) => {
   Idea
@@ -33,6 +37,8 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(400).json(err));
 })
 
+
+// TESTED
 // Idea post route
 router.post("/",
   passport.authenticate("jwt", { session: false }),
@@ -53,9 +59,35 @@ router.post("/",
   });
 
 // Idea update route
+// Todo: test to make sure users can only update ideas if logged in
+router.patch("/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const ideaBody = req.body.body;
 
+    const { isValid, errors } = validateIdeaInput(req.body);
 
-// Idea delete route
+    if (!isValid) {
+      return res.status(400).json(errors);
+    };
 
+    Idea
+      .findById(req.params.id)
+      .update({'body': ideaBody})
+      .then(idea => res.json(idea))
+      .catch(err => res.status(400).json(err));
+  }
+);
+
+// Delete idea by id
+// Todo: test to make sure users can only delete ideas if logged in
+router.delete("/:id", 
+  passport.authenticate("jwt", { session: false }), 
+  (req, res) => {
+    Idea
+      .findById(req.params.id)
+      .remove()
+      .then(idea => res.json(idea)) // dunno what to put here
+  });
 
 module.exports = router;
