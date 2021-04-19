@@ -84,6 +84,7 @@ router.delete("/:id",
   (req, res) => {
     Idea
       .findById(req.params.id)
+      .remove()
       .then(idea => res.json(idea)) // dunno what to put here
   });
 
