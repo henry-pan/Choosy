@@ -1,10 +1,11 @@
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
 const passport = require('passport');
-const app = express();
+
 const db = require("./config/keys").mongoURI;
 const users = require('./routes/api/users');
-const ideas = require('./routes/api/ideas');
+// const ideas = require('./routes/api/ideas');
 
 
 
@@ -28,7 +29,7 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 app.use("/api/users", users);
-app.user("/api/ideas", ideas);
+// app.use("/api/ideas", ideas);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
