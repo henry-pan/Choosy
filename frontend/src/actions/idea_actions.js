@@ -1,4 +1,4 @@
-import { getIdeas, getUserIdeas, createIdea, deleteIdea } from '../util/idea_util';
+import { getIdeas, getIdea, getUserIdeas, createIdea, deleteIdea } from '../util/idea_util';
 
 export const RECEIVE_IDEAS = "RECEIVE_IDEAS";
 export const RECEIVE_USER_IDEAS = "RECEIVE_USER_IDEAS";
@@ -29,6 +29,12 @@ export const removeIdea = ideaId => ({
 export const fetchIdeas = () => dispatch => (
   getIdeas()
     .then(ideas => dispatch(receiveIdeas(ideas)))
+    .catch(err => console.log(err))
+);
+
+export const fetchIdea = id => dispatch => (
+  getIdeas(id)
+    .then(idea => dispatch(receiveIdea(idea)))
     .catch(err => console.log(err))
 );
 
