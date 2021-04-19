@@ -31,7 +31,6 @@ class SessionForm extends React.Component {
   handleDemo(user, e) {
     e.preventDefault();
     this.props.processForm({ username: user, password: "123456" });
-    this.props.closeModal();
   }
   
   renderErrors(){
@@ -63,17 +62,18 @@ class SessionForm extends React.Component {
     }
 
     return (
-      <>
+      <div>
+        <h1>Choosy</h1>
         {demoLogin}
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleUser} type="text" value={this.state.username} placeholder="Your username"/>
+          <input onChange={this.handleInput("username")} type="text" value={this.state.username} placeholder="Your username"/>
           {emailInput}
-          <input onChange={this.handlePassword} type="password" value={this.state.password} placeholder="Your password"/>
+          <input onChange={this.handleInput("password")} type="password" value={this.state.password} placeholder="Your password"/>
           {password2Input}
           {this.renderErrors()}
           <button>{this.props.formType}</button>
         </form>
-      </>
+      </div>
     );
   
   }
