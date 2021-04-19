@@ -9,7 +9,7 @@ const passport = require("passport");
 
 // Set up routes
 const users = require('./routes/api/users');
-// const ideas = require('./routes/api/ideas');
+const ideas = require('./routes/api/ideas');
 
 
 // Comment in for heroku
