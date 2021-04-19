@@ -6,14 +6,10 @@ const validText = require('./valid-text');
 module.exports = function validateIdeaInput(data) {
   let errors = {};
 
-  data.text = validText(data.text) ? data.text : '';
+  data.body = validText(data.body) ? data.body : '';
 
-  if (!Validator.isLength(data.text, { min: 5, max: 140 })) {
-    errors.text = 'Idea must be between 5 and 140 characters';
-  }
-
-  if (Validator.isEmpty(data.text)) {
-    errors.text = 'Text field is required';
+  if (Validator.isEmpty(data.body)) {
+    errors.body = 'Idea body is required';
   }
 
   return {

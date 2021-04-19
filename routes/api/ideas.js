@@ -45,7 +45,7 @@ router.post("/",
 
     const newIdea = new Idea({
       user: req.user.id,
-      text: req.body.text
+      body: req.body.body
     })
 
     newIdea.save()
