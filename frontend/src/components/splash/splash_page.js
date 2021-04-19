@@ -6,9 +6,10 @@ class SplashPage extends React.Component {
     super(props);
 
     this.state = {
-      roomCode: ""
+      roomCode: "",
+      errors: {}
     }
-    
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -19,11 +20,21 @@ class SplashPage extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    console.log("This would have entered the room: ", this.state.roomCode);
+  }
+
+  renderErrors(){
+    return (
+      <ul>
+        {Object.keys(this.state.errors).map((error, i) => (
+          <li key={`error-${i}`}>{this.state.errors[error]}</li>
+        ))}
+      </ul>
+    );
   }
 
   render() {
-
+    
     let logoutButton;
     let authButtons;
     if (this.props.loggedIn) {

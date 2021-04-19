@@ -1,10 +1,11 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 class SessionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      name: "",
       email: "",
       password: "",
       password2: "",
@@ -15,6 +16,9 @@ class SessionForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.signedIn === true) {
+      this.props.history.push("/");
+    }
     this.setState({ errors: nextProps.errors });
   }
 
@@ -28,9 +32,9 @@ class SessionForm extends React.Component {
     this.props.processForm(user);
   }
 
-  handleDemo(user, e) {
+  handleDemo(userEmail, e) {
     e.preventDefault();
-    this.props.processForm({ username: user, password: "123456" });
+    this.props.processForm({ email: userEmail, password: "123456" });
   }
   
   renderErrors(){
@@ -44,10 +48,10 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    let emailInput;
+    let usernameInput;
     let password2Input;
     if (this.props.formType === "Register") {
-      emailInput = <input onChange={this.handleInput("email")} type="text" value={this.state.email} placeholder="Your email"/>;
+      usernameInput = <input onChange={this.handleInput("name")} type="text" value={this.state.name} placeholder="Your name"/>;
       password2Input = <input onChange={this.handleInput("password2")} type="password" value={this.state.password2} placeholder="Confirm your password"/>;
     }
     
@@ -55,7 +59,7 @@ class SessionForm extends React.Component {
     if (this.props.formType === "Login") {
       demoLogin = <>
         <div>
-          <button onClick={(e) => this.handleDemo("Demo", e)}>Demo Login</button>
+          <button onClick={(e) => this.handleDemo("demo@demo.com", e)}>Demo Login</button>
         </div>
         <div className="divider"><p>or</p></div>
       </>;
@@ -66,8 +70,8 @@ class SessionForm extends React.Component {
         <h1>Choosy</h1>
         {demoLogin}
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleInput("username")} type="text" value={this.state.username} placeholder="Your username"/>
-          {emailInput}
+          {usernameInput}
+          <input onChange={this.handleInput("email")} type="text" value={this.state.email} placeholder="Your email"/>
           <input onChange={this.handleInput("password")} type="password" value={this.state.password} placeholder="Your password"/>
           {password2Input}
           {this.renderErrors()}
@@ -79,4 +83,4 @@ class SessionForm extends React.Component {
   }
 }
 
-export default SessionForm;
+export default withRouter(SessionForm);
