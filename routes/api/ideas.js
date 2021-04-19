@@ -59,6 +59,7 @@ router.post("/",
   });
 
 // Idea update route
+// Todo: test to make sure users can only update ideas if logged in
 router.patch("/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -78,7 +79,8 @@ router.patch("/:id",
   }
 );
 
-// Delete idea by id (not currently restricted to a user)
+// Delete idea by id
+// Todo: test to make sure users can only delete ideas if logged in
 router.delete("/:id", 
   passport.authenticate("jwt", { session: false }), 
   (req, res) => {
