@@ -15,7 +15,7 @@ import { RECEIVE_IDEAS, RECEIVE_USER_IDEAS, RECEIVE_IDEA, REMOVE_IDEA } from '..
         newState.new = action.idea.data
         return newState;
       case REMOVE_IDEA:
-        newState.new = undefined
+        delete newState[action.ideaId];
         return newState;
       default:
         return state;
