@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
-import SplashPage from './splash_page';
+import Room from './room';
 
 const mapStateToProps = state => ({
   loggedIn: state.session.isAuthenticated,
@@ -11,4 +11,4 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SplashPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Room);
