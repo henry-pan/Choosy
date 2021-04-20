@@ -9,7 +9,19 @@ module.exports = function validateIdeaInput(data) {
   data.body = validText(data.body) ? data.body : '';
 
   if (Validator.isEmpty(data.body)) {
-    errors.body = 'Idea body is required';
+    errors.text = 'Idea body is required';
+  }
+
+  if (!Validator.isLength(data.body, { min: 5, max: 80 })) {
+    errors.text = 'Idea must be between 5 and 80 characters';
+  }
+
+  if (!Validator.isLowercase(data.body)) {
+    errors.text = 'Idea must be lowercase';
+  }
+
+  if (!Validator.isAlphanumeric(data.body)) {
+    errors.text = 'Idea must be alphanumeric';
   }
 
   return {

@@ -3,6 +3,9 @@ const app = express();
 const db = require("./config/keys").mongoURI;
 const mongoose = require("mongoose");
 const passport = require("passport");
+const http = require('http');
+const server = http.createServer(app);
+const io = require('socket.io')(server);
 
 // const path = require('path'); // Heroku
 
@@ -10,6 +13,7 @@ const passport = require("passport");
 // Set up routes
 const users = require('./routes/api/users');
 const ideas = require('./routes/api/ideas');
+const rooms = require('./routes/api/rooms');
 
 
 // Comment in for heroku
@@ -41,6 +45,7 @@ app.use(express.json());
 // Configure routes
 app.use("/api/users", users);
 app.use("/api/ideas", ideas);
+app.use("/api/rooms", rooms);
 
 
 
@@ -51,3 +56,4 @@ app.get("/", (req, res) => {
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
+
