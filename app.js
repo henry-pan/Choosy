@@ -3,6 +3,9 @@ const app = express();
 const db = require("./config/keys").mongoURI;
 const mongoose = require("mongoose");
 const passport = require("passport");
+const http = require('http');
+const server = http.createServer(app);
+const io = require('socket.io')(server);
 
 // const path = require('path'); // Heroku
 
