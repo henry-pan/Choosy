@@ -17,3 +17,4 @@ router.get("/test", (req, res) => {
 // DELETE route for closing a room
 
 
+module.exports = router;

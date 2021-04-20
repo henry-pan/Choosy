@@ -21,3 +21,5 @@ const RoomSchema = new Schema({
   //users documents in the schema or
   //let socket io handle it
 });
+
+module.exports = Room = mongoose.model('Room', RoomSchema);
