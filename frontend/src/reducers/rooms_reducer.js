@@ -1,6 +1,6 @@
-import { RECEIVE_IDEAS, RECEIVE_USERS, REMOVE_ROOM } from '../actions/room_actions';
+import { RECEIVE_IDEAS, RECEIVE_ROOM, RECEIVE_USERS, REMOVE_ROOM } from '../actions/room_actions';
   
-  const RoomsReducer = (state = { users: {}, ideas: {}, new: undefined }, action) => {
+  const RoomsReducer = (state = { id: undefined, users: {}, ideas: {}, new: undefined }, action) => {
     Object.freeze(state);
     let newState = Object.assign({}, state);
     switch(action.type) {
@@ -10,6 +10,8 @@ import { RECEIVE_IDEAS, RECEIVE_USERS, REMOVE_ROOM } from '../actions/room_actio
       case RECEIVE_USERS:
         newState.users.all = action.users.data
         return newState;
+      case RECEIVE_ROOM:
+        newState.id = action.roomId
       case REMOVE_ROOM:
         newState = undefined;
         return newState;

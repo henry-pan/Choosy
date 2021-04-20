@@ -8,6 +8,10 @@ export const deleteRoom = roomId => {
   return axios.delete(`/api/rooms/${roomId}`)
 }
 
+export const getRoom = roomId => {
+  return axios.get(`/api/rooms/${roomId}`)
+}
+
 export const getUsers = roomId => {
   return axios.get(`/api/rooms/${roomId}/users`)
 }
