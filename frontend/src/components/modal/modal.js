@@ -1,25 +1,23 @@
 import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
+import AboutContainer from '../about/about_container';
+import JoinGuestContainer from '../join_guest/join_guest_container';
 import { connect } from 'react-redux';
 
-function Modal({modal, closeModal, trackId}) {
+function Modal({ modal, closeModal }) {
   if (!modal) {
     return null;
   }
   let component;
-  let modalType;
+  let modalClass;
   switch (modal) {
-    case 'login':
-      component = <LoginFormContainer />;
-      modalType = "modal-session";
+    case 'about':
+      component = <AboutContainer />;
+      modalClass = "modal-about";
       break;
-    case 'signup':
-      component = <SignupFormContainer />;
-      modalType = "modal-session";
-      break;
-    case 'edit':
-      component = <EditTrackFormContainer trackId={trackId}/>;
-      modalType = "modal-edit-track";
+    case 'join':
+      component = <JoinGuestContainer />;
+      modalClass = "modal-join";
       break;
     default:
       return null;
@@ -36,7 +34,7 @@ function Modal({modal, closeModal, trackId}) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    modal: state.ui.modal
+    modal: state.modal
   };
 };
 
