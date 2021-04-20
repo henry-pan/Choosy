@@ -40,8 +40,10 @@ router.get("/:id", (req, res) => {
 
 // TESTED
 // Idea post route
+// may have to refactor to allow non-signed-in users to post ideas.
+// may want to create a dummy user to keep track of all the associated ideas
 router.post("/",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     const { isValid, errors } = validateIdeaInput(req.body);
 
@@ -59,6 +61,7 @@ router.post("/",
   });
 
 // Idea update route
+// may have to refactor to allow non-signed-in users to post ideas.
 // Todo: test to make sure users can only update ideas if logged in
 router.patch("/:id",
   passport.authenticate("jwt", { session: false }),
