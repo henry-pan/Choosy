@@ -6,9 +6,15 @@ class Room extends React.Component{
 
     this.state = {};
   }
+
   render() {
-    <div>
-    </div>
+    if (!this.props.currentUser) return null;
+
+    return (
+      <div>
+        <h1>Welcome, {this.props.currentUser.name}. You are in the room.</h1>
+      </div>
+    );
   }
 }
 
