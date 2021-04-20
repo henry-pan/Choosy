@@ -71,7 +71,7 @@ class SessionForm extends React.Component {
         {demoLogin}
         <form onSubmit={this.handleSubmit}>
           {usernameInput}
-          <input onChange={this.handleInput("email")} type="text" value={this.state.email} placeholder="Your email"/>
+          <input onChange={this.handleInput("email")} type="email" value={this.state.email} placeholder="Your email"/>
           <input onChange={this.handleInput("password")} type="password" value={this.state.password} placeholder="Your password"/>
           {password2Input}
           {this.renderErrors()}
