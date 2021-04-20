@@ -40,8 +40,10 @@ router.get("/:id", (req, res) => {
 
 // TESTED
 // Idea post route
+// may have to refactor to allow non-signed-in users to post ideas.
+// may want to create a dummy user to keep track of all the associated ideas
 router.post("/",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     const { isValid, errors } = validateIdeaInput(req.body);
 
@@ -59,11 +61,11 @@ router.post("/",
   });
 
 // Idea update route
+// may have to refactor to allow non-signed-in users to post ideas.
 // Todo: test to make sure users can only update ideas if logged in
 router.patch("/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const ideaBody = req.body.body;
 
     const { isValid, errors } = validateIdeaInput(req.body);
 
@@ -72,8 +74,7 @@ router.patch("/:id",
     };
 
     Idea
-      .findById(req.params.id)
-      .update({'body': ideaBody})
+      .findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then(idea => res.json(idea))
       .catch(err => res.status(400).json(err));
   }
@@ -85,9 +86,9 @@ router.delete("/:id",
   passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     Idea
-      .findById(req.params.id)
-      .remove()
+      .findByIdAndDelete(req.params.id)
       .then(idea => res.json(idea)) // dunno what to put here
+      .catch(err => res.status(400).json(err));
   });
 
 module.exports = router;
