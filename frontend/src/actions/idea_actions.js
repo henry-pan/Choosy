@@ -11,7 +11,7 @@ export const receiveIdeas = ideas => ({
   ideas
 });
 
-export const receiveRoomIdeas = ideas => ({
+export const receiveUserIdeas = ideas => ({
   type: RECEIVE_USER_IDEAS,
   ideas
 });
@@ -38,9 +38,9 @@ export const fetchIdea = id => dispatch => (
     .catch(err => console.log(err))
 );
 
-export const fetchRoomIdeas = userId => dispatch => (
+export const fetchUserIdeas = userId => dispatch => (
   getUserIdeas(userId)
-    .then(ideas => dispatch(receiveRoomTweets(ideas)))
+    .then(ideas => dispatch(receiveUserTweets(ideas)))
     .catch(err => console.log(err))
 );
 
