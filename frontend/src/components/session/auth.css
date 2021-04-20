@@ -1,0 +1,63 @@
+.auth-main {
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 auto;
+  min-height: 700px;
+}
+
+.auth-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.auth-logo {
+  font-size: 56px;
+  margin-bottom: 60px;
+}
+
+.auth-btn {
+  width: 170px;
+}
+
+.auth-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.auth-pass-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.auth-input {
+  text-align: center;
+  font-size: 20px;
+  width: 220px;
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.auth-input-pass {
+  text-align: center;
+  font-size: 20px;
+  width: 220px;
+  height: 50px;
+  margin-bottom: 0;
+}
+
+.auth-show-pass {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  background: transparent;
+  border: none;
+}
