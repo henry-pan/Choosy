@@ -5,3 +5,7 @@ a {
 body {
   font-size: 18px;
 }
+
+button {
+  outline: none;
+}

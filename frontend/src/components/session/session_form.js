@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./auth.css";
 
 class SessionForm extends React.Component {
@@ -10,10 +10,14 @@ class SessionForm extends React.Component {
       email: "",
       password: "",
       password2: "",
-      errors: {}
+      errors: {},
+      showPass: false,
+      showPass2: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.togglePassword = this.togglePassword.bind(this);
+    this.togglePassword2 = this.togglePassword2.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,6 +37,17 @@ class SessionForm extends React.Component {
     this.props.processForm(user);
   }
 
+  togglePassword(e) {
+    e.preventDefault();
+    this.setState({ showPass: !this.state.showPass });
+  }
+
+  togglePassword2(e) {
+    e.preventDefault();
+    this.setState({ showPass2: !this.state.showPass2 });
+  }
+
+
   handleDemo(userEmail, e) {
     e.preventDefault();
     this.props.processForm({ email: userEmail, password: "123456" });
@@ -49,11 +64,18 @@ class SessionForm extends React.Component {
   }
 
   render() {
+    let passType = (this.state.showPass ? "text" : "password");
+    let passType2 = (this.state.showPass2 ? "text" : "password");
     let usernameInput;
     let password2Input;
     if (this.props.formType === "Register") {
       usernameInput = <input className="auth-input" onChange={this.handleInput("name")} type="text" value={this.state.name} placeholder="Your name"/>;
-      password2Input = <input className="auth-input" onChange={this.handleInput("password2")} type="password" value={this.state.password2} placeholder="Confirm password"/>;
+      password2Input = (
+        <div className="auth-pass-container">
+          <input className="auth-input-pass" onChange={this.handleInput("password2")} type={passType2} value={this.state.password2} placeholder="Confirm password"/>
+          <span className="auth-show-pass" tabIndex="-1" onClick={this.togglePassword2}>👁️</span>
+        </div>
+      );
     }
     
     let demoLogin;
@@ -66,12 +88,18 @@ class SessionForm extends React.Component {
 
     return (
       <div className="auth-main">
+        <div className="auth-nav">
+          <Link className="link-btn about-btn" to="/">&lt;</Link>
+        </div>
         <h1 className="auth-logo">choosy</h1>
         {demoLogin}
         <form className="auth-form" onSubmit={this.handleSubmit}>
           {usernameInput}
           <input className="auth-input" onChange={this.handleInput("email")} type="email" value={this.state.email} placeholder="Your email"/>
-          <input className="auth-input" onChange={this.handleInput("password")} type="password" value={this.state.password} placeholder="Your password"/>
+          <div className="auth-pass-container">
+            <input className="auth-input-pass" onChange={this.handleInput("password")} type={passType} value={this.state.password} placeholder="Your password"/>
+            <span className="auth-show-pass" tabIndex="-1" onClick={this.togglePassword}>👁️</span>
+          </div>
           {password2Input}
           {this.renderErrors()}
           <button className="link-btn auth-btn" >{this.props.formType}</button>

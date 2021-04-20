@@ -39,7 +39,7 @@ class SplashPage extends React.Component {
     let logoutButton;
     let authButtons;
     if (this.props.loggedIn) {
-      logoutButton = <button className="link-btn logout-btn" onClick={this.props.logout}>Log Out</button>
+      logoutButton = <button className="link-btn logout-btn" onClick={this.props.logout}>{this.props.currentUser.name}</button>
       authButtons = <>
         <Link className="link-btn room-btn" to={"/room"}>Create Room</Link>
       </>
@@ -53,7 +53,7 @@ class SplashPage extends React.Component {
     return (
       <div className="splash-main">
         <div className="splash-nav">
-          <button className="link-btn about-btn"></button>
+          <button className="link-btn about-btn">?</button>
           {logoutButton}
         </div>
         <h1 className="splash-logo">choosy</h1>
