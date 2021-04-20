@@ -33,14 +33,14 @@ export const fetchIdeas = () => dispatch => (
 );
 
 export const fetchIdea = id => dispatch => (
-  getIdeas(id)
+  getIdea(id)
     .then(idea => dispatch(receiveIdea(idea)))
     .catch(err => console.log(err))
 );
 
 export const fetchUserIdeas = userId => dispatch => (
   getUserIdeas(userId)
-    .then(ideas => dispatch(receiveUserTweets(ideas)))
+    .then(ideas => dispatch(receiveUserIdeas(ideas)))
     .catch(err => console.log(err))
 );
 

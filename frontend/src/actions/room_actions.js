@@ -1,4 +1,4 @@
-import { createRoom, deleteRoom } from '../util/room_util';
+import { createRoom, deleteRoom, getUsers, getIdeas } from '../util/room_util';
 
 export const RECEIVE_IDEAS = "RECEIVE_IDEAS";
 export const RECEIVE_USERS = "RECEIVE_USERS";
@@ -35,10 +35,10 @@ export const fetchUsers = roomId => dispatch => (
   getUsers(roomId)
     .then(roomId => dispatch(receiveUsers(roomId)))
     .catch(err => console.log(err))
-)
+);
 
 export const fetchIdeas = roomId => dispatch => (
   getIdeas(roomId)
     .then(roomId => dispatch(receiveIdeas(roomId)))
     .catch(err => console.log(err))
-)
+);

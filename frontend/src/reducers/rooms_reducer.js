@@ -1,4 +1,4 @@
-import { RECEIVE_IDEAS, RECEIVE_USER_IDEAS, RECEIVE_IDEA, REMOVE_IDEA, REMOVE_ROOM } from '../actions/room_actions';
+import { RECEIVE_IDEAS, RECEIVE_USERS, REMOVE_ROOM } from '../actions/room_actions';
   
   const RoomsReducer = (state = { users: {}, ideas: {}, new: undefined }, action) => {
     Object.freeze(state);
