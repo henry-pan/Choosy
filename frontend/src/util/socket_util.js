@@ -17,10 +17,9 @@ export const addUsername = () => {
   });
 }
 
-export const appendUsername = () => {
-
+export const addUsername = () => {
   const socket = io();
-  
+
   const usernames = document.getElementById('usernames');
 
   socket.on('user joins room', function (username) {

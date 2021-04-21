@@ -1,5 +1,6 @@
 import React from "react";
 import "./join_guest.css";
+import { handleUsername, addUsername } from "../../util/socket_util";
 
 class JoinGuest extends React.Component {
   constructor(props){
@@ -11,6 +12,10 @@ class JoinGuest extends React.Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    handleUsername();
   }
 
   handleInput(field) {
@@ -38,8 +43,8 @@ class JoinGuest extends React.Component {
     return (
       <>
         <h1>{this.props.roomCode}</h1>
-        <form className="splash-join-room" onSubmit={this.handleSubmit}>
-          <input className="join-guest-input" onChange={this.handleInput("username")} type="text" value={this.state.username} placeholder="Enter a username"/>
+        <form id="form" className="splash-join-room" onSubmit={this.handleSubmit}>
+          <input id="input" className="join-guest-input" onChange={this.handleInput("username")} type="text" value={this.state.username} placeholder="Enter a username"/>
           {this.renderErrors()}
           <button className="link-btn join-guest-btn">Join</button>
         </form>

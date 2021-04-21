@@ -1,6 +1,6 @@
 import React from "react";
-// import io from "socket.io-client";
-import { addUsername, appendUsername } from "../../util/socket_util";
+import io from "socket.io-client";
+import { handleUsername, addUsername } from "../../util/socket_util";
 import { Link } from "react-router-dom";
 
 class Room extends React.Component{
@@ -11,8 +11,8 @@ class Room extends React.Component{
   }
 
   componentDidMount(){
+    // this.handleUsername();
     addUsername();
-    appendUsername();
   }
 
   render() {
@@ -25,6 +25,7 @@ class Room extends React.Component{
         <form id="form" action="">
           <input id="input" placeholder="Input name" autoComplete="off" /><button>Send</button>
         </form>
+        <Link to='/room/submitideas'>Start</Link>
       </div>
     );
   }
