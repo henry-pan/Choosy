@@ -24,7 +24,7 @@ router.get("/", (req, res) =>{
     .catch(err => res.status(400).json(err));
 });
 
-// room GET route. Fetches the room with the given code.
+// room GET route. Fetches the room with the id.
 router.get("/:id", (req, res) => {
   Room
     .findById(req.params.id)
