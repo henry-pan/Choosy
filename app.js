@@ -12,6 +12,7 @@ const io = require('socket.io')(server);
 const users = require('./routes/api/users');
 const ideas = require('./routes/api/ideas');
 const rooms = require('./routes/api/rooms');
+const guests = require('./routes/api/guests');
 
 
 // Comment in for heroku
@@ -44,6 +45,7 @@ app.use(express.json());
 app.use("/api/users", users);
 app.use("/api/ideas", ideas);
 app.use("/api/rooms", rooms);
+app.use("/api/guests", guests);
 
 
 
