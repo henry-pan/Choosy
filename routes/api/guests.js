@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
   const { errors, isValid } = validateGuestNameInput(req.body);
 
   if (!isValid) {
-    return res.status(json(errors));
+    return res.status(400).json(errors);
   }
 
   const newGuest = new Guest({
