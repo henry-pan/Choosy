@@ -17,7 +17,7 @@ const RoomSchema = new Schema({
   ideas: {
     type: Schema.Types.ObjectId,
     ref: 'ideas'
-  }
+  },
   //users documents in the schema or
   //let socket io handle it
 });

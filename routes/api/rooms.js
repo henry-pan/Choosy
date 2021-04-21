@@ -5,8 +5,10 @@ const bcrypt = require("bcryptjs");
 const keys = require('../../config/keys');
 const jwt = require('jsonwebtoken'); // does not end up in the final version
 const passport = require("passport"); // Post action required passport
-const validateRoomInput = require("../../validation/ideas");
+const validateRoomCode = require("../../validation/ideas");
 const Room = require('../../models/Room');
+const Idea = require("../../models/Idea");
+const { json } = require("body-parser");
 
 router.get("/test", (req, res) => {
   res.json({
@@ -14,24 +16,25 @@ router.get("/test", (req, res) => {
   });
 });
 
-// Generate GET route for fetching  a room based on the access code
-// POST route for making a new room
-// DELETE route for closing a room
+//GET route. Fetch all rooms.
+router.get("/", (req, res) =>{
+  Room
+    .find()
+    .then(rooms => res.json(rooms))
+    .catch(err => res.status(400).json(err));
+});
 
-// router.get("/:id", (req, res) => {
-//   const { errors, isValid } = validateRoomInput(req.code);
+// room GET route. Fetches the room with the given code.
+router.get("/:id", (req, res) => {
+  Room
+    .findById(req.params.id)
+    .then(room => res.json(room))
+    .catch(err => res.status(400).json({ noroomfound: "This room does not exist"}));
+});
+  
 
-//   Room.findOne({ code: req.body.code })
-//     .then(room => {
-//       if (!room) {
-//         errors.
-//       }
-//     })
-//     .find()
-//     .then(rooms => res.json(rooms))
-//     .catch(err => res.status(400).json(err))
-// });
 
+//room POST route. A user can create a room if they are signed in
 router.post("/", 
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -45,6 +48,7 @@ router.post("/",
       .then(room => res.json(room));
 })
 
+//room DELETE route. Only the owner can delete the room
 router.delete("/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {

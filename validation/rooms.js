@@ -1,7 +1,7 @@
 const Validator = require("validator");
 const validText = require("./valid-text");
 
-module.exports = function validateRoomInput(data) {
+module.exports = function validateRoomCode(data) {
   let errors = {};
 
   data.code = validText(data.code) ? data.code : '';
@@ -11,11 +11,11 @@ module.exports = function validateRoomInput(data) {
   }
 
   if (!Validator.isLength(data.code, { min : 6, max: 6 })) {
-    errors.text = "Code must be 6 characters";
+    errors.text = "Code must have a length of 6";
   }
 
   if (!Validator.isNumeric(data.code, { no_symbols: true})) {
-    errors.text = "Code must be all numbers";
+    errors.text = "Code must all be numbers";
   }
 
   return {
