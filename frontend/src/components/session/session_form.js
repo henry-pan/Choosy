@@ -81,7 +81,7 @@ class SessionForm extends React.Component {
     let demoLogin;
     if (this.props.formType === "Login") {
       demoLogin = <>
-        <button className="link-btn auth-btn" onClick={(e) => this.handleDemo("demo@demo.com", e)}>Demo Login</button>
+        <button className="link-btn" onClick={(e) => this.handleDemo("demo@demo.com", e)}>Demo Login</button>
         <div className="divider"><p>or</p></div>
       </>;
     }
@@ -91,7 +91,7 @@ class SessionForm extends React.Component {
         <div className="auth-nav">
           <Link className="btn-circle" to="/">&lt;</Link>
         </div>
-        <h1 className="auth-logo">choosy</h1>
+        <h1 className="logo">choosy</h1>
         {demoLogin}
         <form className="auth-form" onSubmit={this.handleSubmit}>
           {usernameInput}
@@ -102,7 +102,7 @@ class SessionForm extends React.Component {
           </div>
           {password2Input}
           {this.renderErrors()}
-          <button className="link-btn auth-btn" >{this.props.formType}</button>
+          <button className="link-btn" >{this.props.formType}</button>
         </form>
       </div>
     );

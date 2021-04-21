@@ -6,6 +6,7 @@ import SplashContainer from './splash/splash_container';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import RoomContainer from './room/room_container';
+import VotingPhaseContainer from './voting_phase/voting_phase_container';
 
 const App = () => (
   <>
@@ -13,6 +14,7 @@ const App = () => (
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/register" component={SignupFormContainer} />
       <ProtectedRoute exact path="/room" component={RoomContainer} />
+      <Route exact path="/voting" component={VotingPhaseContainer} />
       <Route exact path="/" component={SplashContainer} />
     </Switch>
   </>
