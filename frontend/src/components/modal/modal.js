@@ -5,7 +5,7 @@ import JoinGuestContainer from '../join_guest/join_guest_container';
 import { connect } from 'react-redux';
 import "./modal.css";
 
-function Modal({ modal, closeModal }) {
+function Modal({ modal, closeModal, roomCode }) {
   if (!modal) {
     return null;
   }
@@ -17,7 +17,7 @@ function Modal({ modal, closeModal }) {
       modalClass = "modal-about";
       break;
     case 'join':
-      component = <JoinGuestContainer />;
+      component = <JoinGuestContainer roomCode={roomCode}/>;
       modalClass = "modal-join";
       break;
     default:

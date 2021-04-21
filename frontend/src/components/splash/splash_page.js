@@ -21,8 +21,9 @@ class SplashPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const user = Object.assign({}, this.state);
-    console.log("This would have entered the room: ", this.state.roomCode);
+    // const user = Object.assign({}, this.state);
+    // console.log("This would have entered the room: ", this.state.roomCode);
+    this.props.openModal("join");
   }
 
   renderErrors(){
@@ -53,7 +54,7 @@ class SplashPage extends React.Component {
 
     return (
       <div className="splash-main">
-        <Modal />
+        <Modal roomCode={this.state.roomCode}/>
         <div className="splash-nav">
           <button className="link-btn about-btn" onClick={() => this.props.openModal("about")}>?</button>
           {logoutButton}
