@@ -5,7 +5,6 @@ import io from "socket.io-client";
 export const handleUsername = () => {
   const socket = io();
 
-  const usernames = document.getElementById('usernames');
   const form = document.getElementById('form');
   const input = document.getElementById('input');
 
@@ -16,6 +15,12 @@ export const handleUsername = () => {
       input.value = '';
     }
   });
+}
+
+export const addUsername = () => {
+  const socket = io();
+
+  const usernames = document.getElementById('usernames');
 
   socket.on('user joins room', function (username) {
     var item = document.createElement('li');
