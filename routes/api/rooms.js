@@ -18,12 +18,19 @@ router.get("/test", (req, res) => {
 // POST route for making a new room
 // DELETE route for closing a room
 
-router.get("/", (req, res) => {
-  Room
-    .find()
-    .then(rooms => res.json(rooms))
-    .catch(err => res.status(400).json(err))
-});
+// router.get("/:id", (req, res) => {
+//   const { errors, isValid } = validateRoomInput(req.code);
+
+//   Room.findOne({ code: req.body.code })
+//     .then(room => {
+//       if (!room) {
+//         errors.
+//       }
+//     })
+//     .find()
+//     .then(rooms => res.json(rooms))
+//     .catch(err => res.status(400).json(err))
+// });
 
 router.post("/", 
   passport.authenticate("jwt", { session: false }),
@@ -37,6 +44,16 @@ router.post("/",
     newRoom.save()
       .then(room => res.json(room));
 })
+
+router.delete("/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Room
+      .findByIdAndDelete(req.params.id)
+      .then(room => res.json(room))
+      .catch(err => res.status(400).json(err));
+  }
+);
 
 
 module.exports = router;
