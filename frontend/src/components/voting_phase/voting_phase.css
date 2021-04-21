@@ -1,20 +1,47 @@
+.voting-timer {
+  font-size: 72px;
+  margin-bottom: 30px;
+}
 
-.vote-idea-container {
+.voting-idea-container {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 60px;
+  width: 100%;
+  padding: 25px;
 }
 
-.vote-idea {
-  font-size: 24px;
+.voting-idea {
+  margin: auto;
+  font-size: 56px;
 }
 
-.vote-btn {
-  height: 150px;
-  width: 150px;
-  min-width: 150px;
+.voting-btn {
+  height: 200px;
+  width: 200px;
+  min-width: 200px;
+  font-size: 100px;
+  border-radius: 20px;
+  text-align: center;
+  margin: auto;
 }
 
 .voting-vote-container {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+
+.voting-voted {
+  line-height: 200px;
+  height: 200px;
+  width: 200px;
+  min-width: 200px;
+  font-size: 100px;
+  border-radius: 20px;
+  text-align: center;
+  margin: auto;
+  box-sizing: border-box;
+  background-color: purple;
+  border: 1px solid purple;
 }
