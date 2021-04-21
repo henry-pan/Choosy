@@ -19,6 +19,24 @@ button {
   outline: none;
 }
 
+.content {
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 auto;
+  min-height: 700px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .link-btn {
   display: inline-block;
   position: relative;

@@ -1,26 +1,8 @@
-.splash-main {
-  display: flex;
-  position: relative;
-  align-items: center;
-  flex-direction: column;
-  width: 40%;
-  margin: 0 auto;
-  min-height: 700px;
-}
-
 .splash-join-room {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.splash-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 25px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .logout-btn {
