@@ -3,8 +3,9 @@ import { closeModal } from '../../actions/modal_actions';
 import AboutContainer from '../about/about_container';
 import JoinGuestContainer from '../join_guest/join_guest_container';
 import { connect } from 'react-redux';
+import "./modal.css";
 
-function Modal({ modal, closeModal }) {
+function Modal({ modal, closeModal, roomCode }) {
   if (!modal) {
     return null;
   }
@@ -16,7 +17,7 @@ function Modal({ modal, closeModal }) {
       modalClass = "modal-about";
       break;
     case 'join':
-      component = <JoinGuestContainer />;
+      component = <JoinGuestContainer roomCode={roomCode}/>;
       modalClass = "modal-join";
       break;
     default:
@@ -24,8 +25,7 @@ function Modal({ modal, closeModal }) {
   }
   return (
     <div className="modal-background" onClick={closeModal}>
-      <span className="modal-close" onClick={closeModal}>&times;</span>
-      <div className={modalType} onClick={e => e.stopPropagation()}>
+      <div className={modalClass} onClick={e => e.stopPropagation()}>
         { component }
       </div>
     </div>

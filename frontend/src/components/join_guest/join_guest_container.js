@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { closeModal } from '../../actions/modal_actions';
 import JoinGuest from "./join_guest";
 
 const mapStateToProps = (state) => ({

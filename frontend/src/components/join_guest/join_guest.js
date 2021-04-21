@@ -1,11 +1,49 @@
 import React from "react";
+import "./join_guest.css";
 
 class JoinGuest extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      username: "",
+      errors: {}
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInput(field) {
+    return e => this.setState({ [field]: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    // const user = Object.assign({}, this.state);
+    console.log("Entering the room: ", this.props.roomCode, "with user: ", this.state.username);
+  }
+
+  renderErrors(){
+    return (
+      <ul>
+        {Object.keys(this.state.errors).map((error, i) => (
+          <li key={`error-${i}`}>{this.state.errors[error]}</li>
+        ))}
+      </ul>
+    );
+  }
+
+
   render() {
     return (
-      <div>
-
-      </div>
+      <>
+        <h1>{this.props.roomCode}</h1>
+        <form className="splash-join-room" onSubmit={this.handleSubmit}>
+          <input className="join-guest-input" onChange={this.handleInput("username")} type="text" value={this.state.username} placeholder="Enter a username"/>
+          {this.renderErrors()}
+          <button className="link-btn join-guest-btn">Join</button>
+        </form>
+      </>
     );
   }
 }
