@@ -9,7 +9,6 @@ router.get("/test", (req, res) => res.json({ msg: "This is the guests route" }))
 
 //fetch all guests
 router.get("/", (req, res) => {
-  debugger
   Guest
     .find()
     .then(guests => res.json(guests))
@@ -26,11 +25,12 @@ router.get("/:id", (req, res) => {
 
 //create a guest
 router.post("/", (req, res) => {
-  // const { errors, isValid } = validateGuestNameInput(req.name);
+  debugger
+  const { errors, isValid } = validateGuestNameInput(req.body);
 
-  // if (!isValid) {
-  //   return res.status(json(errors));
-  // }
+  if (!isValid) {
+    return res.status(json(errors));
+  }
 
   const newGuest = new Guest({
     name: req.body.name
