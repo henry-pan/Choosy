@@ -1,6 +1,7 @@
 import React from "react";
 import io from "socket.io-client";
 import { handleUsername } from "../../util/socket_util"
+// add an IdeaSubmissionContainer import line here
 
 class Room extends React.Component{
   constructor(props){
@@ -24,6 +25,7 @@ class Room extends React.Component{
         <form id="form" action="">
           <input id="input" placeholder="Input name" autocomplete="off" /><button>Send</button>
         </form>
+        {/* <Link to={ <IdeaSubmissionContainer />}></Link> */}
       </div>
     );
   }
