@@ -25,7 +25,6 @@ router.get("/:id", (req, res) => {
 
 //create a guest
 router.post("/", (req, res) => {
-  debugger
   const { errors, isValid } = validateGuestNameInput(req.body);
 
   if (!isValid) {
