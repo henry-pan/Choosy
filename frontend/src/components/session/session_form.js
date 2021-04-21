@@ -89,7 +89,7 @@ class SessionForm extends React.Component {
     return (
       <div className="auth-main">
         <div className="auth-nav">
-          <Link className="link-btn about-btn" to="/">&lt;</Link>
+          <Link className="btn-circle" to="/">&lt;</Link>
         </div>
         <h1 className="auth-logo">choosy</h1>
         {demoLogin}

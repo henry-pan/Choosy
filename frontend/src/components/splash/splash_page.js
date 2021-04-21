@@ -56,10 +56,10 @@ class SplashPage extends React.Component {
       <div className="splash-main">
         <Modal roomCode={this.state.roomCode}/>
         <div className="splash-nav">
-          <button className="link-btn about-btn" onClick={() => this.props.openModal("about")}>?</button>
+          <button className="btn-circle" onClick={() => this.props.openModal("about")}>?</button>
           {logoutButton}
         </div>
-        <h1 className="splash-logo">choosy</h1>
+        <h1 className="logo">choosy</h1>
         <div className="splash-auth">
           {authButtons}
         </div>
