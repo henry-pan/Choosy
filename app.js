@@ -53,10 +53,10 @@ io.on('connection', (socket) => {
   });
 });
 
-// if a 'chat message' event fires, io will emit the message
+// if a 'user joins room' event fires, io will emit the username
 io.on('connection', (socket) => {
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+  socket.on('user joins room', (username) => {
+    io.emit('user joins room', username); // name is reserved so I can't use it
   });
 });
 
