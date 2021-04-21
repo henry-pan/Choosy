@@ -57,6 +57,7 @@ io.on('connection', (socket) => {
 io.on('connection', (socket) => {
   socket.on('user joins room', (username) => {
     io.emit('user joins room', username); // name is reserved so I can't use it
+    //save to the database here
   });
 });
 

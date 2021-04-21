@@ -2,7 +2,7 @@ import io from "socket.io-client";
 
 
 // used in room.js. I attempted a modal refactor that didn't work.
-export const addUsername = () => {
+export const handleUsername = () => {
   const socket = io();
 
   const form = document.getElementById('form');
