@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Modal from "../modal/modal";
 import "./splash.css";
 
 class SplashPage extends React.Component {
@@ -52,8 +53,9 @@ class SplashPage extends React.Component {
 
     return (
       <div className="splash-main">
+        <Modal />
         <div className="splash-nav">
-          <button className="link-btn about-btn">?</button>
+          <button className="link-btn about-btn" onClick={() => this.props.openModal("about")}>?</button>
           {logoutButton}
         </div>
         <h1 className="splash-logo">choosy</h1>

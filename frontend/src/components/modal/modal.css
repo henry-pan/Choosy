@@ -1,0 +1,29 @@
+.modal-background {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.modal-close {
+  margin: 14px 20px;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 3;
+}
+
+.modal-about {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin-top: 50px;
+  overflow-y: scroll;
+  background-color: rgba(255,255,255,0.95);
+  width: 550px;
+  height: 650px;
+}
