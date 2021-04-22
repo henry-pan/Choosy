@@ -13,10 +13,10 @@ const IdeasReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
       });
       return newState;
     case RECEIVE_IDEA:
-      newState.new = action.idea.data
+      newState.user[action.idea.data._id] = action.idea.data
       return newState;
     case REMOVE_IDEA:
-      delete newState[action.ideaId];
+      delete newState.user[action.ideaId];
       return newState;
     default:
       return state;

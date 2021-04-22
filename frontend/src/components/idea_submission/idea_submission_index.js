@@ -29,7 +29,7 @@ class IdeaSubmissionIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.countdown()
+    // this.countdown()
     this.props.fetchUserIdeas(this.state.user.id)
   }
 
@@ -60,8 +60,6 @@ class IdeaSubmissionIndex extends React.Component {
   handleIdeaSubmit(e) {
     e.preventDefault();
     this.props.addIdea(this.state.currentIdea)
-    this.props.fetchUserIdeas(this.state.user.id)
-    this.setState()
     console.log(this.props.userIdeas)
   }
 
@@ -97,21 +95,11 @@ class IdeaSubmissionIndex extends React.Component {
                 <IdeaItem
                   key={`idea${idea._id}`}
                   id={`${idea._id}`}
-                  body={idea.body}/>
-                <button onClick={
-                  e => {
-                    e.preventDefault();
-                    this.props.destroyIdea(idea._id);
-                    console.log(this.state);
-                    let newList = [...this.props.userIdeas]
-                    delete newList[idea._id]
-                    console.log(this.state.ideaList);
-                    this.setState({ ideaList: newList });
-                  }
-                }>delete</button>
+                  body={idea.body}
+                  deleteIdea={this.props.destroyIdea}/>
+
                 </li>
               )
-
             )
           }
         </ul>
