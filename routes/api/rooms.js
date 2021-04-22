@@ -24,6 +24,26 @@ router.get("/", (req, res) =>{
     .catch(err => res.status(400).json(err));
 });
 
+//GET route. Fetch all users in a room
+router.get("/:id/users", (req, res) => {
+  // WRITE CODE HERE
+
+
+
+
+});
+
+
+//Get route. Fetch all ideas in a room
+router.get("/:id/ideas", (req, res) => {
+// WRITE CODE HERE
+
+
+
+
+
+});
+
 // room GET route. Fetches the room with the id.
 router.get("/:id", (req, res) => {
   Room
