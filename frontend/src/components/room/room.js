@@ -11,7 +11,7 @@ class Room extends React.Component{
   }
 
   componentDidMount(){
-    this.props.loadGuests();
+    // this.props.loadGuests(); // doesn't work
     addUsername();
   }
 

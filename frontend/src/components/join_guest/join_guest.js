@@ -1,6 +1,7 @@
 import React from "react";
 import "./join_guest.css";
 import { handleUsername, addUsername } from "../../util/socket_util";
+import { Redirect, withRouter } from "react-router-dom";
 
 class JoinGuest extends React.Component {
   constructor(props){
@@ -16,6 +17,10 @@ class JoinGuest extends React.Component {
 
   componentDidMount(){
     handleUsername();
+  }
+
+  componentWillUnmount(){
+    <Redirect to="/room" /> // won't work until protected routes are refactored
   }
 
   handleInput(field) {
@@ -59,4 +64,4 @@ class JoinGuest extends React.Component {
   }
 }
 
-export default JoinGuest;
+export default withRouter(JoinGuest);
