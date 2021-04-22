@@ -15,7 +15,6 @@ class VotingPhase extends React.Component{
     this.interval = 0;
 
     this.countdown = this.countdown.bind(this);
-    this.handleVote = this.handleVote.bind(this);
   }
   
   componentDidMount() {
@@ -23,16 +22,17 @@ class VotingPhase extends React.Component{
   }
 
   countdown() {
-    console.log("hi")
     this.setState({ timer: this.state.timer - 1});
     if (this.state.timer === 0) {
       clearInterval(this.interval);
+      if (!this.state.voted) {
+        this.setState({ vote: Math.floor(Math.random() * 2), voted: true });
+      }
     }
   }
 
-  handleVote(e) {
-    this.setState({ vote: this.state.vote + 1, voted: true });
-    console.log(this.state);
+  handleVote(vote) {
+    this.setState({ vote: vote, voted: true });
   }
 
   render() {
@@ -47,8 +47,8 @@ class VotingPhase extends React.Component{
       }
     } else {
       voteButtons = (<>
-        <button className="link-btn voting-btn">👎</button>
-        <button onClick={this.handleVote} className="link-btn voting-btn">👍</button>
+        <button onClick={() => this.handleVote(0)} className="link-btn voting-btn">👎</button>
+        <button onClick={() => this.handleVote(1)} className="link-btn voting-btn">👍</button>
       </>);
     }
     
