@@ -83,7 +83,7 @@ class IdeaSubmissionIndex extends React.Component {
     console.log(this.state.ideaList);
     const timeLeft = this.state.secondsLeft;
     if (timeLeft === 0) {
-      return <Redirect to='/'/>
+      return <Redirect to='/result'/>
     } else return (
       <div className="idea-submission-index-div">
         <h3 className='idea-submission-timer'>{timeLeft}</h3>

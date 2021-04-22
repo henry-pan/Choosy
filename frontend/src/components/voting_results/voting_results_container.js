@@ -4,7 +4,9 @@ import VotingResults from './voting_results';
 
 const mapStateToProps = state => ({
   loggedIn: state.session.isAuthenticated,
-  currentUser: state.session.user
+  currentUser: state.session.user,
+  // CHANGE IDEAS TO PULL FROM ROOM.IDEAS WHEN ROUTES IN PLACE
+  ideas: Object.values(state.ideas.user)
 });
 
 const mapDispatchToProps = dispatch => ({
