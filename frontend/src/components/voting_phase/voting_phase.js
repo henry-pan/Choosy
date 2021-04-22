@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./voting_phase.css";
 
 class VotingPhase extends React.Component{
@@ -13,7 +13,6 @@ class VotingPhase extends React.Component{
     };
 
     this.interval = 0;
-
     this.countdown = this.countdown.bind(this);
   }
   
@@ -28,6 +27,8 @@ class VotingPhase extends React.Component{
       if (!this.state.voted) {
         this.setState({ vote: Math.floor(Math.random() * 2), voted: true });
       }
+      // Redirect in three seconds.
+      setTimeout(()=>this.props.history.push("/"), 3000);
     }
   }
 
@@ -69,4 +70,4 @@ class VotingPhase extends React.Component{
   }
 }
 
-export default VotingPhase;
+export default withRouter(VotingPhase);
