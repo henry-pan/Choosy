@@ -6,6 +6,7 @@ const passport = require("passport");
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
+const SocketUtil = require("./src/socket_server_util");
 
 
 // Set up routes
@@ -47,6 +48,8 @@ app.use("/api/ideas", ideas);
 app.use("/api/rooms", rooms);
 app.use("/api/guests", guests);
 
+// ********** WORKS *************
+
 //test socket connection/disconnection (remove in production)
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -55,20 +58,62 @@ io.on('connection', (socket) => {
   });
 });
 
-// if a 'user joins room' event fires, io will emit the username
+// emits the username
 io.on('connection', (socket) => {
   socket.on('user joins room', (username) => {
-    io.emit('user joins room', username); // name is reserved so I can't use it
-    //save to the database here
+    io.emit('user joins room', username);
+    //save to the database here?
   });
 });
 
+// *********** TO TEST ****************
+// somehow having these uncommented doesn't break anything ...
 
-
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+// https://socket.io/docs/v4/rooms/
+// creates room?
+io.on('connection', (socket) => {
+  io.of("/room").adapter.on("create-room", (room) => {
+    console.log(`room ${room} was created`);
+  });
 });
+
+// borrowing from routes, simple .join method
+// create room?
+io.of("/room").on('connection', (socket) => {
+  const RANDOM_CODE = (Math.random() * 9876543210).toString().slice(0, 6);
+  socket.join(`${RANDOM_CODE}`);
+});
+
+
+// https://socket.io/docs/v4/rooms/
+// join room?
+io.on('connection'), (socket) => {
+  io.of("/").adapter.on("join-room", (room, id) => {
+    console.log(`socket ${id} has joined room ${room}`);
+    // io.to(`${RANDOM_CODE}`).emit() // put something in emit so that it emits the username of the current signed-in user
+  });
+}
+
+// https://socket.io/docs/v4/rooms/
+//join room?
+io.of("/room").on('connection'), (room, id) => {
+    console.log(`socket ${id} has joined room ${room}`);
+    // io.to(`${RANDOM_CODE}`).emit() // put something in emit so that it emits the username of the current signed-in user
+}
+
+// https://www.youtube.com/watch?v=bxUlKDgpbWs 
+//join room?
+io
+    .of("/room")
+    .on('connection'), (socket) => {
+        socket.on("joinRoom", (room) => {
+          socket.join(room);
+        });
+}
+
+
+
+
 
 
 const port = process.env.PORT || 5000;

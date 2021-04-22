@@ -44,6 +44,7 @@ router.post("/",
       code: RANDOM_CODE
     })
 
+    
     newRoom.save()
       .then(room => res.json(room));
 })
