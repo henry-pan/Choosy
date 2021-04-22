@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Room extends React.Component{
   constructor(props){
@@ -13,6 +14,7 @@ class Room extends React.Component{
     return (
       <div>
         <h1>Welcome, {this.props.currentUser.name}. You are in the room.</h1>
+        <Link to='/room/submitideas'>Start</Link>
       </div>
     );
   }

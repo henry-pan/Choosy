@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default ({ idea }) => {
+export default ({ body }) => {
   return (
     <li className='idea-item'>
-      <h3 className='idea-item-body'>{idea.body}</h3>
+      <h3 className='idea-item-body'>{body}</h3>
       {/* add delete button here */}
     </li>
   )
