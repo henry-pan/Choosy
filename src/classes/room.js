@@ -37,6 +37,7 @@ class Room {
       return;
     }
 
+    // may be a better method to emit to all sockets in a room
     Object.values(this.userSockets).forEach(socket => {
       console.log(`Emitting to ${socket.id}`);
       socket.emit("roomStart");
@@ -68,7 +69,7 @@ class Room {
 
   addUser(userId, socket, userTag, roomId) {
 
-    // confused about what this line is doing
+    // sets a new key in the user sockets object
     this.userSockets[userId] = socket;
 
     if (userTag === 'Demo') this.demo = true;

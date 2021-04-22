@@ -53,6 +53,7 @@ app.use("/api/guests", guests);
 //test socket connection/disconnection (remove in production)
 io.on('connection', (socket) => {
   console.log('a user connected');
+  // console.log(socket.id);
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
@@ -60,6 +61,7 @@ io.on('connection', (socket) => {
 
 // emits the username
 io.on('connection', (socket) => {
+  // console.log(socket.id);
   socket.on('user joins room', (username) => {
     io.emit('user joins room', username);
     //save to the database here?
@@ -67,49 +69,50 @@ io.on('connection', (socket) => {
 });
 
 // *********** TO TEST ****************
-// somehow having these uncommented doesn't break anything ...
+// Does calling io.on('connection') create multiple sockets? Answer: NO
 
-// https://socket.io/docs/v4/rooms/
-// creates room?
+
+// // https://socket.io/docs/v4/rooms/
+// // creates room?
 io.on('connection', (socket) => {
   io.of("/room").adapter.on("create-room", (room) => {
     console.log(`room ${room} was created`);
   });
 });
 
-// borrowing from routes, simple .join method
-// create room?
-io.of("/room").on('connection', (socket) => {
-  const RANDOM_CODE = (Math.random() * 9876543210).toString().slice(0, 6);
-  socket.join(`${RANDOM_CODE}`);
-});
+// // borrowing from routes, simple .join method
+// // create room?
+// io.of("/room").on('connection', (socket) => {
+//   const RANDOM_CODE = (Math.random() * 9876543210).toString().slice(0, 6);
+//   socket.join(`${RANDOM_CODE}`);
+// });
 
 
-// https://socket.io/docs/v4/rooms/
-// join room?
-io.on('connection'), (socket) => {
-  io.of("/").adapter.on("join-room", (room, id) => {
-    console.log(`socket ${id} has joined room ${room}`);
-    // io.to(`${RANDOM_CODE}`).emit() // put something in emit so that it emits the username of the current signed-in user
-  });
-}
+// // https://socket.io/docs/v4/rooms/
+// // join room?
+// io.on('connection'), (socket) => {
+//   io.of("/").adapter.on("join-room", (room, id) => {
+//     console.log(`socket ${id} has joined room ${room}`);
+//     // io.to(`${RANDOM_CODE}`).emit() // put something in emit so that it emits the username of the current signed-in user
+//   });
+// }
 
-// https://socket.io/docs/v4/rooms/
-//join room?
-io.of("/room").on('connection'), (room, id) => {
-    console.log(`socket ${id} has joined room ${room}`);
-    // io.to(`${RANDOM_CODE}`).emit() // put something in emit so that it emits the username of the current signed-in user
-}
+// // https://socket.io/docs/v4/rooms/
+// //join room?
+// io.of("/room").on('connection'), (room, id) => {
+//     console.log(`socket ${id} has joined room ${room}`);
+//     // io.to(`${RANDOM_CODE}`).emit() // put something in emit so that it emits the username of the current signed-in user
+// }
 
-// https://www.youtube.com/watch?v=bxUlKDgpbWs 
-//join room?
-io
-    .of("/room")
-    .on('connection'), (socket) => {
-        socket.on("joinRoom", (room) => {
-          socket.join(room);
-        });
-}
+// // https://www.youtube.com/watch?v=bxUlKDgpbWs 
+// //join room?
+// io
+//     .of("/room")
+//     .on('connection'), (socket) => {
+//         socket.on("joinRoom", (room) => {
+//           socket.join(room);
+//         });
+// }
 
 
 

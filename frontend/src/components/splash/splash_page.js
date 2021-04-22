@@ -23,6 +23,7 @@ class SplashPage extends React.Component {
     e.preventDefault();
     // const user = Object.assign({}, this.state);
     // console.log("This would have entered the room: ", this.state.roomCode);
+    // call a function in socket_util
     this.props.openModal("join");
   }
 

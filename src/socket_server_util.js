@@ -7,7 +7,7 @@ let USER_LIST = {};
 
 module.exports = function (socket) {
   socket.on("joinRoom", data => {
-    socket.id = Math.random();
+    socket.id = Math.random(); // change to room code?
     console.log(data.roomId);
     if (data.type === "createRoom") {
       room = ROOM_LIST[data.roomId] = new Room(data.roomId, socket.id); // todo: match params
