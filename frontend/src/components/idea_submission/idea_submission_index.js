@@ -29,7 +29,7 @@ class IdeaSubmissionIndex extends React.Component {
   }
 
   componentDidMount() {
-    // this.countdown()
+    this.countdown()
     this.props.fetchUserIdeas(this.state.user.id)
   }
 
