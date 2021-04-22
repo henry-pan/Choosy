@@ -1,0 +1,19 @@
+.voting-results-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 500px;
+}
+.voting-results-title {
+  font-size: 72px;
+}
+
+.voting-results-list {
+  width: 100%;
+  padding: 25px;
+}
+
+.voting-results-item {
+  font-size: 32px;
+}

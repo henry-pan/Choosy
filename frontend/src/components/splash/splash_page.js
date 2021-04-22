@@ -53,13 +53,13 @@ class SplashPage extends React.Component {
     }
 
     return (
-      <div className="splash-main">
+      <div className="content">
         <Modal roomCode={this.state.roomCode}/>
-        <div className="splash-nav">
-          <button className="link-btn about-btn" onClick={() => this.props.openModal("about")}>?</button>
+        <nav className="nav">
+          <button className="btn-circle" onClick={() => this.props.openModal("about")}>?</button>
           {logoutButton}
-        </div>
-        <h1 className="splash-logo">choosy</h1>
+        </nav>
+        <h1 className="logo">choosy</h1>
         <div className="splash-auth">
           {authButtons}
         </div>
@@ -67,7 +67,7 @@ class SplashPage extends React.Component {
         <form className="splash-join-room" onSubmit={this.handleSubmit}>
           <input className="join-input" onChange={this.handleInput("roomCode")} type="text" value={this.state.roomCode} placeholder="Enter room code"/>
           {this.renderErrors()}
-          <button className="link-btn join-btn">Join Room</button>
+          <button className="link-btn">Join Room</button>
         </form>
       </div>
     );
