@@ -18,9 +18,13 @@ const RoomSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'ideas'
   },
-  users: []
+  users: [],
   //users documents in the schema or
   //let socket io handle it
+  guests: {
+    type: Schema.Types.ObjectId,
+    ref: 'guests'
+  }
 });
 
 module.exports = Room = mongoose.model('Room', RoomSchema);

@@ -10,6 +10,7 @@ const RootReducer = combineReducers({
   errors,
   ideas,
   rooms,
+  guests,
   modal
 });
 

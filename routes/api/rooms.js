@@ -47,7 +47,7 @@ router.post("/",
     newRoom.save()
       .then(room => res.json(room));
 })
-
+// I think this lets any signed-in user delete a room
 //room DELETE route. Only the owner can delete the room
 router.delete("/:id",
   passport.authenticate("jwt", { session: false }),

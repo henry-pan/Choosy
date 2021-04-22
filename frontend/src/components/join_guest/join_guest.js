@@ -24,10 +24,14 @@ class JoinGuest extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // const user = Object.assign({}, this.state);
-    // post to guest document/collection in the backend
-    // redirect to room route
+    const guest = Object.assign({}, this.state);
+
+    // in theory posts to guest document/collection in the backend
+    this.props.joinAsGuest(guest);
+    
     console.log("Entering the room: ", this.props.roomCode, "with user: ", this.state.username);
+
+    this.props.closeModal();
   }
 
   renderErrors(){
