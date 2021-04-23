@@ -13,6 +13,7 @@
   user-select: none;
   z-index: 3;
   color: #2a9d8f;
+  transition: color .25s;
 }
 
 .about-header-icon:hover {
@@ -42,6 +43,11 @@
   border: 3px solid #2a9d8f;
   border-radius: 15px;
   padding: 7px;
+  transition: border .25s;
+}
+
+.about-member:hover {
+  border: 3px solid #207268;
 }
 
 .about-member span {
