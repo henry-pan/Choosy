@@ -8,13 +8,15 @@ const IdeasReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
       newState.all = action.ideas.data;
       return newState;
     case RECEIVE_USER_IDEAS:
-      newState.user = action.ideas.data;
+      action.ideas.data.forEach(idea => {
+        newState.user[idea._id] = idea
+      });
       return newState;
     case RECEIVE_IDEA:
-      newState.new = action.idea.data
+      newState.user[action.idea.data._id] = action.idea.data
       return newState;
     case REMOVE_IDEA:
-      delete newState[action.ideaId];
+      delete newState.user[action.ideaId];
       return newState;
     default:
       return state;

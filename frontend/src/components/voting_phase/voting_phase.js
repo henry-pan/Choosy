@@ -1,7 +1,11 @@
 import React from "react";
+<<<<<<< HEAD
 import { Link, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+=======
+import { Link } from "react-router-dom";
+>>>>>>> 7f5a9af1a93d379cb09f1d534a7b69922f6ed45d
 import "./voting_phase.css";
 
 class VotingPhase extends React.Component{
@@ -11,7 +15,8 @@ class VotingPhase extends React.Component{
     this.state = {
       timer: 10,
       vote: 0,
-      voted: false
+      voted: false,
+      idea: this.props.idea
     };
 
     this.interval = 0;
@@ -30,12 +35,16 @@ class VotingPhase extends React.Component{
         this.setState({ vote: Math.floor(Math.random() * 2), voted: true });
       }
       // Redirect in three seconds.
-      setTimeout(()=>this.props.history.push("/"), 3000);
+      // setTimeout(()=>this.props.history.push("/"), 3000);
     }
   }
 
   handleVote(vote) {
     this.setState({ vote: vote, voted: true });
+    if (vote === 1) {
+      this.state.idea.__v = this.state.idea.__v + 1
+      this.props.updateIdea(this.state.idea)
+    }
   }
 
   render() {
@@ -62,7 +71,8 @@ class VotingPhase extends React.Component{
         </div>
         <span className="voting-timer">{this.state.timer}</span>
         <div className="voting-idea-container">
-          <span className="voting-idea">a great idea</span>
+          {/* CHANGE TO THIS.PROPS.IDEA */}
+          <span className="voting-idea">{this.props.idea.body}</span>
         </div>
         <div className="voting-vote-container">
           {voteButtons}
@@ -72,4 +82,4 @@ class VotingPhase extends React.Component{
   }
 }
 
-export default withRouter(VotingPhase);
+export default VotingPhase;

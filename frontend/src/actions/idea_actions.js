@@ -1,4 +1,4 @@
-import { getIdeas, getIdea, getUserIdeas, createIdea, deleteIdea } from '../util/idea_util';
+import { getIdeas, getIdea, getUserIdeas, createIdea, deleteIdea, updateIdea } from '../util/idea_util';
 
 export const RECEIVE_IDEAS = "RECEIVE_IDEAS";
 export const RECEIVE_USER_IDEAS = "RECEIVE_USER_IDEAS";
@@ -55,3 +55,9 @@ export const destroyIdea = ideaId => dispatch => (
     .then(() => dispatch(removeIdea(ideaId)))
     .catch(err => console.log(err))
 );
+
+export const patchIdea = data => dispatch => (
+  updateIdea(data)
+    .then(idea => dispatch(receiveIdea(idea)))
+    .catch(err => console.log(err))
+)

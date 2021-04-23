@@ -7,12 +7,29 @@ import "./voting_results.css";
 class VotingResults extends React.Component {
   constructor(props){
     super(props);
+    console.log(this.props)
+    this.state = {
+      timer: 5
+    };
+
+    this.interval = 0;
+    // this.countdown = this.countdown.bind(this);
   }
   
-  componentDidMount() {
-    // Redirect in ten seconds.
-    setTimeout(()=>this.props.history.push("/"), 10000);
-  }
+  // componentDidMount() {
+  //   // Redirect in ten seconds.
+  //   // setTimeout(()=>this.props.history.push("/"), 10000);
+  //   this.interval = setInterval(this.countdown, 1000);
+  // }
+
+  // countdown() {
+  //   this.setState({ timer: this.state.timer - 1});
+  //   if (this.state.timer === 0) {
+  //     clearInterval(this.interval);
+  //     // Redirect in three seconds.
+  //     // this.props.history.push("/voting");
+  //   }
+  // }
 
   render() {
 
@@ -21,16 +38,19 @@ class VotingResults extends React.Component {
         <div className="nav">
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
+        <h3 className="voting-results-timer">{this.props.timer}</h3>
         <div className="voting-results-container">
           <h1 className="title">Results</h1>
+          {/* NOTE: we should change 'Results' to 'Round <x>', pass as prop from room */}
+          {/* <h1 className="voting-results-title">Round {this.props.round}</h1> */}
           <ul className="voting-results-list">
-            <li className="voting-results-item">an earth-shattering idea</li>
-            <li className="voting-results-item">an amazing idea</li>
-            <li className="voting-results-item">a great idea</li>
-            <li className="voting-results-item">a decent idea</li>
-            <li className="voting-results-item">a tolerable idea</li>
-            <li className="voting-results-item">a bad idea</li>
-            <li className="voting-results-item">an abhorrent idea</li>
+            {
+              this.props.ideas.map(idea => (
+                <li key={`idea${idea._id}`} className='voting-results-idea'>{idea.body}
+                  <h3>{idea.__v}</h3>
+                </li>
+              ))
+            }
           </ul>
         </div>
       </div>
@@ -38,4 +58,4 @@ class VotingResults extends React.Component {
   }
 }
 
-export default withRouter(VotingResults);
+export default VotingResults;
