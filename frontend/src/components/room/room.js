@@ -15,19 +15,28 @@ import "./room.css";
 class Room extends React.Component{
   constructor(props){
     super(props);
-
-    // all this initial state-setting requires hooks. rip.
-    // const [username, setUsername] = useState("");
-    // const [connected, setConnected] = useState(false); // need this
-    // const [currentChat, setCurrentChat] = useState({ isChannel: true, chatName: "general", receiverId: "" });
-    // const [connectedRooms, setConnectedRooms] = useState(["general"]);
-    // const [allUsers, setAllUsers] = useState([]);
-    // const [messages, setMessages] = useState(initialMessagesState);
-    // const [message, setMessage] = useState("");
-    // const socketRef = useRef(); // ref will be housed in the socket.io connected client
-
     
-    this.state = {};
+    this.state = {
+      hasNick: false,
+      phase: "room",
+      round: 1,
+      winner: false,
+      timer: 15,
+      ideas: this.props.userIdeas,
+      idea_num: 0,
+      survivors: []
+    };
+    this.interval = 0;
+    this.countdown = this.countdown.bind(this);
+    this.handleRoomStart = this.handleRoomStart.bind(this);
+    this.newScoreIdeas = this.newScoreIdeas.bind(this);
+    this.submitNick = this.submitNick.bind(this);
+  }
+
+  handleRoomStart() {
+    this.props.fetchUserIdeas(this.props.currentUser.id);
+    this.setState({ ideas: this.props.userIdeas, phase: "idea-submission" });
+    this.interval = setInterval(this.countdown, 1000);
   }
 
   componentDidMount(){
@@ -41,82 +50,6 @@ class Room extends React.Component{
 
     socket();
   }
-
-  // sendUsername() {
-  //   const payload = {
-  //     username,
-  //     roomcode // pass in roomcode from props?
-  //   }
-  //   socketRef.current.emit("send message", payload);
-  // }
-
-
-
-  
-  render() {
-    if (!this.props.currentUser) return null;
-    console.log(this.state.roomId);
-    this.state = {
-      phase: "room",
-      round: 1,
-      winner: false,
-      timer: 15,
-      ideas: this.props.userIdeas,
-      idea_num: 0,
-      survivors: []
-    };
-    this.interval = 0;
-    this.countdown = this.countdown.bind(this);
-    this.handleRoomStart = this.handleRoomStart.bind(this);
-    this.newScoreIdeas = this.newScoreIdeas.bind(this);
-  }
-
-  handleRoomStart() {
-    this.props.fetchUserIdeas(this.props.currentUser.id);
-    this.setState({ ideas: this.props.userIdeas, phase: "idea-submission" });
-    this.interval = setInterval(this.countdown, 1000);
-  }
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.userIdeas.length !== this.props.userIdeas.length) {
-  //     this.props.fetchUserIdeas(this.props.currentUser.id);
-  //     this.setState({ ideas: this.props.userIdeas });
-  //   }
-  // }
-
-  //create duplicate of ideas at start so we can clear state?
-
-  // scoreIdeas() {
-  //   //sets winner to true if only one idea remaining
-  //   let winner = false;
-  //   //array of idea scores, sorted by score
-  //   let scoreArr = this.state.ideas.map(idea => idea.__v).sort();
-  //   //array of idea scores, sans scores of 0
-  //   let noLosers = scoreArr.filter(score => score > 0);
-  //   //replaces score_arr with no_losers and deletes zeros,
-  //   //unless no_losers is empty or every score is zeros
-  //   if (noLosers.length > 0) {
-  //     scoreArr = noLosers;
-  //     for (let i = 0; i < array.length; i++) {
-  //       if (this.state.ideas[i].__v === 0) {
-  //         this.props.destroyIdea(this.state.ideas[i]._id);
-  //         delete this.state.ideas[i]
-  //       }
-  //     }
-  //   };
-  //   //gets last item index that should be deleted
-  //   let deleteIndex = Math.floor(scoreArr.length / 2);
-  //   if (deleteIndex + 1 === scoreArr.length) {winner = true}
-  //   //gets highest score of item to be deleted
-  //   let lowScore = scoreArr[deleteIndex];
-  //   //gets array of items eligible to be deleted
-  //   let losers = this.state.ideas.filter(idea => (idea.__v <= lowScore) && (idea.__v > 0));
-  //   //delete losers
-  //   for (let i = 0; i <= deleteIndex; i++) {
-  //     this.props.destroyIdea(losers[i]);
-  //   }
-  //   return winner;
-  // }
 
 
   newScoreIdeas() {
@@ -144,8 +77,6 @@ class Room extends React.Component{
     this.setState({ survivors: survivors })
     return winner;
   }
-
-  //arr.sort((el1, el2) => el1 - el2)
 
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -198,6 +129,12 @@ class Room extends React.Component{
     }
   }
 
+  submitNick(){
+    this.setState({
+      hasNick: true
+    })
+  }
+
   room() {
     return (
       <div className="content">
@@ -207,18 +144,13 @@ class Room extends React.Component{
         <h1 className="title room-code">123456</h1>
         <h2 className="room-subtitle">Room Code</h2>
         <ul id="usernames" className="room-users-container">
-          <span className="room-user-item">{this.props.currentUser.name}</span>
-          <span className="room-user-item">Random guest</span>
-          <span className="room-user-item">Fake user</span>
-          <span className="room-user-item">Not real</span>
-          <span className="room-user-item">Space filler</span>
-          <span className="room-user-item">Flex Wrap</span>
-          <span className="room-user-item">Looks good</span>
+          {/* <span className="room-user-item">{this.props.currentUser.name}</span> */}
         </ul>
         
-        <form id="form-test" action="">
+        {this.state.hasNick ? null : <form id="form-test" action="" onSubmit={this.submitNick}>
           <input id="input-test" placeholder="Input name" autoComplete="off" /><button>Send</button>
-        </form>
+        </form>}
+        
         <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>
         <button className="link-btn" onClick={this.handleRoomStart}>Start</button>
       </div>
@@ -232,6 +164,9 @@ class Room extends React.Component{
   }
 
   render() {
+    console.log("this.props: ", this.props);
+    console.log("hostId: ", this.props.hostId);
+
     if (!this.props.currentUser) return null;
     switch (this.state.phase) {
       case "room":
@@ -250,21 +185,3 @@ class Room extends React.Component{
 }
 
 export default Room;
-
-//room => idea-submission => Round 1(results) => voting phase => check if winner
-//if no winner => Round 2
-//if winner => winner
-//phase states: room, idea-submission, results, voting phase, winner
-//if phase === room, phase: idea-submission
-//if phase === idea-submission, phase: Results (check round #, increment)
-//if phase === results, check winner, phase: voting or phase: winner
-//if phase === voting, phase: Results (check round #, increment)
-//if phase === winner
-
-
-//keep ideas in array in room state
-
-//keep idea_number in room state
-
-//when timer hits 0 add 1 to idea_number and render unless
-//idea number >= array.length - 1

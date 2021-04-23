@@ -60,7 +60,7 @@ router.post("/",
   (req, res) => {
     const RANDOM_CODE = (Math.random() * 9876543210).toString().slice(0, 6);
     const newRoom = new Room({
-      owner: req.user.id,
+      host: req.user.id,
       code: RANDOM_CODE
     })
 

@@ -61,7 +61,6 @@ export const socket = () => {
     e.preventDefault();
     if (input.value) {
       socket.emit('submit username', input.value); // app.js line 76
-
       input.value = '';
     }
   });

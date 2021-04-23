@@ -5,10 +5,11 @@ import Room from './room';
 import { receiveGuests } from '../../actions/guest_actions';
 import { fetchRoom } from '../../actions/room_actions';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   loggedIn: state.session.isAuthenticated,
   currentUser: state.session.user,
-  userIdeas: Object.values(state.ideas.user)
+  userIdeas: Object.values(state.ideas.user),
+  // hostId: state.rooms.rooms[ownProps.match.params._id].data.host
 });
 
 const mapDispatchToProps = dispatch => ({
