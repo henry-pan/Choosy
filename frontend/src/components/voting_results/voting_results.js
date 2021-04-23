@@ -5,13 +5,13 @@ import "./voting_results.css";
 class VotingResults extends React.Component {
   constructor(props){
     super(props);
-
+    console.log(this.props)
     this.state = {
       timer: 5
     };
 
     this.interval = 0;
-    this.countdown = this.countdown.bind(this);
+    // this.countdown = this.countdown.bind(this);
   }
   
   // componentDidMount() {
@@ -20,14 +20,14 @@ class VotingResults extends React.Component {
   //   this.interval = setInterval(this.countdown, 1000);
   // }
 
-  countdown() {
-    this.setState({ timer: this.state.timer - 1});
-    if (this.state.timer === 0) {
-      clearInterval(this.interval);
-      // Redirect in three seconds.
-      // this.props.history.push("/voting");
-    }
-  }
+  // countdown() {
+  //   this.setState({ timer: this.state.timer - 1});
+  //   if (this.state.timer === 0) {
+  //     clearInterval(this.interval);
+  //     // Redirect in three seconds.
+  //     // this.props.history.push("/voting");
+  //   }
+  // }
 
   render() {
 
@@ -43,7 +43,9 @@ class VotingResults extends React.Component {
           <ul className="voting-results-list">
             {
               this.props.ideas.map(idea => (
-                <li key={`idea${idea._id}`} className='voting-results-idea'>{idea.body}</li>
+                <li key={`idea${idea._id}`} className='voting-results-idea'>{idea.body}
+                  <h3>{idea.__v}</h3>
+                </li>
               ))
             }
           </ul>

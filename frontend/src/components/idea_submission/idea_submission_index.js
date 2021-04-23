@@ -33,12 +33,7 @@ class IdeaSubmissionIndex extends React.Component {
     this.props.fetchUserIdeas(this.state.user.id)
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.userIdeas.length !== this.props.userIdeas.length) {
-      this.props.fetchUserIdeas(this.state.user.id);
-      this.setState()
-    }
-  }
+
 
   countdown() {
     //takes one second off timer

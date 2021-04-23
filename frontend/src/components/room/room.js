@@ -16,13 +16,13 @@ class Room extends React.Component{
       round: 1,
       winner: false,
       timer: 10,
-      ideas: [],
-      idea_num: 0
+      ideas: this.props.userIdeas,
+      idea_num: 0,
     };
-
     this.interval = 0;
     this.countdown = this.countdown.bind(this);
     this.handleRoomStart = this.handleRoomStart.bind(this);
+    this.scoreIdeas = this.scoreIdeas.bind(this);
   }
 
   handleRoomStart() {
@@ -30,44 +30,95 @@ class Room extends React.Component{
     this.interval = setInterval(this.countdown, 1000)
   }
 
-  scoreIdeas() {
-    
-
+  componentDidUpdate(prevProps) {
+    if (prevProps.userIdeas.length !== this.props.userIdeas.length) {
+      this.props.fetchUserIdeas(this.props.currentUser.id);
+      this.setState({ ideas: this.props.userIdeas })
+    }
   }
 
-  //we already have an array of idea items
-  //iterate through array, push idea scores into new array
-  //sort new array from low to high
-  //get low_score at index (arr.length / 4)
-  //while low_score < score at index (arr.length - 1)
-  //iterate through array of idea items, if score is <= low_score, delete
+  scoreIdeas() {
+    console.log(this.state.ideas)
+    //array of idea scores, sorted by score
+    let scoreArr = this.state.ideas.map(idea => idea.__v).sort();
+    console.log("score arr", scoreArr)
+    //array of idea scores, sans scores of 0
+    let noLosers = scoreArr.filter(idea => idea > 0);
+    console.log("noLosers", noLosers)
+    //replaces score_arr with no_losers and deletes zeros,
+    //unless no_losers is empty or every score is zeros
+    if (noLosers.length > 0 && noLosers.length < this.state.ideas.length) {
+      scoreArr = noLosers;
+      this.state.ideas.forEach(idea => {
+        if (idea.__v === 0) {this.props.destroyIdea(idea._id)}
+      });
+    };
+    //gets last item index that should be deleted
+    let deleteIndex = Math.floor(scoreArr.length / 2);
+    console.log("deleteIndex", deleteIndex)
+    //sets winner to true if only one idea remaining
+    let winner = false
+    if (deleteIndex + 1 === scoreArr.length - 1) {winner = true}
+    //gets highest score of item to be deleted
+    let lowScore = scoreArr[deleteIndex]
+    //gets array of items eligible to be deleted
+    let losers = this.state.ideas.filter(idea => (idea.__v <= lowScore) && (idea.__v > 0))
+    //delete losers
+    for (let i = 0; i < deleteIndex; i++) {
+      console.log(losers[i])
+      this.props.destroyIdea(losers[i])
+    }
+    return winner
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
 
   countdown() {
     this.setState({ timer: this.state.timer - 1 })
     if (this.state.timer === 0) {
+      console.log(this.state.phase)
       switch (this.state.phase) {
-        case "idea-submission":
-          console.log("idea to results")
-          this.setState({ phase: "results", timer: 10 });
+        case "idea-submission": //moves to results
+          this.setState({ phase: "results", timer: 13 });
 
           break;
-        case "results":
-          clearInterval(this.interval);
+        case "results": //moves to voting
+          this.interval = setInterval(this.countdown, 1000)
+          console.log("voting")
           this.setState({
             phase: "voting",
-            timer: 10,
+            timer: 13,
             round: this.state.round + 1,
             idea_num: 0
            });
 
-          break;
-        case "voting":
-          if (this.state.idea_num >= this.state.ideas.length - 1) {
-            this.setState({ phase: "winner" });
-          } else {
-            this.setState({ idea_num: this.state.idea_num + 1 })
-          }
 
+          break;
+        case "voting": //moves to either results or winner or more voting
+          console.log(this.state)
+          // if the idea number is the number of ideas, check for winner
+          if (this.state.idea_num >= this.state.ideas.length - 1) {
+            let winner = this.scoreIdeas();
+            this.props.fetchUserIdeas(this.props.currentUser.id)
+            //if there is a winner go to "winner", else go to "results"
+            if (winner) {
+              this.setState({ phase: "winner" });
+              clearInterval(this.interval)
+            } else {
+              this.setState({ phase: "results", timer: 10 });
+            }
+            //if the idea number is less than the num of ideas, reset voting
+          } else {
+            clearInterval(this.interval);
+            console.log("else")
+            this.setState({
+              phase: "voting",
+              idea_num: this.state.idea_num + 1,
+              timer: 13
+            })
+          }
           break;
       }
     }
@@ -90,9 +141,9 @@ class Room extends React.Component{
       case "idea-submission":
         return <IdeaSubmissionContainer timer={this.state.timer}/>
       case "results":
-        return <VotingResultsContainer round={this.state.round} />
+        return <VotingResultsContainer round={this.state.round} timer={this.state.timer}/>
       case "voting":
-        return <VotingPhaseContainer idea={this.state.ideas[this.state.idea_num]}/>
+        return <VotingPhaseContainer key={this.state.idea_num} idea={this.state.ideas[this.state.idea_num]} timer={this.state.timer}/>
       case "winner":
         // CHANGE TO WINNER WHEN WE HAVE WINNER PAGE
         return <VotingWinnerContainer idea={this.state.ideas[0]}/>
