@@ -54,7 +54,7 @@ class SplashPage extends React.Component {
 
   createRoom() {
     // this.props.addRoom().then(res => console.log(res.roomId.data._id));
-    this.props.addRoom().then(this.sendRoom);
+    this.props.addRoom().then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
   }
 
   render() {
