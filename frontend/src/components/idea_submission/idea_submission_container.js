@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import React from 'react';
 import IdeaSubmissionIndex from './idea_submission_index';
 
 

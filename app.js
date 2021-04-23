@@ -3,10 +3,28 @@ const app = express();
 const db = require("./config/keys").mongoURI;
 const mongoose = require("mongoose");
 const passport = require("passport");
+
 const http = require('http');
 const server = http.createServer(app);
-const io = require('socket.io')(server);
-const SocketUtil = require("./src/socket_server_util");
+
+// https://socket.io/docs/v4/rooms/
+// const { Server } = require("socket.io");
+// const io = new Server(server);
+
+// https://www.youtube.com/watch?v=NwHq1-FkQpU
+// doesn't work with the other files
+
+// const io = socket(server);
+// const socket = require("socket.io");
+
+
+// https://github.com/OmarMAbbasi/StarfighterPvP/blob/master/app.js
+const io = (module.exports.io = require("socket.io")(server));
+
+
+// const SocketUtil = require("./src/socket_server_util");
+// const SocketTest = require("./src/socket_testing");
+const SocketDraft = require("./src/socket_draft");
 
 
 // Set up routes
@@ -52,72 +70,12 @@ app.use("/api/guests", guests);
 
 //test socket connection/disconnection (remove in production)
 io.on('connection', (socket) => {
-  console.log('a user connected');
-  // console.log(socket.id);
+  console.log(socket.id); // why are there different sockets sometimes?
+  console.log('a user connected'); // why are there so many of these sometimes?
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
 });
-
-// emits the username
-io.on('connection', (socket) => {
-  // console.log(socket.id);
-  socket.on('user joins room', (username) => {
-    io.emit('user joins room', username);
-    //save to the database here?
-  });
-});
-
-// *********** TO TEST ****************
-// Does calling io.on('connection') create multiple sockets? Answer: NO
-
-
-// // https://socket.io/docs/v4/rooms/
-// // creates room?
-io.on('connection', (socket) => {
-  io.of("/room").adapter.on("create-room", (room) => {
-    console.log(`room ${room} was created`);
-  });
-});
-
-// // borrowing from routes, simple .join method
-// // create room?
-// io.of("/room").on('connection', (socket) => {
-//   const RANDOM_CODE = (Math.random() * 9876543210).toString().slice(0, 6);
-//   socket.join(`${RANDOM_CODE}`);
-// });
-
-
-// // https://socket.io/docs/v4/rooms/
-// // join room?
-// io.on('connection'), (socket) => {
-//   io.of("/").adapter.on("join-room", (room, id) => {
-//     console.log(`socket ${id} has joined room ${room}`);
-//     // io.to(`${RANDOM_CODE}`).emit() // put something in emit so that it emits the username of the current signed-in user
-//   });
-// }
-
-// // https://socket.io/docs/v4/rooms/
-// //join room?
-// io.of("/room").on('connection'), (room, id) => {
-//     console.log(`socket ${id} has joined room ${room}`);
-//     // io.to(`${RANDOM_CODE}`).emit() // put something in emit so that it emits the username of the current signed-in user
-// }
-
-// // https://www.youtube.com/watch?v=bxUlKDgpbWs 
-// //join room?
-// io
-//     .of("/room")
-//     .on('connection'), (socket) => {
-//         socket.on("joinRoom", (room) => {
-//           socket.join(room);
-//         });
-// }
-
-
-
-
-
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server is running on port ${port}`));

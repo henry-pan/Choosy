@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Modal from "../modal/modal";
 import "./splash.css";
+// import { createRoom } from '../../util/socket_util.js';
 
 class SplashPage extends React.Component {
   constructor(props){
@@ -13,6 +14,12 @@ class SplashPage extends React.Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    // if (this.props.loggedIn) {
+    //   createRoom();
+    // }
   }
 
   handleInput(field) {
@@ -44,7 +51,7 @@ class SplashPage extends React.Component {
     if (this.props.loggedIn) {
       logoutButton = <button className="link-btn logout-btn" onClick={this.props.logout}>{this.props.currentUser.name}</button>
       authButtons = <>
-        <Link className="link-btn room-btn" to={"/room"}>Create Room</Link>
+        <Link id="create-room" className="link-btn room-btn" to={"/room"}>Create Room</Link>
       </>
     } else {
       authButtons = <>

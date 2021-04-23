@@ -31,7 +31,7 @@ class IdeaSubmissionIndex extends React.Component {
     this.setState({
       secondsLeft: seconds
     })
-    if (seconds == 0) {
+    if (seconds === 0) {
       this.handleListSubmit();
     } else {
       setInterval(this.countdown, 1000)
