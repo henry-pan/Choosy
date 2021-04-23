@@ -55,7 +55,6 @@ class IdeaSubmissionIndex extends React.Component {
     this.props.addIdea(this.state.currentIdea);
     // this.setState({ body: "" });
     e.target.reset();
-    console.log("idea_submission_index userIdeas: ", this.props.userIdeas);
   }
 
 
