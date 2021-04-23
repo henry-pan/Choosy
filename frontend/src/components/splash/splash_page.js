@@ -14,6 +14,7 @@ class SplashPage extends React.Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
   componentDidMount(){
@@ -44,6 +45,11 @@ class SplashPage extends React.Component {
     );
   }
 
+  createRoom() {
+    // this.props.addRoom().then(res => console.log(res.roomId.data._id));
+    this.props.addRoom().then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
+  }
+
   render() {
     
     let logoutButton;
@@ -51,7 +57,7 @@ class SplashPage extends React.Component {
     if (this.props.loggedIn) {
       logoutButton = <button className="link-btn logout-btn" onClick={this.props.logout}>{this.props.currentUser.name}</button>
       authButtons = <>
-        <Link id="create-room" className="link-btn room-btn" to={"/room"}>Create Room</Link>
+        <Link onClick={this.createRoom} className="link-btn room-btn" to={"/room"}>Create Room</Link>
       </>
     } else {
       authButtons = <>

@@ -42,7 +42,7 @@ const receiveRoom = roomId => ({
   
 export const addRoom = data => dispatch => (
   createRoom(data)
-    .then(roomId => dispatch(receiveUsers(roomId)))
+    .then(roomId => dispatch(receiveRoom(roomId))) //originally dispatch(receiveUsers(roomId)))
     .catch(err => console.log(err))
 );
 
