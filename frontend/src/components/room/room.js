@@ -65,15 +65,12 @@ class Room extends React.Component{
         }
       }
     }
-    console.log("sortArr after 0's", sortArr)
     if (sortArr.length <= 3) {winner = true}
     let deleteIndex = Math.floor(sortArr.length / 2);
     for (let i = 0; i < deleteIndex; i++) {
       this.props.destroyIdea(sortArr[i]._id)
     }
     let survivors = sortArr.slice(deleteIndex, sortArr.length)
-    console.log("state before survivors ", this.state.ideas)
-    console.log("survivors ", survivors)
     this.setState({ survivors: survivors })
     return winner;
   }
@@ -88,7 +85,8 @@ class Room extends React.Component{
       switch (this.state.phase) {
         case "idea-submission": //moves to results
           this.props.fetchUserIdeas(this.props.currentUser.id);
-          this.setState({ phase: "results", timer: 5, ideas: this.props.userIdeas });
+          console.log("this.props, pre-results: ", this.props)
+          this.setState({ phase: "results", timer: 13, ideas: this.props.userIdeas });
 
           break;
         case "results": //moves to voting
@@ -106,7 +104,6 @@ class Room extends React.Component{
           // if the idea number is the number of ideas, check for winner
           if (this.state.idea_num >= this.state.ideas.length - 1) {
             let winner = this.newScoreIdeas();
-            console.log("winner ", winner)
             //if there is a winner go to "winner", else go to "results"
             if (winner) {
               clearInterval(this.interval);
@@ -114,6 +111,8 @@ class Room extends React.Component{
               this.setState({ ideas: this.state.survivors });
             } else {
               this.setState({ phase: "results", timer: 13 });
+              this.setState({ ideas: this.state.survivors });
+              console.log("this.props after voting", this.props)
             }
             //if the idea number is less than the num of ideas, reset voting
           } else {
@@ -164,9 +163,6 @@ class Room extends React.Component{
   }
 
   render() {
-    console.log("this.props: ", this.props);
-    console.log("hostId: ", this.props.hostId);
-
     if (!this.props.currentUser) return null;
     switch (this.state.phase) {
       case "room":
