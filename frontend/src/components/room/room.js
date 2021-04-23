@@ -38,7 +38,7 @@ class Room extends React.Component{
   }
 
   scoreIdeas() {
-    console.log(this.state.ideas)
+    console.log("room.js ideas: ", this.state.ideas)
     //array of idea scores, sorted by score
     let scoreArr = this.state.ideas.map(idea => idea.__v).sort();
     console.log("score arr", scoreArr)
@@ -65,7 +65,7 @@ class Room extends React.Component{
     let losers = this.state.ideas.filter(idea => (idea.__v <= lowScore) && (idea.__v > 0))
     //delete losers
     for (let i = 0; i < deleteIndex; i++) {
-      console.log(losers[i])
+      console.log("losers[i]: ", losers[i])
       this.props.destroyIdea(losers[i])
     }
     return winner
@@ -78,7 +78,7 @@ class Room extends React.Component{
   countdown() {
     this.setState({ timer: this.state.timer - 1 })
     if (this.state.timer === 0) {
-      console.log(this.state.phase)
+      console.log("room.js: this.state.phase", this.state.phase)
       switch (this.state.phase) {
         case "idea-submission": //moves to results
           this.setState({ phase: "results", timer: 13 });
@@ -97,7 +97,7 @@ class Room extends React.Component{
 
           break;
         case "voting": //moves to either results or winner or more voting
-          console.log(this.state)
+          console.log("room.js", this.state)
           // if the idea number is the number of ideas, check for winner
           if (this.state.idea_num >= this.state.ideas.length - 1) {
             let winner = this.scoreIdeas();
@@ -112,7 +112,6 @@ class Room extends React.Component{
             //if the idea number is less than the num of ideas, reset voting
           } else {
             clearInterval(this.interval);
-            console.log("else")
             this.setState({
               phase: "voting",
               idea_num: this.state.idea_num + 1,

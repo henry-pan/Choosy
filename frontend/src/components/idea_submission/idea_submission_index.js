@@ -30,7 +30,7 @@ class IdeaSubmissionIndex extends React.Component {
 
   componentDidMount() {
     // this.countdown()
-    this.props.fetchUserIdeas(this.state.user.id)
+    // this.props.fetchUserIdeas(this.state.user.id)
   }
 
 
@@ -49,7 +49,13 @@ class IdeaSubmissionIndex extends React.Component {
   handleIdeaSubmit(e) {
     e.preventDefault();
     this.props.addIdea(this.state.currentIdea)
-    console.log(this.props.userIdeas)
+    console.log("idea_submission_index userIdeas: ", this.props.userIdeas)
+  }
+
+  resetIdeas(){
+    this.setState({
+      ideaList: []
+    })
   }
 
   render() {
