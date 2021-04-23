@@ -1,0 +1,56 @@
+.idea-submission-timer {
+  user-select: none;
+  font-size: 72px;
+  margin-bottom: 30px;
+}
+
+.idea-submission-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.idea-submission-input {
+  padding: 15px;
+  font-size: 20px;
+  width: 400px;
+  height: 50px;
+  border-radius: 15px 0 0 15px;
+  border-right: none;
+}
+
+.idea-submission-input:focus {
+  border-right: none;
+}
+
+.idea-submit-btn {
+  border-radius: 0 15px 15px 0;
+}
+
+.ideas-list {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
+  width: 400px;
+  max-height: 65vh;
+}
+
+.idea-item {
+  display: flex;
+  align-items: center;
+  background-color: #e9c46a;
+  color: #333;
+  border-radius: 15px;
+  min-width: 300px;
+  margin: 10px;
+  padding-right: 15px;
+}
+
+.idea-btn {
+  width: 50px;
+  min-width: 50px;
+  border-radius: 15px 0 0 15px;
+  margin-right: 15px;
+}
+

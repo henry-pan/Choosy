@@ -35,6 +35,7 @@
   background: transparent;
   border: none;
   width: 25px;
+  transition: color .25s;
   text-align: center;
 }
 

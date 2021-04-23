@@ -17,7 +17,7 @@ export const createIdea = data => {
 }
 
 export const updateIdea = data => {
-  return axios.patch('/api/ideas/', data)
+  return axios.patch(`/api/ideas/${data._id}`, data)
 }
 
 export const deleteIdea = ideaId => {

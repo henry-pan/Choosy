@@ -8,10 +8,11 @@ import { RECEIVE_IDEAS, RECEIVE_ROOM, RECEIVE_USERS, REMOVE_ROOM } from '../acti
         newState.ideas.all = action.ideas.data;
         return newState;
       case RECEIVE_USERS:
-        newState.users.all = action.users.data
+        newState.users.all = action.users.data;
         return newState;
       case RECEIVE_ROOM:
-        newState.id = action.roomId
+        newState.id = action.roomId;
+        return newState;
       case REMOVE_ROOM:
         newState = undefined;
         return newState;

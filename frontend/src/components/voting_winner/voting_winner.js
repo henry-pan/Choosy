@@ -19,8 +19,9 @@ class VotingWinner extends React.Component {
         </div>
         <div className="voting-winner-container">
           <h1 className="title voting-winner-title">Winner</h1>
-          <h1 className="voting-winner-item">an earth-shattering idea</h1>
-          <p className="voting-winner-blurb">Liked this set of ideas? {saveIdeasText}</p>
+          <h1 className="voting-winner-item">{this.props.idea.body}</h1>
+          <p className="voting-winner-blurb">Liked this set of ideas?</p>
+          <p className="voting-winner-blurb">{saveIdeasText}</p>
           <button className="link-btn">{this.props.loggedIn ? "Save" : "Register"}</button>
         </div>
       </div>

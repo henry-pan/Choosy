@@ -11,7 +11,8 @@ class VotingPhase extends React.Component{
     this.state = {
       timer: 10,
       vote: 0,
-      voted: false
+      voted: false,
+      idea: this.props.idea
     };
 
     this.interval = 0;
@@ -30,17 +31,21 @@ class VotingPhase extends React.Component{
         this.setState({ vote: Math.floor(Math.random() * 2), voted: true });
       }
       // Redirect in three seconds.
-      setTimeout(()=>this.props.history.push("/"), 3000);
+      // setTimeout(()=>this.props.history.push("/"), 3000);
     }
   }
 
   handleVote(vote) {
     this.setState({ vote: vote, voted: true });
+    if (vote === 1) {
+      this.state.idea.__v = this.state.idea.__v + 1
+      this.props.updateIdea(this.state.idea)
+    }
   }
 
   render() {
     if (!this.props.currentUser) return null;
-
+    // if (!this.props.idea) return null;
     let voteButtons;
     if (this.state.voted) {
       if (this.state.vote === 0) {
@@ -62,7 +67,8 @@ class VotingPhase extends React.Component{
         </div>
         <span className="voting-timer">{this.state.timer}</span>
         <div className="voting-idea-container">
-          <span className="voting-idea">a great idea</span>
+          {/* CHANGE TO THIS.PROPS.IDEA */}
+          <span className="voting-idea">{this.props.idea.body}</span>
         </div>
         <div className="voting-vote-container">
           {voteButtons}
@@ -72,4 +78,4 @@ class VotingPhase extends React.Component{
   }
 }
 
-export default withRouter(VotingPhase);
+export default VotingPhase;
