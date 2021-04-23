@@ -160,7 +160,7 @@ class Room extends React.Component{
         <div className="nav">
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
-        <h1 className="title">123456</h1>
+        <h1 className="title room-code">123456</h1>
         <h2 className="room-subtitle">Room Code</h2>
         <div className="room-users-container">
           <span className="room-user-item">{this.props.currentUser.name}</span>

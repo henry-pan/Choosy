@@ -37,9 +37,9 @@ class VotingResults extends React.Component {
         <div className="nav">
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
-        <h3 className="voting-results-timer">{this.props.timer}</h3>
         <div className="voting-results-container">
-          <h1 className="title">Results</h1>
+          <h1 className="title">Round {this.props.round}</h1>
+          <p>Voting starts in {this.props.timer}</p>
           {/* NOTE: we should change 'Results' to 'Round <x>', pass as prop from room */}
           {/* <h1 className="voting-results-title">Round {this.props.round}</h1> */}
           <ul className="voting-results-list">

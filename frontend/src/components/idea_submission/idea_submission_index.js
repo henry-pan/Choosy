@@ -70,6 +70,14 @@ class IdeaSubmissionIndex extends React.Component {
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
         <h3 className="idea-submission-timer">{this.props.timer}</h3>
+        <form className="idea-submission-form" onSubmit={this.handleIdeaSubmit}>
+          <input type="text"
+            className="idea-submission-input"
+            placeholder="Think of something"
+            value={this.state.body}
+            onChange={this.update()} />
+          <button className="link-btn idea-submit-btn">Submit</button>
+        </form>
         <ul className="ideas-list">
           {
             this.props.userIdeas.map(idea => (
@@ -82,18 +90,6 @@ class IdeaSubmissionIndex extends React.Component {
             )
           }
         </ul>
-        <div className="idea-submission-form-div">
-          <form className="idea-submission-form" onSubmit={this.handleIdeaSubmit}>
-            <div className="idea-submission-input">
-              <input type="text"
-                className="idea-body-input"
-                placeholder="Enter Idea"
-                value={this.state.body}
-                onChange={this.update()} />
-            </div>
-            <button className="link-btn">Add list</button>
-          </form>
-        </div>
       </div>
     )
   };
