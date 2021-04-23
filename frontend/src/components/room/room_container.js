@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => ({
   loggedIn: state.session.isAuthenticated,
   currentUser: state.session.user,
   userIdeas: Object.values(state.ideas.user),
-  // hostId: state.rooms.rooms[ownProps.match.params._id].data.host
+  room: state.rooms.id.data
 });
 
 const mapDispatchToProps = dispatch => ({
