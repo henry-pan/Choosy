@@ -18,7 +18,7 @@ class VotingWinner extends React.Component {
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
         <div className="voting-winner-container">
-          <h1 className="voting-winner-title">Winner</h1>
+          <h1 className="title voting-winner-title">Winner</h1>
           <h1 className="voting-winner-item">an earth-shattering idea</h1>
           <p className="voting-winner-blurb">Liked this set of ideas? {saveIdeasText}</p>
           <button className="link-btn">{this.props.loggedIn ? "Save" : "Register"}</button>

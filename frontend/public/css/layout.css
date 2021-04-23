@@ -113,6 +113,13 @@ a:hover {
   user-select: none;
 }
 
+.title {
+  font-family: 'Londrina Solid', cursive;
+  font-size: 72px;
+  user-select: none;
+  text-align: center;
+}
+
 .divider {
   margin: 1.5em auto;
   position: relative;

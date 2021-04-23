@@ -22,7 +22,7 @@ class VotingResults extends React.Component {
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
         <div className="voting-results-container">
-          <h1 className="voting-results-title">Results</h1>
+          <h1 className="title">Results</h1>
           <ul className="voting-results-list">
             <li className="voting-results-item">an earth-shattering idea</li>
             <li className="voting-results-item">an amazing idea</li>
