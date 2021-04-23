@@ -2,7 +2,6 @@ import React from "react";
 import io from "socket.io-client";
 import { socket } from "../../util/socket_util";
 import { Link } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 class Room extends React.Component{
   constructor(props){
@@ -49,7 +48,7 @@ class Room extends React.Component{
         <form id="form-test" action="">
           <input id="input-test" placeholder="Input name" autoComplete="off" /><button>Send</button>
         </form>
-        <Link to='/room/submitideas'>Start</Link>
+        <Link to='/room/submitideas' replace>Start</Link>
       </div>
     );
   }

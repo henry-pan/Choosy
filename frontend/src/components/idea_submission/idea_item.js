@@ -1,15 +1,5 @@
 import React from 'react';
 
-<<<<<<< HEAD
-export default ({ idea }) => {
-  return (
-    <li className='idea-item'>
-      <h3 className='idea-item-body'>{idea.body}</h3>
-      {/* add delete button here */}
-    </li>
-  )
-}
-=======
 class IdeaItem extends React.Component {
   constructor(props) {
     super(props)
@@ -35,4 +25,3 @@ class IdeaItem extends React.Component {
 }
 
 export default IdeaItem
->>>>>>> idea-submission

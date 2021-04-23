@@ -1,20 +1,12 @@
 import React from 'react';
 import IdeaItem from './idea_item';
-<<<<<<< HEAD
-=======
 import { Redirect } from 'react-router-dom';
 
->>>>>>> idea-submission
 
 class IdeaSubmissionIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      ideaList: [],
-      currentIdea: '',
-      secondsLeft: 31
-=======
       user: this.props.currentUser,
       ideaList: this.props.userIdeas,
       currentIdea: {
@@ -24,31 +16,20 @@ class IdeaSubmissionIndex extends React.Component {
       },
       secondsLeft: 31,
       update: false
->>>>>>> idea-submission
     }
     this.update = this.update.bind(this);
     this.handleIdeaSubmit = this.handleIdeaSubmit.bind(this);
     this.countdown = this.countdown.bind(this);
-<<<<<<< HEAD
-    this.handleListSubmit = this.handleListSubmit.bind(this);
-=======
->>>>>>> idea-submission
   }
 
   update() {
     return (e) => {
-<<<<<<< HEAD
-      this.setState({ currentIdea: e.currentTarget.value })
-=======
       this.setState({ currentIdea: { body: e.currentTarget.value } })
->>>>>>> idea-submission
     }
   }
 
   componentDidMount() {
     this.countdown()
-<<<<<<< HEAD
-=======
     this.props.fetchUserIdeas(this.state.user.id)
   }
 
@@ -57,7 +38,6 @@ class IdeaSubmissionIndex extends React.Component {
       this.props.fetchUserIdeas(this.state.user.id);
       this.setState()
     }
->>>>>>> idea-submission
   }
 
   countdown() {
@@ -66,27 +46,6 @@ class IdeaSubmissionIndex extends React.Component {
     this.setState({
       secondsLeft: seconds
     })
-<<<<<<< HEAD
-    if (seconds === 0) {
-      this.handleListSubmit();
-    } else {
-      setInterval(this.countdown, 1000)
-    }
-  }
-
-  handleListSubmit() {
-    //add list submission here
-  }
-
-  handleIdeaSubmit() {
-    let newIdeaList = this.state.ideaList.push(this.state.currentIdea)
-    this.setState({ ideaList: newIdeaList, currentIdea: '' })
-  }
-
-  render() {
-    const timeLeft = this.state.secondsLeft
-    return (
-=======
     if (seconds > 0) {
       setTimeout(this.countdown, 1000)
     }
@@ -126,17 +85,10 @@ class IdeaSubmissionIndex extends React.Component {
     if (timeLeft === 0) {
       return <Redirect to='/result'/>
     } else return (
->>>>>>> idea-submission
       <div className="idea-submission-index-div">
         <h3 className='idea-submission-timer'>{timeLeft}</h3>
         <ul className="ideas-list">
           {
-<<<<<<< HEAD
-            this.state.ideaList.map(idea => (
-              <IdeaItem
-                key={`idea${idea.id}`}
-                body={idea.body}/>
-=======
             // this.ideasMap()
             this.props.userIdeas.map(idea => (
               <li>
@@ -147,7 +99,6 @@ class IdeaSubmissionIndex extends React.Component {
                   deleteIdea={this.props.destroyIdea}/>
 
                 </li>
->>>>>>> idea-submission
               )
             )
           }
@@ -167,11 +118,7 @@ class IdeaSubmissionIndex extends React.Component {
         </div>
       </div>
     )
-<<<<<<< HEAD
-  }
-=======
   };
->>>>>>> idea-submission
 }
 
 export default IdeaSubmissionIndex;
