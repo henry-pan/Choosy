@@ -2,9 +2,7 @@ import React from "react";
 import io from "socket.io-client";
 import { socket } from "../../util/socket_util";
 import { Link } from "react-router-dom";
-
-const initialUsernamesState = {
-}
+import { Link } from "react-router-dom";
 
 class Room extends React.Component{
   constructor(props){

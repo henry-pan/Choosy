@@ -60,6 +60,7 @@ class VotingPhase extends React.Component{
         </div>
         <span className="voting-timer">{this.state.timer}</span>
         <div className="voting-idea-container">
+          {/* CHANGE TO THIS.PROPS.IDEA */}
           <span className="voting-idea">a great idea</span>
         </div>
         <div className="voting-vote-container">
