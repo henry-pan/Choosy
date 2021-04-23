@@ -22,6 +22,12 @@ class Room extends React.Component{
   }
 
   componentDidMount(){
+    this.props.fetchRoom(this.props.match.params._id)
+    .then(
+      this.setState({
+        roomId: (this.props.match.params._id)
+      })
+    ).then(console.log(this.props.match.params._id))
     // this.props.loadGuests(); // doesn't work
 
     socket();
@@ -40,6 +46,7 @@ class Room extends React.Component{
   
   render() {
     if (!this.props.currentUser) return null;
+    console.log(this.state.roomId);
 
     return (
       <div>
@@ -48,7 +55,7 @@ class Room extends React.Component{
         <form id="form-test" action="">
           <input id="input-test" placeholder="Input name" autoComplete="off" /><button>Send</button>
         </form>
-        <Link to='/room/submitideas' replace>Start</Link>
+        <Link to={`/room/${this.state.roomId}/submitideas`} replace>Start</Link>
       </div>
     );
   }

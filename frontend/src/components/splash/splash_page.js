@@ -15,6 +15,9 @@ class SplashPage extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.createRoom = this.createRoom.bind(this);
+
+    this.sendRoom = this.sendRoom.bind(this);
+    this.roomId = "";
   }
 
   componentDidMount(){
@@ -45,9 +48,13 @@ class SplashPage extends React.Component {
     );
   }
 
+  sendRoom(res){
+    this.props.history.push(`/room/${res.roomId.data._id}`);
+  }
+
   createRoom() {
     // this.props.addRoom().then(res => console.log(res.roomId.data._id));
-    this.props.addRoom().then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
+    this.props.addRoom().then(this.sendRoom);
   }
 
   render() {

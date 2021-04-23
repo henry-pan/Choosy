@@ -6,7 +6,8 @@ import { addRoom, fetchRoom } from '../../actions/room_actions';
 
 const mapStateToProps = state => ({
   loggedIn: state.session.isAuthenticated,
-  currentUser: state.session.user
+  currentUser: state.session.user,
+  room: state.rooms
 });
 
 const mapDispatchToProps = dispatch => ({
