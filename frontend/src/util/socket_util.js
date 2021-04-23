@@ -72,6 +72,7 @@ export const socket = () => {
   socket.on('submit username', function (username) {
     var item = document.createElement('li');
     item.textContent = username;
+    item.classList.add('room-user-item');
     usernames.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
   });
