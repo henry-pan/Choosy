@@ -1,11 +1,7 @@
 import React from "react";
-<<<<<<< HEAD
 import { Link, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-=======
-import { Link } from "react-router-dom";
->>>>>>> 7f5a9af1a93d379cb09f1d534a7b69922f6ed45d
 import "./voting_phase.css";
 
 class VotingPhase extends React.Component{
