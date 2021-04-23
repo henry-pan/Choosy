@@ -1,4 +1,6 @@
 import React from "react";
+import io from "socket.io-client";
+import { socket } from "../../util/socket_util";
 import { Link } from "react-router-dom";
 import voting_phase from "../voting_phase/voting_phase";
 import IdeaSubmissionContainer from "../idea_submission/idea_submission_container";
@@ -14,6 +16,46 @@ class Room extends React.Component{
   constructor(props){
     super(props);
 
+    // all this initial state-setting requires hooks. rip.
+    // const [username, setUsername] = useState("");
+    // const [connected, setConnected] = useState(false); // need this
+    // const [currentChat, setCurrentChat] = useState({ isChannel: true, chatName: "general", receiverId: "" });
+    // const [connectedRooms, setConnectedRooms] = useState(["general"]);
+    // const [allUsers, setAllUsers] = useState([]);
+    // const [messages, setMessages] = useState(initialMessagesState);
+    // const [message, setMessage] = useState("");
+    // const socketRef = useRef(); // ref will be housed in the socket.io connected client
+
+    
+    this.state = {};
+  }
+
+  componentDidMount(){
+    this.props.fetchRoom(this.props.match.params._id)
+    .then(
+      this.setState({
+        roomId: (this.props.match.params._id)
+      })
+    ).then(console.log(this.props.match.params._id))
+    // this.props.loadGuests(); // doesn't work
+
+    socket();
+  }
+
+  // sendUsername() {
+  //   const payload = {
+  //     username,
+  //     roomcode // pass in roomcode from props?
+  //   }
+  //   socketRef.current.emit("send message", payload);
+  // }
+
+
+
+  
+  render() {
+    if (!this.props.currentUser) return null;
+    console.log(this.state.roomId);
     this.state = {
       phase: "room",
       round: 1,
@@ -164,7 +206,7 @@ class Room extends React.Component{
         </div>
         <h1 className="title room-code">123456</h1>
         <h2 className="room-subtitle">Room Code</h2>
-        <div className="room-users-container">
+        <ul id="usernames" className="room-users-container">
           <span className="room-user-item">{this.props.currentUser.name}</span>
           <span className="room-user-item">Random guest</span>
           <span className="room-user-item">Fake user</span>
@@ -172,7 +214,11 @@ class Room extends React.Component{
           <span className="room-user-item">Space filler</span>
           <span className="room-user-item">Flex Wrap</span>
           <span className="room-user-item">Looks good</span>
-        </div>
+        </ul>
+        
+        <form id="form-test" action="">
+          <input id="input-test" placeholder="Input name" autoComplete="off" /><button>Send</button>
+        </form>
         <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>
         <button className="link-btn" onClick={this.handleRoomStart}>Start</button>
       </div>

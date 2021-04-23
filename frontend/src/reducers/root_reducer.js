@@ -4,12 +4,14 @@ import errors from './errors_reducer';
 import ideas from './ideas_reducer';
 import rooms from './rooms_reducer';
 import modal from './modal_reducer';
+import guests from './guests_reducer';
 
 const RootReducer = combineReducers({
   session,
   errors,
   ideas,
   rooms,
+  guests,
   modal
 });
 

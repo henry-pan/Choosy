@@ -1,5 +1,7 @@
 import React from "react";
 import "./join_guest.css";
+// import { joinRoom } from "../../util/socket_util";
+import { withRouter } from "react-router-dom";
 
 class JoinGuest extends React.Component {
   constructor(props){
@@ -13,14 +15,30 @@ class JoinGuest extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount(){
+    // joinRoom();
+  }
+
+
+  componentWillUnmount(){
+    // <Redirect to="/room" /> // won't work until protected routes are refactored?
+    this.props.history.push("/room");
+  }
+
   handleInput(field) {
     return e => this.setState({ [field]: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    // const user = Object.assign({}, this.state);
+    const guest = Object.assign({}, this.state);
+
+    // in theory posts to guest document/collection in the backend
+    this.props.joinAsGuest(guest);
+    
     console.log("Entering the room: ", this.props.roomCode, "with user: ", this.state.username);
+
+    this.props.closeModal();
   }
 
   renderErrors(){
@@ -38,8 +56,8 @@ class JoinGuest extends React.Component {
     return (
       <>
         <h1>{this.props.roomCode}</h1>
-        <form className="splash-join-room" onSubmit={this.handleSubmit}>
-          <input className="join-guest-input" onChange={this.handleInput("username")} type="text" value={this.state.username} placeholder="Enter a username"/>
+        <form id="form" className="splash-join-room" onSubmit={this.handleSubmit}>
+          <input id="input" className="join-guest-input" onChange={this.handleInput("username")} type="text" value={this.state.username} placeholder="Enter a username"/>
           {this.renderErrors()}
           <button className="link-btn join-guest-btn">Join</button>
         </form>
@@ -48,4 +66,4 @@ class JoinGuest extends React.Component {
   }
 }
 
-export default JoinGuest;
+export default withRouter(JoinGuest);
