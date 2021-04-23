@@ -11,7 +11,7 @@
 
 .modal-close {
   margin: 14px 20px;
-  font-size: 28px;
+  font-size: 32px;
   cursor: pointer;
   user-select: none;
   z-index: 3;
@@ -23,7 +23,7 @@
   flex-direction: column;
   margin-top: 50px;
   overflow-y: scroll;
-  background-color: rgba(230,230,230,0.95);
+  background-color: rgba(204,204,204,0.95);
   border-radius: 3px;
   width: 550px;
   height: 650px;

@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./auth.css";
 
 class SessionForm extends React.Component {
@@ -66,6 +68,9 @@ class SessionForm extends React.Component {
   render() {
     let passType = (this.state.showPass ? "text" : "password");
     let passType2 = (this.state.showPass2 ? "text" : "password");
+    let showPass = (this.state.showPass ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />);
+    let showPass2 = (this.state.showPass2 ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />);
+    
     let usernameInput;
     let password2Input;
     if (this.props.formType === "Register") {
@@ -73,7 +78,7 @@ class SessionForm extends React.Component {
       password2Input = (
         <div className="auth-pass-container">
           <input className="auth-input-pass" onChange={this.handleInput("password2")} type={passType2} value={this.state.password2} placeholder="Confirm password"/>
-          <span className="auth-show-pass" tabIndex="-1" onClick={this.togglePassword2}>👁️</span>
+          <span className="auth-show-pass" tabIndex="-1" onClick={this.togglePassword2}>{showPass2}</span>
         </div>
       );
     }
@@ -89,7 +94,7 @@ class SessionForm extends React.Component {
     return (
       <div className="content">
         <nav className="nav">
-          <Link className="btn-circle" to="/">&lt;</Link>
+          <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faChevronLeft} /></Link>
         </nav>
         <h1 className="logo">choosy</h1>
         {demoLogin}
@@ -98,7 +103,7 @@ class SessionForm extends React.Component {
           <input className="auth-input" onChange={this.handleInput("email")} type="email" value={this.state.email} placeholder="Your email"/>
           <div className="auth-pass-container">
             <input className="auth-input-pass" onChange={this.handleInput("password")} type={passType} value={this.state.password} placeholder="Your password"/>
-            <span className="auth-show-pass" tabIndex="-1" onClick={this.togglePassword}>👁️</span>
+            <span className="auth-show-pass" tabIndex="-1" onClick={this.togglePassword}>{showPass}</span>
           </div>
           {password2Input}
           {this.renderErrors()}

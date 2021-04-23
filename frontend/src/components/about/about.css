@@ -5,6 +5,19 @@
   width: 100%;
 }
 
+.about-header-icon {
+  margin: 14px 20px;
+  font-size: 32px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 3;
+  color: #2a9d8f;
+}
+
+.about-header-icon:hover {
+  color: #207268;
+}
+
 .about-content {
   color: #333;
 }
