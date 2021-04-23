@@ -2,5 +2,64 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: absolute;
   width: 100%;
+}
+
+.about-header-icon {
+  margin: 14px 20px;
+  font-size: 32px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 3;
+  color: #2a9d8f;
+}
+
+.about-header-icon:hover {
+  color: #207268;
+}
+
+.about-content {
+  color: #333;
+  margin-top: 15px;
+}
+
+.about-content p {
+  margin: 15px;
+}
+
+.about-team {
+  display: flex;
+  justify-content: space-between;
+  color: #333;
+  margin: 15px;
+}
+
+.about-member {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  border: 3px solid #2a9d8f;
+  border-radius: 15px;
+  padding: 7px;
+}
+
+.about-member span {
+  font-size: 17px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.about-member-pic {
+  height: 100px;
+  width: 100px;
+  min-width: 100px;
+  border-radius: 50%;
+  margin-bottom: 7px;
+}
+
+.about-member-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }

@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import "./voting_phase.css";
 
 class VotingPhase extends React.Component{
@@ -42,21 +44,21 @@ class VotingPhase extends React.Component{
     let voteButtons;
     if (this.state.voted) {
       if (this.state.vote === 0) {
-        voteButtons = <span className="voting-voted">👎</span>;
+        voteButtons = <span className="voting-voted"><FontAwesomeIcon icon={faThumbsDown} /></span>;
       } else {
-        voteButtons = <span className="voting-voted">👍</span>;
+        voteButtons = <span className="voting-voted"><FontAwesomeIcon icon={faThumbsUp} /></span>;
       }
     } else {
       voteButtons = (<>
-        <button onClick={() => this.handleVote(0)} className="link-btn voting-btn">👎</button>
-        <button onClick={() => this.handleVote(1)} className="link-btn voting-btn">👍</button>
+        <button onClick={() => this.handleVote(0)} className="link-btn voting-btn"><FontAwesomeIcon icon={faThumbsDown} /></button>
+        <button onClick={() => this.handleVote(1)} className="link-btn voting-btn"><FontAwesomeIcon icon={faThumbsUp} /></button>
       </>);
     }
     
     return (
       <div className="content">
         <div className="nav">
-          <Link className="btn-circle" to="/">&times;</Link>
+          <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
         <span className="voting-timer">{this.state.timer}</span>
         <div className="voting-idea-container">

@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./voting_results.css";
 
 class VotingResults extends React.Component {
@@ -17,10 +19,10 @@ class VotingResults extends React.Component {
     return (
       <div className="content">
         <div className="nav">
-          <Link className="btn-circle" to="/">&times;</Link>
+          <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
         <div className="voting-results-container">
-          <h1 className="voting-results-title">Results</h1>
+          <h1 className="title">Results</h1>
           <ul className="voting-results-list">
             <li className="voting-results-item">an earth-shattering idea</li>
             <li className="voting-results-item">an amazing idea</li>
