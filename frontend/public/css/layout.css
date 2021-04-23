@@ -29,6 +29,14 @@ input:focus {
   border: 3px solid #e9c46a;
 }
 
+a {
+  color: #2a9d8f;
+}
+
+a:hover {
+  color: #207268;
+}
+
 .content {
   display: flex;
   position: relative;
@@ -58,6 +66,7 @@ input:focus {
   background-color: #f4a261;
   border: 1px solid #f4a261;
   text-align: center;
+  user-select: none;
   padding: 0 16px;
   border-radius: 1000px;
   line-height: 50px;
@@ -68,6 +77,7 @@ input:focus {
 .link-btn:hover {
   background-color: #e76f51;
   border: 1px solid #e76f51;
+  color: white;
 }
 
 .btn-circle {
@@ -81,6 +91,7 @@ input:focus {
   background-color: #f4a261;
   border: 1px solid #f4a261;
   text-align: center;
+  user-select: none;
   padding: 0;
   border-radius: 50%;
   line-height: 50px;
@@ -92,6 +103,7 @@ input:focus {
 .btn-circle:hover{
   background-color: #e76f51;
   border: 1px solid #e76f51;
+  color: white;
 }
 
 .logo {
@@ -99,6 +111,13 @@ input:focus {
   font-size: 56px;
   margin-bottom: 60px;
   user-select: none;
+}
+
+.title {
+  font-family: 'Londrina Solid', cursive;
+  font-size: 72px;
+  user-select: none;
+  text-align: center;
 }
 
 .divider {
