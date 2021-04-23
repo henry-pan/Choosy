@@ -6,7 +6,9 @@
   height: 500px;
 }
 .voting-results-title {
+  font-family: 'Londrina Solid', cursive;
   font-size: 72px;
+  user-select: none;
 }
 
 .voting-results-list {

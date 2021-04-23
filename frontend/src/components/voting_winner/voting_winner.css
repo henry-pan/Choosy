@@ -9,6 +9,7 @@
   font-family: 'Londrina Solid', cursive;
   font-size: 72px;
   margin-bottom: 60px;
+  user-select: none;
 }
 
 .voting-winner-item {
