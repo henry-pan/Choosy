@@ -52,7 +52,7 @@ export default ({ closeModal }) => {
           <span>Tommy Lee</span>
           <div className="about-member-links">
             <a href="https://github.com/SouVangLee"><FontAwesomeIcon icon={faGithub} /></a>
-            <a href="https://www.linkedin.com/in/sou-vang-tommy-lee-443208198/"><FontAwesomeIcon icon={faLinkedin} /></a>
+            <a href="https://www.linkedin.com/in/sou-vang-tommy-lee/"><FontAwesomeIcon icon={faLinkedin} /></a>
             <a href="#"><FontAwesomeIcon icon={faAngellist} /></a>
             <a href="#"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
           </div>

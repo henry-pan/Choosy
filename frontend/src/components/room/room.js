@@ -5,6 +5,9 @@ import IdeaSubmissionContainer from "../idea_submission/idea_submission_containe
 import VotingResultsContainer from "../voting_results/voting_results_container";
 import VotingPhaseContainer from "../voting_phase/voting_phase_container";
 import VotingWinnerContainer from "../voting_winner/voting_winner_container";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import "./room.css";
 
 
 class Room extends React.Component{
@@ -27,24 +30,24 @@ class Room extends React.Component{
 
   handleRoomStart() {
     this.setState({ phase: "idea-submission" });
-    this.interval = setInterval(this.countdown, 1000)
+    this.interval = setInterval(this.countdown, 1000);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.userIdeas.length !== this.props.userIdeas.length) {
       this.props.fetchUserIdeas(this.props.currentUser.id);
-      this.setState({ ideas: this.props.userIdeas })
+      this.setState({ ideas: this.props.userIdeas });
     }
   }
 
   scoreIdeas() {
-    console.log("room.js ideas: ", this.state.ideas)
+    console.log("room.js ideas: ", this.state.ideas);
     //array of idea scores, sorted by score
     let scoreArr = this.state.ideas.map(idea => idea.__v).sort();
-    console.log("score arr", scoreArr)
+    console.log("score arr", scoreArr);
     //array of idea scores, sans scores of 0
     let noLosers = scoreArr.filter(idea => idea > 0);
-    console.log("noLosers", noLosers)
+    console.log("noLosers", noLosers);
     //replaces score_arr with no_losers and deletes zeros,
     //unless no_losers is empty or every score is zeros
     if (noLosers.length > 0 && noLosers.length < this.state.ideas.length) {
@@ -55,38 +58,38 @@ class Room extends React.Component{
     };
     //gets last item index that should be deleted
     let deleteIndex = Math.floor(scoreArr.length / 2);
-    console.log("deleteIndex", deleteIndex)
+    console.log("deleteIndex", deleteIndex);
     //sets winner to true if only one idea remaining
-    let winner = false
+    let winner = false;
     if (deleteIndex + 1 === scoreArr.length - 1) {winner = true}
     //gets highest score of item to be deleted
-    let lowScore = scoreArr[deleteIndex]
+    let lowScore = scoreArr[deleteIndex];
     //gets array of items eligible to be deleted
-    let losers = this.state.ideas.filter(idea => (idea.__v <= lowScore) && (idea.__v > 0))
+    let losers = this.state.ideas.filter(idea => (idea.__v <= lowScore) && (idea.__v > 0));
     //delete losers
     for (let i = 0; i < deleteIndex; i++) {
-      console.log("losers[i]: ", losers[i])
-      this.props.destroyIdea(losers[i])
+      console.log("losers[i]: ", losers[i]);
+      this.props.destroyIdea(losers[i]);
     }
-    return winner
+    return winner;
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval)
+    clearInterval(this.interval);
   }
 
   countdown() {
     this.setState({ timer: this.state.timer - 1 })
     if (this.state.timer === 0) {
-      console.log("room.js: this.state.phase", this.state.phase)
+      console.log("room.js: this.state.phase", this.state.phase);
       switch (this.state.phase) {
         case "idea-submission": //moves to results
           this.setState({ phase: "results", timer: 13 });
 
           break;
         case "results": //moves to voting
-          this.interval = setInterval(this.countdown, 1000)
-          console.log("voting")
+          this.interval = setInterval(this.countdown, 1000);
+          console.log("voting");
           this.setState({
             phase: "voting",
             timer: 13,
@@ -97,16 +100,16 @@ class Room extends React.Component{
 
           break;
         case "voting": //moves to either results or winner or more voting
-          console.log("room.js", this.state)
-          console.log("this.state.idea_num: ", this.state.idea_num)
+          console.log("room.js", this.state);
+          console.log("this.state.idea_num: ", this.state.idea_num);
           // if the idea number is the number of ideas, check for winner
           if (this.state.idea_num >= this.state.ideas.length - 1) {
             let winner = this.scoreIdeas();
-            this.props.fetchUserIdeas(this.props.currentUser.id)
+            this.props.fetchUserIdeas(this.props.currentUser.id);
             //if there is a winner go to "winner", else go to "results"
             if (winner) {
               this.setState({ phase: "winner" });
-              clearInterval(this.interval)
+              clearInterval(this.interval);
             } else {
               this.setState({ phase: "results", timer: 10 });
             }
@@ -126,9 +129,23 @@ class Room extends React.Component{
 
   room() {
     return (
-      <div>
-        <h1>Welcome, {this.props.currentUser.name}. You are in the room.</h1>
-        <button onClick={this.handleRoomStart}>Start</button>
+      <div className="content">
+        <div className="nav">
+          <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
+        </div>
+        <h1 className="title">123456</h1>
+        <h2 className="room-subtitle">Room Code</h2>
+        <div className="room-users-container">
+          <span className="room-user-item">{this.props.currentUser.name}</span>
+          <span className="room-user-item">Random guest</span>
+          <span className="room-user-item">Fake user</span>
+          <span className="room-user-item">Random guest</span>
+          <span className="room-user-item">Fake user</span>
+          <span className="room-user-item">Random guest</span>
+          <span className="room-user-item">Fake user</span>
+        </div>
+        <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>
+        <button className="link-btn" onClick={this.handleRoomStart}>Start</button>
       </div>
     );
   }

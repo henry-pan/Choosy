@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import "./idea_submission.css";
 
 class IdeaItem extends React.Component {
   constructor(props) {
@@ -16,8 +17,8 @@ class IdeaItem extends React.Component {
 
   render() {
     return (
-      <li className='idea-item'>
-        <h3 className='idea-item-body'>{this.props.body}</h3>
+      <li className="idea-item">
+        <h3 className="idea-item-body">{this.props.body}</h3>
           <button onClick={this.handleIdeaDelete}>delete</button>
       </li>
     )

@@ -1,6 +1,9 @@
-import React from 'react';
-import IdeaItem from './idea_item';
-import { Redirect } from 'react-router-dom';
+import React from "react";
+import IdeaItem from "./idea_item";
+import { Redirect } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import "./idea_submission.css";
 
 
 class IdeaSubmissionIndex extends React.Component {
@@ -14,7 +17,7 @@ class IdeaSubmissionIndex extends React.Component {
       // ideaList: [],
       currentIdea: {
         user: this.props.currentUser,
-        body: '',
+        body: "",
         score: 0
       },
       secondsLeft: 31,
@@ -57,14 +60,14 @@ class IdeaSubmissionIndex extends React.Component {
 
 
   render() {
-    // if ((typeof this.props.userIdeas === 'object')) return null;
+    // if ((typeof this.props.userIdeas === "object")) return null;
     // const timeLeft = this.state.secondsLeft;
     // if (timeLeft === 0) {
-    //   return <Redirect to='/result'/>
+    //   return <Redirect to="/result"/>
     // }
     return (
       <div className="idea-submission-index-div">
-        <h3 className='idea-submission-timer'>{this.props.timer}</h3>
+        <h3 className="idea-submission-timer">{this.props.timer}</h3>
         <ul className="ideas-list">
           {
             // this.ideasMap()

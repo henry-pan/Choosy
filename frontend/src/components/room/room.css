@@ -1,0 +1,22 @@
+.room-subtitle {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.room-users-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.room-user-item {
+  background-color: #e9c46a;
+  color: #333;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.room-blurb {
+  margin-bottom: 30px;
+}

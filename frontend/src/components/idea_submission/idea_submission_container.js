@@ -15,4 +15,4 @@ const mapDispatchToProps = (dispatch) => ({
   destroyIdea: ideaId => dispatch(destroyIdea(ideaId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(IdeaSubmissionIndex)
+export default connect(mapStateToProps, mapDispatchToProps)(IdeaSubmissionIndex);
