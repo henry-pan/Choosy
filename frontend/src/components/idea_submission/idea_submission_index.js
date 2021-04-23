@@ -29,7 +29,7 @@ class IdeaSubmissionIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.countdown()
+    // this.countdown()
     this.props.fetchUserIdeas(this.state.user.id)
   }
 
@@ -51,54 +51,30 @@ class IdeaSubmissionIndex extends React.Component {
     }
   }
 
-  // handleIdeaSubmit() {
-  //   let newIdeaList = this.state.ideaList.concat([this.state.currentIdea])
-  //   console.log('newIdeaList: ', newIdeaList)
-  //   this.setState({ ideaList: newIdeaList, currentIdea: '' })
-  // }
-
   handleIdeaSubmit(e) {
     e.preventDefault();
     this.props.addIdea(this.state.currentIdea)
     console.log(this.props.userIdeas)
   }
 
-  // ideasMap() {
-  //   return (
-  //     <div>
-  //       {this.props.userIdeas.map(idea => (
-  //         <IdeaItem
-  //           key={`idea${idea.id}`}
-  //           body={idea.currentIdea}/>
-  //         )
-  //       )}
-  //     </div>
-  //   )
-  // }
-
-//{ ideaList: this.props.userIdeas }
-
   render() {
     // if ((typeof this.props.userIdeas === 'object')) return null;
-    console.log(this.state.ideaList);
-    const timeLeft = this.state.secondsLeft;
-    if (timeLeft === 0) {
-      return <Redirect to='/result'/>
-    } else return (
+    // const timeLeft = this.state.secondsLeft;
+    // if (timeLeft === 0) {
+    //   return <Redirect to='/result'/>
+    // }
+    return (
       <div className="idea-submission-index-div">
-        <h3 className='idea-submission-timer'>{timeLeft}</h3>
+        <h3 className='idea-submission-timer'>{this.props.timer}</h3>
         <ul className="ideas-list">
           {
             // this.ideasMap()
             this.props.userIdeas.map(idea => (
-              <li>
                 <IdeaItem
                   key={`idea${idea._id}`}
                   id={`${idea._id}`}
                   body={idea.body}
                   deleteIdea={this.props.destroyIdea}/>
-
-                </li>
               )
             )
           }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./voting_phase.css";
 
 class VotingPhase extends React.Component{
@@ -16,9 +16,9 @@ class VotingPhase extends React.Component{
     this.countdown = this.countdown.bind(this);
   }
   
-  componentDidMount() {
-    this.interval = setInterval(this.countdown, 1000);
-  }
+  // componentDidMount() {
+  //   this.interval = setInterval(this.countdown, 1000);
+  // }
 
   countdown() {
     this.setState({ timer: this.state.timer - 1});
@@ -58,7 +58,7 @@ class VotingPhase extends React.Component{
         <div className="nav">
           <Link className="btn-circle" to="/">&times;</Link>
         </div>
-        <span className="voting-timer">{this.state.timer}</span>
+        <span className="voting-timer">{this.props.timer}</span>
         <div className="voting-idea-container">
           {/* CHANGE TO THIS.PROPS.IDEA */}
           <span className="voting-idea">a great idea</span>
@@ -71,4 +71,4 @@ class VotingPhase extends React.Component{
   }
 }
 
-export default withRouter(VotingPhase);
+export default VotingPhase;
