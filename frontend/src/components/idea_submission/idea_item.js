@@ -11,7 +11,7 @@ class IdeaItem extends React.Component {
   handleIdeaDelete(e) {
     e.preventDefault();
     this.props.deleteIdea(this.props.id);
-    console.log(this.props);
+    console.log("idea_item this.props: ", this.props);
   }
 
   render() {

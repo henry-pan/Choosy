@@ -6,9 +6,12 @@ import { Redirect } from 'react-router-dom';
 class IdeaSubmissionIndex extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      // body: "",
       user: this.props.currentUser,
       ideaList: this.props.userIdeas,
+      // ideaList: [],
       currentIdea: {
         user: this.props.currentUser,
         body: '',
@@ -19,99 +22,72 @@ class IdeaSubmissionIndex extends React.Component {
     }
     this.update = this.update.bind(this);
     this.handleIdeaSubmit = this.handleIdeaSubmit.bind(this);
-    this.countdown = this.countdown.bind(this);
+    // this.countdown = this.countdown.bind(this);
   }
 
   update() {
-    return (e) => {
-      this.setState({ currentIdea: { body: e.currentTarget.value } })
+    return (e) => this.setState({ currentIdea: { body: e.currentTarget.value } })
     }
-  }
 
-  componentDidMount() {
-    this.countdown()
-    this.props.fetchUserIdeas(this.state.user.id)
-  }
+  // componentDidMount() {
+    // this.countdown()
+    // this.props.fetchUserIdeas(this.state.user.id)
+  // }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.userIdeas.length !== this.props.userIdeas.length) {
-      this.props.fetchUserIdeas(this.state.user.id);
-      this.setState()
-    }
-  }
 
-  countdown() {
-    //takes one second off timer
-    let seconds = this.state.secondsLeft - 1
-    this.setState({
-      secondsLeft: seconds
-    })
-    if (seconds > 0) {
-      setTimeout(this.countdown, 1000)
-    }
-  }
 
-  // handleIdeaSubmit() {
-  //   let newIdeaList = this.state.ideaList.concat([this.state.currentIdea])
-  //   console.log('newIdeaList: ', newIdeaList)
-  //   this.setState({ ideaList: newIdeaList, currentIdea: '' })
+  // countdown() {
+  //   //takes one second off timer
+  //   let seconds = this.state.secondsLeft - 1
+  //   this.setState({
+  //     secondsLeft: seconds
+  //   })
+  //   if (seconds > 0) {
+  //     setTimeout(this.countdown, 1000);
+  //   }
   // }
 
   handleIdeaSubmit(e) {
     e.preventDefault();
-    this.props.addIdea(this.state.currentIdea)
-    console.log(this.props.userIdeas)
+    this.props.addIdea(this.state.currentIdea);
+    // this.setState({ body: "" });
+    e.target.reset();
+    console.log("idea_submission_index userIdeas: ", this.props.userIdeas);
   }
 
-  // ideasMap() {
-  //   return (
-  //     <div>
-  //       {this.props.userIdeas.map(idea => (
-  //         <IdeaItem
-  //           key={`idea${idea.id}`}
-  //           body={idea.currentIdea}/>
-  //         )
-  //       )}
-  //     </div>
-  //   )
-  // }
-
-//{ ideaList: this.props.userIdeas }
 
   render() {
     // if ((typeof this.props.userIdeas === 'object')) return null;
-    console.log(this.state.ideaList);
-    const timeLeft = this.state.secondsLeft;
-    if (timeLeft === 0) {
-      return <Redirect to='/result'/>
-    } else return (
+    // const timeLeft = this.state.secondsLeft;
+    // if (timeLeft === 0) {
+    //   return <Redirect to='/result'/>
+    // }
+    return (
       <div className="idea-submission-index-div">
-        <h3 className='idea-submission-timer'>{timeLeft}</h3>
+        <h3 className='idea-submission-timer'>{this.props.timer}</h3>
         <ul className="ideas-list">
           {
             // this.ideasMap()
             this.props.userIdeas.map(idea => (
-              <li>
                 <IdeaItem
                   key={`idea${idea._id}`}
                   id={`${idea._id}`}
                   body={idea.body}
                   deleteIdea={this.props.destroyIdea}/>
-
-                </li>
               )
             )
           }
         </ul>
         <div className="idea-submission-form-div">
-          <form className="idea-submission-form">
+          <form className="idea-submission-form" onSubmit={this.handleIdeaSubmit}>
             <div className="idea-submission-input">
               <input type="text"
                 className="idea-body-input"
                 placeholder="Enter Idea"
+                value={this.state.body}
                 onChange={this.update()} />
             </div>
-            <button className="create-idea-button" onClick={this.handleIdeaSubmit}>
+            <button className="create-idea-button" >
               <h3 className="create-idea-button-name">Add list</h3>
             </button>
           </form>
