@@ -147,8 +147,9 @@ class Room extends React.Component{
           {/* <span className="room-user-item">{this.props.currentUser.name}</span> */}
         </ul>
         
-        {this.state.hasNick ? null : <form id="form-test" action="" onSubmit={this.submitNick}>
-          <input id="input-test" placeholder="Input name" autoComplete="off" /><button>Send</button>
+        {this.state.hasNick ? null : <form id="form-test" className="room-username-form" onSubmit={this.submitNick}>
+          <input id="input-test" className="room-username-input" placeholder="Your name" autoComplete="off" />
+          <button className="link-btn room-username-btn">Join</button>
         </form>}
         
         <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>

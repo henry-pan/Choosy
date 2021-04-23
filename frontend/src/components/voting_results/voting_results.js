@@ -45,8 +45,9 @@ class VotingResults extends React.Component {
           <ul className="voting-results-list">
             {
               this.props.ideas.map(idea => (
-                <li key={`idea${idea._id}`} className='voting-results-idea'>{idea.body}
-                  <h3>{idea.__v}</h3>
+                <li key={`idea${idea._id}`} className="voting-results-item">
+                  <span className="voting-results-votes">{idea.__v}</span>
+                  <span className="voting-results-idea">{idea.body}</span>
                 </li>
               ))
             }
