@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./idea_submission.css";
 
 class IdeaItem extends React.Component {
@@ -18,8 +20,8 @@ class IdeaItem extends React.Component {
   render() {
     return (
       <li className="idea-item">
+        <button className="link-btn idea-btn" onClick={this.handleIdeaDelete}><FontAwesomeIcon icon={faTrash} /></button>
         <h3 className="idea-item-body">{this.props.body}</h3>
-          <button onClick={this.handleIdeaDelete}>delete</button>
       </li>
     )
   }

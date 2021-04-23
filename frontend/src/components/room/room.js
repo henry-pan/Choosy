@@ -139,10 +139,10 @@ class Room extends React.Component{
           <span className="room-user-item">{this.props.currentUser.name}</span>
           <span className="room-user-item">Random guest</span>
           <span className="room-user-item">Fake user</span>
-          <span className="room-user-item">Random guest</span>
-          <span className="room-user-item">Fake user</span>
-          <span className="room-user-item">Random guest</span>
-          <span className="room-user-item">Fake user</span>
+          <span className="room-user-item">Not real</span>
+          <span className="room-user-item">Space filler</span>
+          <span className="room-user-item">Flex Wrap</span>
+          <span className="room-user-item">Looks good</span>
         </div>
         <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>
         <button className="link-btn" onClick={this.handleRoomStart}>Start</button>

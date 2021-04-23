@@ -1,0 +1,22 @@
+.idea-submission-timer {
+  user-select: none;
+  font-size: 72px;
+  margin-bottom: 30px;
+}
+
+.idea-item {
+  display: flex;
+  align-items: center;
+  background-color: #e9c46a;
+  color: #333;
+  border-radius: 15px;
+  min-width: 200px;
+  margin: 10px;
+}
+
+.idea-btn {
+  width: 50px;
+  min-width: 50px;
+  border-radius: 15px 0 0 15px;
+  margin-right: 15px;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import IdeaItem from "./idea_item";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./idea_submission.css";
@@ -66,11 +66,13 @@ class IdeaSubmissionIndex extends React.Component {
     //   return <Redirect to="/result"/>
     // }
     return (
-      <div className="idea-submission-index-div">
+      <div className="content">
+        <div className="nav">
+          <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
+        </div>
         <h3 className="idea-submission-timer">{this.props.timer}</h3>
         <ul className="ideas-list">
           {
-            // this.ideasMap()
             this.props.userIdeas.map(idea => (
                 <IdeaItem
                   key={`idea${idea._id}`}
@@ -90,9 +92,7 @@ class IdeaSubmissionIndex extends React.Component {
                 value={this.state.body}
                 onChange={this.update()} />
             </div>
-            <button className="create-idea-button" >
-              <h3 className="create-idea-button-name">Add list</h3>
-            </button>
+            <button className="link-btn">Add list</button>
           </form>
         </div>
       </div>
