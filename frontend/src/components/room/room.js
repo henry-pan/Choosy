@@ -15,7 +15,7 @@ class Room extends React.Component{
       phase: "room",
       round: 1,
       winner: false,
-      timer: 10,
+      timer: 30,
       ideas: this.props.userIdeas,
       idea_num: 0,
     };
@@ -98,6 +98,7 @@ class Room extends React.Component{
           break;
         case "voting": //moves to either results or winner or more voting
           console.log("room.js", this.state)
+          console.log("this.state.idea_num: ", this.state.idea_num)
           // if the idea number is the number of ideas, check for winner
           if (this.state.idea_num >= this.state.ideas.length - 1) {
             let winner = this.scoreIdeas();
@@ -130,6 +131,12 @@ class Room extends React.Component{
         <button onClick={this.handleRoomStart}>Start</button>
       </div>
     );
+  }
+
+  resetIdeas() {
+    this.setState({
+      ideaList: []
+    })
   }
 
   render() {

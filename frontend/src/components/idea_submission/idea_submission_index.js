@@ -6,9 +6,12 @@ import { Redirect } from 'react-router-dom';
 class IdeaSubmissionIndex extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      // body: "",
       user: this.props.currentUser,
       ideaList: this.props.userIdeas,
+      // ideaList: [],
       currentIdea: {
         user: this.props.currentUser,
         body: '',
@@ -19,44 +22,39 @@ class IdeaSubmissionIndex extends React.Component {
     }
     this.update = this.update.bind(this);
     this.handleIdeaSubmit = this.handleIdeaSubmit.bind(this);
-    this.countdown = this.countdown.bind(this);
+    // this.countdown = this.countdown.bind(this);
   }
 
   update() {
-    return (e) => {
-      this.setState({ currentIdea: { body: e.currentTarget.value } })
+    return (e) => this.setState({ currentIdea: { body: e.currentTarget.value } })
     }
-  }
 
-  componentDidMount() {
+  // componentDidMount() {
     // this.countdown()
     // this.props.fetchUserIdeas(this.state.user.id)
-  }
+  // }
 
 
 
-  countdown() {
-    //takes one second off timer
-    let seconds = this.state.secondsLeft - 1
-    this.setState({
-      secondsLeft: seconds
-    })
-    if (seconds > 0) {
-      setTimeout(this.countdown, 1000)
-    }
-  }
+  // countdown() {
+  //   //takes one second off timer
+  //   let seconds = this.state.secondsLeft - 1
+  //   this.setState({
+  //     secondsLeft: seconds
+  //   })
+  //   if (seconds > 0) {
+  //     setTimeout(this.countdown, 1000);
+  //   }
+  // }
 
   handleIdeaSubmit(e) {
     e.preventDefault();
-    this.props.addIdea(this.state.currentIdea)
-    console.log("idea_submission_index userIdeas: ", this.props.userIdeas)
+    this.props.addIdea(this.state.currentIdea);
+    // this.setState({ body: "" });
+    e.target.reset();
+    console.log("idea_submission_index userIdeas: ", this.props.userIdeas);
   }
 
-  resetIdeas(){
-    this.setState({
-      ideaList: []
-    })
-  }
 
   render() {
     // if ((typeof this.props.userIdeas === 'object')) return null;
@@ -81,14 +79,15 @@ class IdeaSubmissionIndex extends React.Component {
           }
         </ul>
         <div className="idea-submission-form-div">
-          <form className="idea-submission-form">
+          <form className="idea-submission-form" onSubmit={this.handleIdeaSubmit}>
             <div className="idea-submission-input">
               <input type="text"
                 className="idea-body-input"
                 placeholder="Enter Idea"
+                value={this.state.body}
                 onChange={this.update()} />
             </div>
-            <button className="create-idea-button" onClick={this.handleIdeaSubmit}>
+            <button className="create-idea-button" >
               <h3 className="create-idea-button-name">Add list</h3>
             </button>
           </form>
