@@ -4,7 +4,6 @@ import Modal from "../modal/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./splash.css";
-// import { createRoom } from '../../util/socket_util.js';
 
 class SplashPage extends React.Component {
   constructor(props){
@@ -22,21 +21,12 @@ class SplashPage extends React.Component {
     this.roomId = "";
   }
 
-  componentDidMount(){
-    // if (this.props.loggedIn) {
-    //   createRoom();
-    // }
-  }
-
   handleInput(field) {
     return e => this.setState({ [field]: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    // const user = Object.assign({}, this.state);
-    // console.log("This would have entered the room: ", this.state.roomCode);
-    // call a function in socket_util
     this.props.openModal("join");
   }
 
@@ -55,7 +45,6 @@ class SplashPage extends React.Component {
   }
 
   createRoom() {
-    // this.props.addRoom().then(res => console.log(res.roomId.data._id));
     this.props.addRoom().then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
   }
 

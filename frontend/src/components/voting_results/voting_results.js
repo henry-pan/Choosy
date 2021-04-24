@@ -12,23 +12,7 @@ class VotingResults extends React.Component {
     };
 
     this.interval = 0;
-    // this.countdown = this.countdown.bind(this);
   }
-  
-  // componentDidMount() {
-  //   // Redirect in ten seconds.
-  //   // setTimeout(()=>this.props.history.push("/"), 10000);
-  //   this.interval = setInterval(this.countdown, 1000);
-  // }
-
-  // countdown() {
-  //   this.setState({ timer: this.state.timer - 1});
-  //   if (this.state.timer === 0) {
-  //     clearInterval(this.interval);
-  //     // Redirect in three seconds.
-  //     // this.props.history.push("/voting");
-  //   }
-  // }
 
   render() {
 
@@ -41,7 +25,6 @@ class VotingResults extends React.Component {
           <h1 className="title">Round {this.props.round}</h1>
           <p>Voting starts in {this.props.timer}</p>
           {/* NOTE: we should change 'Results' to 'Round <x>', pass as prop from room */}
-          {/* <h1 className="voting-results-title">Round {this.props.round}</h1> */}
           <ul className="voting-results-list">
             {
               this.props.ideas.map(idea => (

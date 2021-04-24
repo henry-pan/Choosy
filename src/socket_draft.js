@@ -10,9 +10,6 @@ io
         io.emit('user joins room', username);
       })
   })
-  // .of("/room").adapter.on("create-room", (room) => {
-  //   console.log(`room ${room} was created`);
-  // })
   .on('connection', (socket) => {
     socket.on('submit username', (username) => {
       io.emit('submit username', username);

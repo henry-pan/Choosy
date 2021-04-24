@@ -27,18 +27,6 @@ const receiveRoom = roomId => ({
   type: RECEIVE_ROOM,
   roomId
 })
-
-// **BACKEND ROUTE DOES NOT EXIST YET**
-// export const receiveRoomGuests = guests => ({
-  //   type: RECEIVE_ROOM_GUESTS,
-  //   guests
-// });
-
-// **BACKEND ROUTE DOES NOT EXIST YET**
-// export const removeRoomGuests = roomId => ({
-  //   type: REMOVE_ROOM_GUESTS,
-  //   roomId
-  // });
   
 export const addRoom = data => dispatch => (
   createRoom(data)
@@ -69,10 +57,3 @@ export const fetchRoom = roomId => dispatch => (
     .then(roomId => dispatch(receiveRoom(roomId)))
     .catch(err => console.log(err))
 );
-
-// **BACKEND ROUTE DOES NOT EXIST YET**
-// export const fetchRoomGuests = roomId => dispatch => (
-  //   getRoomGuests(roomId)
-  //     .then(guests => dispatch(receiveUserGuests(guests)))
-  //     .catch(err => console.log(err))
-// );
