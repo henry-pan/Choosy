@@ -1,6 +1,6 @@
 import React from "react";
 import IdeaItem from "./idea_item";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./idea_submission.css";

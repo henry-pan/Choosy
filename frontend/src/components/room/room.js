@@ -1,7 +1,6 @@
 import React from "react";
 import { socket } from "../../util/socket_util";
 import { Link } from "react-router-dom";
-import voting_phase from "../voting_phase/voting_phase";
 import IdeaSubmissionContainer from "../idea_submission/idea_submission_container";
 import VotingResultsContainer from "../voting_results/voting_results_container";
 import VotingPhaseContainer from "../voting_phase/voting_phase_container";

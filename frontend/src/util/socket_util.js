@@ -10,7 +10,7 @@ export const socket = () => {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (input.value) {
-      socket.emit('submit username', input.value); // app.js line 76
+      socket.emit('submit username', input.value);
       input.value = '';
     }
   });
