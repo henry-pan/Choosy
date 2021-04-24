@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-// export const createGuest = guest => {
-//   return axios.post('/api/guests', guest);
-// };
 
 export const getGuests = () => {
   return axios.get('/api/guests')

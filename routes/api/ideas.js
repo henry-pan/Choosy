@@ -6,9 +6,7 @@ const validateIdeaInput = require("../../validation/ideas")
 
 router.get("/test", (req, res) => res.json({ msg: "This is the ideas route" }));
 
-// did not add password.authenticate because it doesn't matter whether a user is logged in or not
-// gets all ideas
-// TESTED
+// gets all ideas (unauthenticated)
 router.get("/", (req, res) => {
   Idea
     .find()
@@ -18,8 +16,7 @@ router.get("/", (req, res) => {
 
 
 // gets all the ideas by a given user
-// nest this under room route later?
-// TESTED
+// todo: nest this under room route later?
 router.get("/user/:user_id", (req, res) => { // note the :user_id wildcard
   Idea
     .find({ user: req.params.user_id })
@@ -28,7 +25,6 @@ router.get("/user/:user_id", (req, res) => { // note the :user_id wildcard
 });
 
 
-// TESTED
 // gets a specific idea by its id
 router.get("/:id", (req, res) => {
   Idea
@@ -40,8 +36,8 @@ router.get("/:id", (req, res) => {
 
 // TESTED
 // Idea post route
-// may have to refactor to allow non-signed-in users to post ideas.
-// may want to create a dummy user to keep track of all the associated ideas
+// todo: refactor to allow non-signed-in users to post ideas.
+// todo: make a new auth'd route that only lets users post to their own ideas
 router.post("/",
   passport.authenticate("jwt", { session: false }), 
   (req, res) => {
@@ -82,12 +78,13 @@ router.patch("/:id",
 
 // Delete idea by id
 // Todo: test to make sure users can only delete ideas if logged in
+// todo: refactor to not require auth
 router.delete("/:id", 
   passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     Idea
       .findByIdAndDelete(req.params.id)
-      .then(idea => res.json(idea)) // dunno what to put here
+      .then(idea => res.json(idea))
       .catch(err => res.status(400).json(err));
   });
 

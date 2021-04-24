@@ -1,6 +1,5 @@
 import React from "react";
 import "./join_guest.css";
-// import { joinRoom } from "../../util/socket_util";
 import { withRouter } from "react-router-dom";
 
 class JoinGuest extends React.Component {
@@ -15,13 +14,8 @@ class JoinGuest extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount(){
-    // joinRoom();
-  }
-
 
   componentWillUnmount(){
-    // <Redirect to="/room" /> // won't work until protected routes are refactored?
     this.props.history.push("/room");
   }
 
@@ -33,7 +27,7 @@ class JoinGuest extends React.Component {
     e.preventDefault();
     const guest = Object.assign({}, this.state);
 
-    // in theory posts to guest document/collection in the backend
+    // todo: test to make sure this posts to guest document in the backend
     this.props.joinAsGuest(guest);
     
     console.log("Entering the room: ", this.props.roomCode, "with user: ", this.state.username);

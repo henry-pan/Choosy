@@ -1,8 +1,6 @@
 import React from "react";
-import io from "socket.io-client";
 import { socket } from "../../util/socket_util";
 import { Link } from "react-router-dom";
-import voting_phase from "../voting_phase/voting_phase";
 import IdeaSubmissionContainer from "../idea_submission/idea_submission_container";
 import VotingResultsContainer from "../voting_results/voting_results_container";
 import VotingPhaseContainer from "../voting_phase/voting_phase_container";
@@ -46,7 +44,6 @@ class Room extends React.Component{
         roomId: (this.props.match.params._id)
       })
     ).then(console.log(this.props.match.params._id))
-    // this.props.loadGuests(); // doesn't work
 
     socket();
   }
@@ -143,7 +140,6 @@ class Room extends React.Component{
         <h1 className="title room-code">{this.props.room.code}</h1>
         <h2 className="room-subtitle">Room Code</h2>
         <ul id="usernames" className="room-users-container">
-          {/* <span className="room-user-item">{this.props.currentUser.name}</span> */}
         </ul>
         
         {this.state.hasNick ? null : <form id="form-test" className="room-username-form" onSubmit={this.submitNick}>

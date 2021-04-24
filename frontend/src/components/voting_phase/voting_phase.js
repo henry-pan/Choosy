@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import "./voting_phase.css";
@@ -31,7 +31,6 @@ class VotingPhase extends React.Component{
         this.setState({ vote: Math.floor(Math.random() * 2), voted: true });
       }
       // Redirect in three seconds.
-      // setTimeout(()=>this.props.history.push("/"), 3000);
     }
   }
 
@@ -45,7 +44,6 @@ class VotingPhase extends React.Component{
 
   render() {
     if (!this.props.currentUser) return null;
-    // if (!this.props.idea) return null;
     let voteButtons;
     if (this.state.voted) {
       if (this.state.vote === 0) {
@@ -67,7 +65,7 @@ class VotingPhase extends React.Component{
         </div>
         <span className="voting-timer">{this.state.timer}</span>
         <div className="voting-idea-container">
-          {/* CHANGE TO THIS.PROPS.IDEA */}
+          {/* todo: CHANGE THIS TO THIS.PROPS.IDEA */}
           <span className="voting-idea">{this.props.idea.body}</span>
         </div>
         <div className="voting-vote-container">
