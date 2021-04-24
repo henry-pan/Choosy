@@ -57,15 +57,21 @@ class VotingPhase extends React.Component{
         <button onClick={() => this.handleVote(1)} className="link-btn voting-btn"><FontAwesomeIcon icon={faThumbsUp} /></button>
       </>);
     }
+
+    let timerText;
+    if (this.state.timer === 0) {
+      timerText = (<span className="voting-timer">Time up!</span>)
+    } else {
+      timerText = (<span className="voting-timer">{this.state.timer}</span>)
+    }
     
     return (
       <div className="content">
         <div className="nav">
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
-        <span className="voting-timer">{this.state.timer}</span>
+          {timerText}
         <div className="voting-idea-container">
-          {/* todo: CHANGE THIS TO THIS.PROPS.IDEA */}
           <span className="voting-idea">{this.props.idea.body}</span>
         </div>
         <div className="voting-vote-container">
