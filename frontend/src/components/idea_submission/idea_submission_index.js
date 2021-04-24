@@ -35,7 +35,6 @@ class IdeaSubmissionIndex extends React.Component {
     e.target.reset();
   }
 
-
   render() {
     return (
       <div className="content">

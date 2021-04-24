@@ -76,15 +76,14 @@ class Room extends React.Component{
     clearInterval(this.interval);
   }
 
+  //NOTE: when tweaking timer, remember to change local timer as well
   countdown() {
     this.setState({ timer: this.state.timer - 1 })
-    console.log("timer: ", this.state.timer)
     if (this.state.timer === 0) {
       switch (this.state.phase) {
         case "idea-submission": //moves to results
           this.props.fetchUserIdeas(this.props.currentUser.id);
-          console.log("this.props, pre-results: ", this.props);
-          this.setState({ phase: "results", timer: 13, ideas: this.props.userIdeas });
+          this.setState({ phase: "results", timer: 10, ideas: this.props.userIdeas });
 
           break;
         case "results": //moves to voting
@@ -96,7 +95,6 @@ class Room extends React.Component{
             round: this.state.round + 1,
             idea_num: 0
            });
-
 
           break;
         case "voting": //moves to either results or winner or more voting
@@ -111,11 +109,11 @@ class Room extends React.Component{
             } else {
               this.setState({ phase: "results", timer: 13 });
               this.setState({ ideas: this.state.survivors });
-              console.log("this.props after voting", this.props)
             }
             //if the idea number is less than the num of ideas, reset voting
           } else {
             clearInterval(this.interval);
+            this.interval = setInterval(this.countdown, 1000);
             this.setState({
               phase: "voting",
               idea_num: this.state.idea_num + 1,
