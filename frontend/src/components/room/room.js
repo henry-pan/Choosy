@@ -78,15 +78,17 @@ class Room extends React.Component{
 
   countdown() {
     this.setState({ timer: this.state.timer - 1 })
+    console.log("timer: ", this.state.timer)
     if (this.state.timer === 0) {
       switch (this.state.phase) {
         case "idea-submission": //moves to results
           this.props.fetchUserIdeas(this.props.currentUser.id);
-          console.log("this.props, pre-results: ", this.props)
+          console.log("this.props, pre-results: ", this.props);
           this.setState({ phase: "results", timer: 13, ideas: this.props.userIdeas });
 
           break;
         case "results": //moves to voting
+          clearInterval(this.interval);
           this.interval = setInterval(this.countdown, 1000);
           this.setState({
             phase: "voting",
