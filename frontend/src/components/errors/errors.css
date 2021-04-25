@@ -1,0 +1,30 @@
+.error-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+}
+
+.error-close {
+  margin: 14px 20px;
+  font-size: 32px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 3;
+  color: #2a9d8f;
+  transition: color .25s;
+}
+
+.error-close:hover {
+  color: #207268;
+}
+
+.error-content {
+  color: #333;
+  margin-top: 15px;
+}
+
+.error-list li {
+  margin: 15px;
+}

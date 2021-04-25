@@ -17,7 +17,7 @@ function Modal({ modal, closeModal, errors }) {
       modalClass = "modal-about";
       break;
     case 'error':
-      component = <Errors errors={errors}/>;
+      component = <Errors errors={errors} closeModal={closeModal}/>;
       modalClass = "modal-error";
       break;
     default:
