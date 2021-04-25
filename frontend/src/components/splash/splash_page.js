@@ -23,7 +23,7 @@ class SplashPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({ errors: nextProps.errors });
-    if (this.state.errors) this.props.openModal("error");
+    // if (this.state.errors) this.props.openModal("error");
   }
 
   handleInput(field) {
@@ -60,7 +60,7 @@ class SplashPage extends React.Component {
 
     return (
       <div className="content">
-        <Modal roomCode={this.state.roomCode}/>
+        <Modal errors={this.state.errors} />
         <nav className="nav">
           <button className="btn-circle" onClick={() => this.props.openModal("about")}><FontAwesomeIcon icon={faQuestion} /></button>
           {logoutButton}

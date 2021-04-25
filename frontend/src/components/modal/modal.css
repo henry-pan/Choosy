@@ -10,14 +10,6 @@
   z-index: 10;
 }
 
-.modal-close {
-  margin: 14px 20px;
-  font-size: 32px;
-  cursor: pointer;
-  user-select: none;
-  z-index: 3;
-}
-
 .modal-about {
   display: flex;
   position: relative;
@@ -39,4 +31,31 @@
   margin-top: 110px;
   width: 450px;
   height: 250px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+}
+
+.modal-icon {
+  margin: 14px 20px;
+  font-size: 32px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 3;
+  color: #2a9d8f;
+  transition: color .25s;
+}
+
+.modal-icon:hover {
+  color: #207268;
+}
+
+.modal-content {
+  color: #333;
+  margin-top: 15px;
 }
