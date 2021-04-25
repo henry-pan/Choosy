@@ -9,9 +9,6 @@ const validateRoomCode = require("../../validation/ideas");
 const Room = require('../../models/Room');
 const Idea = require("../../models/Idea");
 const { json } = require("body-parser");
-// const ideas = require('./ideas'); 
-
-// router.use("/:id/ideas", ideas);
 
 router.get("/test", (req, res) => {
   res.json({
