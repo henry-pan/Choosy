@@ -21,23 +21,17 @@ class SplashPage extends React.Component {
     this.roomId = "";
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ errors: nextProps.errors });
+    if (this.state.errors) this.props.openModal("error");
+  }
+
   handleInput(field) {
     return e => this.setState({ [field]: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.openModal("join");
-  }
-
-  renderErrors(){
-    return (
-      <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>{this.state.errors[error]}</li>
-        ))}
-      </ul>
-    );
   }
 
   sendRoom(res){
@@ -78,7 +72,6 @@ class SplashPage extends React.Component {
         <div className="divider"><p>or</p></div>
         <form className="splash-join-room" onSubmit={this.handleSubmit}>
           <input className="join-input" onChange={this.handleInput("roomCode")} type="text" value={this.state.roomCode} placeholder="Enter room code"/>
-          {this.renderErrors()}
           <button className="link-btn">Join Room</button>
         </form>
       </div>
