@@ -24,6 +24,13 @@ router.get("/user/:user_id", (req, res) => { // note the :user_id wildcard
     .catch(err => res.status(400).json(err));
 });
 
+// gets all the ideas by a given room
+router.get("/room/:room_id", (req, res) => {
+  Idea
+    .find({ room: req.params.room_id })
+    .then(ideas => res.json(ideas))
+    .catch(err => res.status(400).json(err));
+});
 
 // gets a specific idea by its id
 router.get("/:id", (req, res) => {
@@ -38,8 +45,30 @@ router.get("/:id", (req, res) => {
 // Idea post route
 // todo: refactor to allow non-signed-in users to post ideas.
 // todo: make a new auth'd route that only lets users post to their own ideas
+// router.post("/",
+//   passport.authenticate("jwt", { session: false }), 
+//   (req, res) => {
+//     const { isValid, errors } = validateIdeaInput(req.body);
+
+//     if (!isValid) {
+//       return res.status(400).json(errors);
+//     };
+
+//     const newIdea = new Idea({
+//       user: req.user.id,
+//       body: req.body.body
+//     })
+
+//     newIdea.save()
+//       .then(idea => res.json(idea));
+//   });
+
+
+// Idea post route
+// todo: refactor to allow non-signed-in users to post ideas.
+// todo: make a new auth'd route that only lets users post to their own ideas
 router.post("/",
-  passport.authenticate("jwt", { session: false }), 
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { isValid, errors } = validateIdeaInput(req.body);
 
@@ -47,14 +76,39 @@ router.post("/",
       return res.status(400).json(errors);
     };
 
-    const newIdea = new Idea({
-      user: req.user.id,
-      body: req.body.body
-    })
+    const saveIdea = (room) => {
+      if (room) {
+        console.log(room);
+        const newIdea = new Idea({
+          user: req.user.id,
+          roomId: req.roomId, // something wrong with this line
+          body: req.body.body
+        });
+        newIdea.save()
+          .then(idea => res.json(idea));
+      } else {
+        console.log("else");
+        const newIdea = new Idea({
+          user: req.user.id,
+          body: req.body.body
+        });
+        newIdea.save()
+          .then(idea => res.json(idea));
+      };
+    }
 
-    newIdea.save()
-      .then(idea => res.json(idea));
+    Room
+      .findById(req.roomId)
+      .then(room => saveIdea(room))
+      .catch(err => res.status(400).json(err));
   });
+
+  /*
+  
+{"_id":{"$oid":"60849ba135d7cd0425930931"},"host":{"$oid":"607df4f81aff602cdfe4ed13"},"code":"888826","date":{"$date":{"$numberLong":"1619303329820"}},"__v":{"$numberInt":"0"}}
+
+  */
+
 
 // Idea update route
 // may have to refactor to allow non-signed-in users to post ideas.

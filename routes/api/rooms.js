@@ -9,6 +9,9 @@ const validateRoomCode = require("../../validation/ideas");
 const Room = require('../../models/Room');
 const Idea = require("../../models/Idea");
 const { json } = require("body-parser");
+// const ideas = require('./ideas'); 
+
+// router.use("/:id/ideas", ideas);
 
 router.get("/test", (req, res) => {
   res.json({
@@ -27,10 +30,10 @@ router.get("/", (req, res) =>{
 //GET route. Fetch all users in a room
 router.get("/:id/users", (req, res) => {
   // WRITE CODE HERE
-
-
-
-
+  User
+    .find()
+    .then(users => res.json(users))
+    .catch(err => res.status(400).json(err));
 });
 
 
