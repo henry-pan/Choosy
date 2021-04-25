@@ -29,7 +29,7 @@
   height: 550px;
 }
 
-.modal-join {
+.modal-error {
   display: flex;
   flex-direction: column;
   justify-content: space-around;

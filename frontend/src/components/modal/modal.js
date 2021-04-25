@@ -1,11 +1,11 @@
 import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import AboutContainer from '../about/about_container';
-import JoinGuestContainer from '../join_guest/join_guest_container';
+import Errors from '../errors/errors';
 import { connect } from 'react-redux';
 import "./modal.css";
 
-function Modal({ modal, closeModal, roomCode }) {
+function Modal({ modal, closeModal, errors }) {
   if (!modal) {
     return null;
   }
@@ -16,9 +16,9 @@ function Modal({ modal, closeModal, roomCode }) {
       component = <AboutContainer />;
       modalClass = "modal-about";
       break;
-    case 'join':
-      component = <JoinGuestContainer roomCode={roomCode}/>;
-      modalClass = "modal-join";
+    case 'error':
+      component = <Errors errors={errors}/>;
+      modalClass = "modal-error";
       break;
     default:
       return null;
