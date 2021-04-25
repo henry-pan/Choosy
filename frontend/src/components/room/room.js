@@ -62,7 +62,7 @@ class Room extends React.Component{
         }
       }
     }
-    if (sortArr.length <= 3) {winner = true}
+    if (sortArr.length < 3) {winner = true}
     let deleteIndex = Math.floor(sortArr.length / 2);
     for (let i = 0; i < deleteIndex; i++) {
       this.props.destroyIdea(sortArr[i]._id)
