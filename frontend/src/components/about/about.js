@@ -1,4 +1,8 @@
 import React from "react";
+import henry from "./henry.jpg";
+import ben from "./ben.jpg";
+import nat from "./nat.jpg";
+import tommy from "./tommy.jpg";
 import "./about.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faExternalLinkAlt  } from "@fortawesome/free-solid-svg-icons";
@@ -18,17 +22,17 @@ export default ({ closeModal }) => {
       </div>
       <div className="about-team">
         <div className="about-member">
-          <img className="about-member-pic" src="https://www.henry-pan.com/seed/sonusstratos/tiger.jpg" />
+          <img className="about-member-pic" src={henry} />
           <span>Henry Pan</span>
           <div className="about-member-links">
             <a href="https://github.com/henry-pan/"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://www.linkedin.com/in/henry-pan/"><FontAwesomeIcon icon={faLinkedin} /></a>
-            <a href="#"><FontAwesomeIcon icon={faAngellist} /></a>
+            <a href="https://angel.co/u/henrypan"><FontAwesomeIcon icon={faAngellist} /></a>
             <a href="https://www.xehryn.com"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
           </div>
         </div>
         <div className="about-member">
-          <img className="about-member-pic" src="https://www.henry-pan.com/seed/sonusstratos/tiger.jpg" />
+          <img className="about-member-pic" src={ben} />
           <span>Ben Young</span>
           <div className="about-member-links">
             <a href="https://github.com/benyoungmusic"><FontAwesomeIcon icon={faGithub} /></a>
@@ -38,17 +42,17 @@ export default ({ closeModal }) => {
           </div>
         </div>
         <div className="about-member">
-          <img className="about-member-pic" src="https://www.henry-pan.com/seed/sonusstratos/tiger.jpg" />
+          <img className="about-member-pic" src={nat} />
           <span>Nat Kozak</span>
           <div className="about-member-links">
             <a href="https://github.com/natkozak"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://www.linkedin.com/in/nat-kozak-23179049/"><FontAwesomeIcon icon={faLinkedin} /></a>
-            <a href="#"><FontAwesomeIcon icon={faAngellist} /></a>
+            <a href="https://angel.co/u/nat-kozak"><FontAwesomeIcon icon={faAngellist} /></a>
             <a href="#"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
           </div>
         </div>
         <div className="about-member">
-          <img className="about-member-pic" src="https://www.henry-pan.com/seed/sonusstratos/tiger.jpg" />
+          <img className="about-member-pic" src={tommy} />
           <span>Tommy Lee</span>
           <div className="about-member-links">
             <a href="https://github.com/SouVangLee"><FontAwesomeIcon icon={faGithub} /></a>
