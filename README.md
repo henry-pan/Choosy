@@ -1,4 +1,4 @@
-![Logo](https://github.com/henry-pan/Choosy/blob/main/logo.png)
+![Logo](https://github.com/henry-pan/Choosy/blob/main/images/logo.png)
 
 # Choosy
 
