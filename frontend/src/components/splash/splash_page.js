@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Modal from "../modal/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -19,6 +19,7 @@ class SplashPage extends React.Component {
 
     this.sendRoom = this.sendRoom.bind(this);
     this.roomId = "";
+    // this.joinRoom = this.joinRoom.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,11 +33,28 @@ class SplashPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log("roomCode input: ", this.state.roomCode);
+    this.props.fetchRoomByCode(this.state.roomCode)
+      .then(res => {
+        this.roomId = res.roomId.data._id;
+        
+      });
+    <Redirect to={`/room/${this.roomId}`} />
   }
 
   sendRoom(res){
     this.props.history.push(`/room/${res.roomId.data._id}`);
   }
+
+  // joinRoom(){
+  //   this.props.fetchRoomByCode(this.state.roomCode)
+  //   // .then(res => console.log(res))
+  //   .then(res => {
+  //     console.log(res.room.data._id);
+  //     this.props.history.push(`/room/${res.room.data._id}`);
+  //     this.roomId = res.room.data._id;
+  //   });
+  // }
 
   createRoom() {
     this.props.addRoom().then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
@@ -73,6 +91,7 @@ class SplashPage extends React.Component {
         <form className="splash-join-room" onSubmit={this.handleSubmit}>
           <input className="join-input" onChange={this.handleInput("roomCode")} type="text" value={this.state.roomCode} placeholder="Enter room code"/>
           <button className="link-btn">Join Room</button>
+          {/* <Link onClick={} className="link-btn" to={"/room"}>Join Room</Link> */}
         </form>
       </div>
     );

@@ -12,6 +12,10 @@ export const getRoom = roomId => {
   return axios.get(`/api/rooms/${roomId}`)
 }
 
+export const getRoomByCode = code => {
+  return axios.get(`/api/rooms/code/${code}`)
+}
+
 export const getUsers = roomId => {
   return axios.get(`/api/rooms/${roomId}/users`)
 }
