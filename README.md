@@ -1,3 +1,5 @@
+![Logo](https://github.com/henry-pan/Choosy/blob/main/logo.png)
+
 # Choosy
 
 [Live on Heroku!](https://choosyapp.herokuapp.com/)
