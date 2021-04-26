@@ -34,6 +34,12 @@ Users can vote on ideas they like or dislike. Users only have a limited time to 
 Only the ideas that receive the most votes are allowed to move on to the next round. Half of all ideas are culled every round. This ensures there will always be one idea left, helping indecisive people pick ideas.
 
 # Planned Features
-* Joining a room as a guest
+* Joining a room as a guest using room codes
+* Synchronize user ideas with the server
 * Saving lists after a session
 
+# Contributors
+* **Henry Pan** - Team Lead
+* **Benjamin Young** - Front End Lead
+* **Nat Kozak** - Back End Lead
+* **Sou (Tommy) Lee** - Fullstack Flex
