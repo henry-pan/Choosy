@@ -77,7 +77,6 @@ class SplashPage extends React.Component {
         <form className="splash-join-room" onSubmit={this.handleSubmit}>
           <input className="join-input" onChange={this.handleInput("roomCode")} type="text" value={this.state.roomCode} placeholder="Enter room code"/>
           <button className="link-btn">Join Room</button>
-          {/* <Link onClick={} className="link-btn" to={"/room"}>Join Room</Link> */}
         </form>
       </div>
     );
