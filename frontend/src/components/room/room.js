@@ -112,18 +112,24 @@ class Room extends React.Component{
         case "idea-submission": //moves to results
           this.props.fetchUserIdeas(this.props.currentUser.id);
           this.setState({ phase: "results", timer: 10, ideas: this.props.userIdeas });
-
           break;
-        case "results": //moves to voting
+          case "results": //moves to voting
           clearInterval(this.interval);
           this.interval = setInterval(this.countdown, 1000);
-          this.setState({
-            phase: "voting",
-            timer: 13,
-            round: this.state.round + 1,
-            idea_num: 0
-           });
-
+          if (this.state.ideas.length === 0) {
+            this.setState({
+              ideas: this.props.userIdeas,
+              phase: "idea-submission",
+              timer: 15
+            });
+          } else {
+            this.setState({
+              phase: "voting",
+              timer: 13,
+              round: this.state.round + 1,
+              idea_num: 0
+             });
+          }
           break;
         case "voting": //moves to either results or winner or more voting
           // if the idea number is the number of ideas, check for winner
