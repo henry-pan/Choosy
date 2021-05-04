@@ -28,7 +28,7 @@ export default ({ closeModal }) => {
             <a href="https://github.com/henry-pan/"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://www.linkedin.com/in/henry-pan/"><FontAwesomeIcon icon={faLinkedin} /></a>
             <a href="https://angel.co/u/henrypan"><FontAwesomeIcon icon={faAngellist} /></a>
-            <a href="https://www.xehryn.com"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
+            <a href="https://www.henry-pan.com"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
           </div>
         </div>
         <div className="about-member">
@@ -37,7 +37,7 @@ export default ({ closeModal }) => {
           <div className="about-member-links">
             <a href="https://github.com/benyoungmusic"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://www.linkedin.com/in/benjamin-young-63869931/"><FontAwesomeIcon icon={faLinkedin} /></a>
-            <a href="#"><FontAwesomeIcon icon={faAngellist} /></a>
+            <a href="https://angel.co/u/benjamin-young-7"><FontAwesomeIcon icon={faAngellist} /></a>
             <a href="#"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
           </div>
         </div>
@@ -57,11 +57,10 @@ export default ({ closeModal }) => {
           <div className="about-member-links">
             <a href="https://github.com/SouVangLee"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://www.linkedin.com/in/sou-vang-tommy-lee/"><FontAwesomeIcon icon={faLinkedin} /></a>
-            <a href="#"><FontAwesomeIcon icon={faAngellist} /></a>
+            <a href="https://angel.co/u/souvanglee"><FontAwesomeIcon icon={faAngellist} /></a>
             <a href="#"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
           </div>
         </div>
-
       </div>
     </>
   );
