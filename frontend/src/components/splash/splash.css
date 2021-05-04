@@ -8,7 +8,8 @@
 .logout-btn {
   border-radius: 1000px;
   padding: 0 25px;
-  width: 150px;
+  min-width: 150px;
+  width: auto;
 }
 
 .splash-auth {
@@ -29,3 +30,14 @@
   height: 50px;
   margin-bottom: 20px;
 }
+
+@media only screen and (max-width: 750px) {
+  .splash-auth {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .splash-auth:first-child {
+    margin-bottom: 20px;
+  }
+} 
