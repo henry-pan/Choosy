@@ -19,7 +19,6 @@ class SplashPage extends React.Component {
 
     this.sendRoom = this.sendRoom.bind(this);
     this.roomId = "";
-    // this.joinRoom = this.joinRoom.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,32 +35,20 @@ class SplashPage extends React.Component {
     console.log("roomCode input: ", this.state.roomCode);
     this.props.fetchRoomByCode(this.state.roomCode)
       .then(res => {
-        this.roomId = res.roomId.data._id;
-        
+        this.sendRoom(res);
       });
-    <Redirect to={`/room/${this.roomId}`} />
   }
 
   sendRoom(res){
     this.props.history.push(`/room/${res.roomId.data._id}`);
   }
 
-  // joinRoom(){
-  //   this.props.fetchRoomByCode(this.state.roomCode)
-  //   // .then(res => console.log(res))
-  //   .then(res => {
-  //     console.log(res.room.data._id);
-  //     this.props.history.push(`/room/${res.room.data._id}`);
-  //     this.roomId = res.room.data._id;
-  //   });
-  // }
 
   createRoom() {
     this.props.addRoom().then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
   }
 
   render() {
-    
     let logoutButton;
     let authButtons;
     if (this.props.loggedIn) {
