@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Modal from "../modal/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -32,7 +32,6 @@ class SplashPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("roomCode input: ", this.state.roomCode);
     this.props.fetchRoomByCode(this.state.roomCode)
       .then(res => {
         this.sendRoom(res);
