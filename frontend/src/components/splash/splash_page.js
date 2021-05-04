@@ -32,18 +32,22 @@ class SplashPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.props.fetchRoomByCode(this.state.roomCode)
+      .then(res => {
+        this.sendRoom(res);
+      });
   }
 
   sendRoom(res){
     this.props.history.push(`/room/${res.roomId.data._id}`);
   }
 
+
   createRoom() {
     this.props.addRoom().then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
   }
 
   render() {
-    
     let logoutButton;
     let authButtons;
     if (this.props.loggedIn) {
