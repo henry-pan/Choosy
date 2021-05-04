@@ -15,17 +15,11 @@ class VotingResults extends React.Component {
   }
 
   render() {
-
-    return (
-      <div className="content">
-        <div className="nav">
-          <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
-        </div>
-        <div className="voting-results-container">
-          <h1 className="title">Round {this.props.round}</h1>
-          <p>Voting starts in {this.props.timer}</p>
-          {/* NOTE: we should change 'Results' to 'Round <x>', pass as prop from room */}
-          <ul className="voting-results-list">
+    let ideaList;
+    if (this.props.ideas.length === 0) {
+      ideaList = <h3 className="ideas-please">Please Submit Ideas!</h3>
+    } else {
+      ideaList = <ul className="voting-results-list">
             {
               this.props.ideas.map(idea => (
                 <li key={`idea${idea._id}`} className="voting-results-item">
@@ -35,6 +29,17 @@ class VotingResults extends React.Component {
               ))
             }
           </ul>
+    }
+
+    return (
+      <div className="content">
+        <div className="nav">
+          <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
+        </div>
+        <div className="voting-results-container">
+          <h1 className="title">Round {this.props.round}</h1>
+          <p>Voting starts in {this.props.timer}</p>
+          {ideaList}
         </div>
       </div>
     );

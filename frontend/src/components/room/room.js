@@ -43,7 +43,7 @@ class Room extends React.Component{
       this.setState({
         roomId: (this.props.match.params._id)
       })
-    ).then(console.log(this.props.match.params._id))
+    ).then(console.log(this.props.match.params._id));
 
     socket();
   }
@@ -62,15 +62,43 @@ class Room extends React.Component{
         }
       }
     }
-    if (sortArr.length <= 3) {winner = true}
+    if (sortArr.length < 3) {winner = true}
     let deleteIndex = Math.floor(sortArr.length / 2);
     for (let i = 0; i < deleteIndex; i++) {
-      this.props.destroyIdea(sortArr[i]._id)
+      this.props.destroyIdea(sortArr[i]._id);
     }
-    let survivors = sortArr.slice(deleteIndex, sortArr.length)
-    this.setState({ survivors: survivors })
+    let survivors = sortArr.slice(deleteIndex, sortArr.length);
+    this.setState({ survivors: survivors });
     return winner;
   }
+
+  randomizeArr(inputArr) {
+    let arr = [...inputArr];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * i);
+      const temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+    }
+    return arr;
+  }
+
+  subDivideArrByScore(arr) {
+    let newArr = [...arr];
+    let randArr = [];
+    let startI = 0;
+    for (let i = 0; i < newArr.length; i++) {
+      if ((newArr[i].__v < newArr[i + 1].__v || newArr[i + 1] === undefined)) {
+        randArr = randArr.concat([newArr.slice(startI, i + 1)]);
+        startI = i + 1;
+      };
+    }
+    return randArr;
+  }
+
+  //separate sorted array into separate arrays by score
+  //randomize arrays
+  //concat arrays
 
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -78,24 +106,30 @@ class Room extends React.Component{
 
   //NOTE: when tweaking timer, remember to change local timer as well
   countdown() {
-    this.setState({ timer: this.state.timer - 1 })
+    this.setState({ timer: this.state.timer - 1 });
     if (this.state.timer === 0) {
       switch (this.state.phase) {
         case "idea-submission": //moves to results
           this.props.fetchUserIdeas(this.props.currentUser.id);
           this.setState({ phase: "results", timer: 10, ideas: this.props.userIdeas });
-
           break;
         case "results": //moves to voting
           clearInterval(this.interval);
           this.interval = setInterval(this.countdown, 1000);
-          this.setState({
-            phase: "voting",
-            timer: 13,
-            round: this.state.round + 1,
-            idea_num: 0
-           });
-
+          if (this.state.ideas.length === 0) {
+            this.setState({
+              ideas: this.props.userIdeas,
+              phase: "idea-submission",
+              timer: 15
+            });
+          } else {
+            this.setState({
+              phase: "voting",
+              timer: 13,
+              round: this.state.round + 1,
+              idea_num: 0
+             });
+          }
           break;
         case "voting": //moves to either results or winner or more voting
           // if the idea number is the number of ideas, check for winner
