@@ -27,15 +27,20 @@ router.get("/", (req, res) =>{
 //GET route. Fetch by code
 router.get("/code/:code", (req, res) => {
   // debugger
-  // console.log("REQ BODY", req);
   const { errors, isValid } = validateRoomCode(req.params);
 
   if (!isValid) return res.status(400).json(errors);
 
   Room
     .findOne({ code: req.params.code })
-    .then(room => res.json(room))
-    .catch(err => res.status(400).json({ noroomfound: "This room does not exist"}));
+    .then(room => {
+      if (!room) {
+        errors.code = "This room does not exist";
+        return res.status(400).json(errors);
+      } else {
+        return res.json(room);
+      }
+    })
 });
 
 // room GET route. Fetches the room with the id.

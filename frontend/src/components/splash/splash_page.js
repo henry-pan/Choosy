@@ -36,7 +36,6 @@ class SplashPage extends React.Component {
     .then(res => {
       console.log("RES", res)
         if (!res) {
-          console.log("RES", res);
         } else {
           this.sendRoom(res);
         }
