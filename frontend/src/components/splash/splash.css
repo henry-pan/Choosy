@@ -37,7 +37,8 @@
     justify-content: space-between;
   }
 
-  .splash-auth:first-child {
-    margin-bottom: 20px;
+  .logout-btn {
+    font-size: 16px;
+    min-width: 0;
   }
 } 
