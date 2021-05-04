@@ -1,31 +1,4 @@
-.about-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-}
-
-.about-header-icon {
-  margin: 14px 20px;
-  font-size: 32px;
-  cursor: pointer;
-  user-select: none;
-  z-index: 3;
-  color: #2a9d8f;
-  transition: color .25s;
-}
-
-.about-header-icon:hover {
-  color: #207268;
-}
-
-.about-content {
-  color: #333;
-  margin-top: 15px;
-}
-
-.about-content p {
+.about-p{
   margin: 15px;
 }
 

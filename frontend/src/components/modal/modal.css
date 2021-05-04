@@ -10,33 +10,52 @@
   z-index: 10;
 }
 
-.modal-close {
+.modal-about {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  background-color: rgba(204,204,204,0.95);
+  border-radius: 15px;
+  margin-top: 50px;
+  width: 550px;
+  height: 550px;
+}
+
+.modal-error {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(204,204,204,0.95);
+  border-radius: 15px;
+  margin-top: 110px;
+  width: 450px;
+  height: 250px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+}
+
+.modal-icon {
   margin: 14px 20px;
   font-size: 32px;
   cursor: pointer;
   user-select: none;
   z-index: 3;
+  color: #2a9d8f;
+  transition: color .25s;
 }
 
-.modal-about {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  margin-top: 50px;
-  background-color: rgba(204,204,204,0.95);
-  border-radius: 15px;
-  width: 550px;
-  height: 550px;
+.modal-icon:hover {
+  color: #207268;
 }
 
-.modal-join {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  background-color: rgba(255,255,255,0.95);
-  border-radius: 3px;
-  margin-top: 110px;
-  width: 450px;
-  height: 350px;
+.modal-content {
+  color: #333;
+  margin-top: 15px;
 }

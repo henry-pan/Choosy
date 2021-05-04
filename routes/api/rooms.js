@@ -19,29 +19,9 @@ router.get("/test", (req, res) => {
 //GET route. Fetch all rooms.
 router.get("/", (req, res) =>{
   Room
-    .find()
+    .find({code: req.body.code})
     .then(rooms => res.json(rooms))
     .catch(err => res.status(400).json(err));
-});
-
-//GET route. Fetch all users in a room
-router.get("/:id/users", (req, res) => {
-  // WRITE CODE HERE
-
-
-
-
-});
-
-
-//Get route. Fetch all ideas in a room
-router.get("/:id/ideas", (req, res) => {
-// WRITE CODE HERE
-
-
-
-
-
 });
 
 // room GET route. Fetches the room with the id.
@@ -52,7 +32,13 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(400).json({ noroomfound: "This room does not exist"}));
 });
   
-
+// room GET route. Fetches a room by its code.
+router.get("/", (req, res) => {
+  Room
+    .find()
+    .then(rooms => res.json(rooms))
+    .catch(err => res.status(400).json(err));
+});
 
 //room POST route. A user can create a room if they are signed in
 router.post("/", 

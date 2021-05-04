@@ -49,10 +49,9 @@ app.use(express.json());
 
 // Configure routes
 app.use("/api/users", users);
-app.use("/api/ideas", ideas);
 app.use("/api/rooms", rooms);
+app.use("/api/ideas", ideas);
 app.use("/api/guests", guests);
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server is running on port ${port}`));
-

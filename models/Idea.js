@@ -6,6 +6,9 @@ const IdeaSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
+  roomId: {
+    type: String
+  },
   body: {
     type: String,
     required: true

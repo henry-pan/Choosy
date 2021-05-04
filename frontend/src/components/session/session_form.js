@@ -1,4 +1,5 @@
 import React from "react";
+import Modal from "../modal/modal";
 import { Link, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -27,6 +28,7 @@ class SessionForm extends React.Component {
       this.props.history.push("/");
     }
     this.setState({ errors: nextProps.errors });
+    if (this.state.errors) this.props.openModal("error");
   }
 
   handleInput(field) {
@@ -55,16 +57,6 @@ class SessionForm extends React.Component {
     this.props.processForm({ email: userEmail, password: "123456" });
   }
   
-  renderErrors(){
-    return (
-      <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>{this.state.errors[error]}</li>
-        ))}
-      </ul>
-    );
-  }
-
   render() {
     let passType = (this.state.showPass ? "text" : "password");
     let passType2 = (this.state.showPass2 ? "text" : "password");
@@ -93,6 +85,7 @@ class SessionForm extends React.Component {
 
     return (
       <div className="content">
+        <Modal errors={this.state.errors} />
         <nav className="nav">
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faChevronLeft} /></Link>
         </nav>
@@ -106,7 +99,6 @@ class SessionForm extends React.Component {
             <span className="auth-show-pass" tabIndex="-1" onClick={this.togglePassword}>{showPass}</span>
           </div>
           {password2Input}
-          {this.renderErrors()}
           <button className="link-btn" >{this.props.formType}</button>
         </form>
       </div>
