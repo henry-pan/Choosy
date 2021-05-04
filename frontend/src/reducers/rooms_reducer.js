@@ -1,4 +1,4 @@
-import { RECEIVE_IDEAS, RECEIVE_ROOM, RECEIVE_USERS, REMOVE_ROOM } from '../actions/room_actions';
+import { RECEIVE_IDEAS, RECEIVE_ROOM, RECEIVE_USERS, REMOVE_ROOM, RECEIVE_ROOM_BY_CODE } from '../actions/room_actions';
   
   const RoomsReducer = (state = { id: undefined, users: {}, ideas: {}, new: undefined }, action) => {
     Object.freeze(state);
@@ -9,6 +9,9 @@ import { RECEIVE_IDEAS, RECEIVE_ROOM, RECEIVE_USERS, REMOVE_ROOM } from '../acti
         return newState;
       case RECEIVE_USERS:
         newState.users.all = action.users.data;
+        return newState;
+      case RECEIVE_ROOM_BY_CODE:
+        newState.id = action.room;
         return newState;
       case RECEIVE_ROOM:
         newState.id = action.roomId;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Modal from "../modal/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -32,18 +32,23 @@ class SplashPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log("roomCode input: ", this.state.roomCode);
+    this.props.fetchRoomByCode(this.state.roomCode)
+      .then(res => {
+        this.sendRoom(res);
+      });
   }
 
   sendRoom(res){
     this.props.history.push(`/room/${res.roomId.data._id}`);
   }
 
+
   createRoom() {
     this.props.addRoom().then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
   }
 
   render() {
-    
     let logoutButton;
     let authButtons;
     if (this.props.loggedIn) {
@@ -73,6 +78,7 @@ class SplashPage extends React.Component {
         <form className="splash-join-room" onSubmit={this.handleSubmit}>
           <input className="join-input" onChange={this.handleInput("roomCode")} type="text" value={this.state.roomCode} placeholder="Enter room code"/>
           <button className="link-btn">Join Room</button>
+          {/* <Link onClick={} className="link-btn" to={"/room"}>Join Room</Link> */}
         </form>
       </div>
     );

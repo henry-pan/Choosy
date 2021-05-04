@@ -24,6 +24,13 @@ router.get("/", (req, res) =>{
     .catch(err => res.status(400).json(err));
 });
 
+router.get("/code/:code", (req, res) => {
+  Room
+    .find({ code: req.params.code })
+    .then(room => res.json(room[0]))
+    .catch(err => res.status(400).json(err));
+});
+
 // room GET route. Fetches the room with the id.
 router.get("/:id", (req, res) => {
   Room
@@ -32,7 +39,7 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(400).json({ noroomfound: "This room does not exist"}));
 });
   
-// room GET route. Fetches a room by its code.
+// room GET route. Fetches all rooms.
 router.get("/", (req, res) => {
   Room
     .find()
