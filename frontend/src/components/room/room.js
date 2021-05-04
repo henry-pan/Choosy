@@ -43,7 +43,7 @@ class Room extends React.Component{
       this.setState({
         roomId: (this.props.match.params._id)
       })
-    ).then(console.log(this.props.match.params._id))
+    ).then(console.log(this.props.match.params._id));
 
     socket();
   }
@@ -65,20 +65,20 @@ class Room extends React.Component{
     if (sortArr.length < 3) {winner = true}
     let deleteIndex = Math.floor(sortArr.length / 2);
     for (let i = 0; i < deleteIndex; i++) {
-      this.props.destroyIdea(sortArr[i]._id)
+      this.props.destroyIdea(sortArr[i]._id);
     }
-    let survivors = sortArr.slice(deleteIndex, sortArr.length)
-    this.setState({ survivors: survivors })
+    let survivors = sortArr.slice(deleteIndex, sortArr.length);
+    this.setState({ survivors: survivors });
     return winner;
   }
 
   randomizeArr(inputArr) {
     let arr = [...inputArr];
     for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * i)
-      const temp = arr[i]
-      arr[i] = arr[j]
-      arr[j] = temp 
+      const j = Math.floor(Math.random() * i);
+      const temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
     }
     return arr;
   }
@@ -106,14 +106,14 @@ class Room extends React.Component{
 
   //NOTE: when tweaking timer, remember to change local timer as well
   countdown() {
-    this.setState({ timer: this.state.timer - 1 })
+    this.setState({ timer: this.state.timer - 1 });
     if (this.state.timer === 0) {
       switch (this.state.phase) {
         case "idea-submission": //moves to results
           this.props.fetchUserIdeas(this.props.currentUser.id);
           this.setState({ phase: "results", timer: 10, ideas: this.props.userIdeas });
           break;
-          case "results": //moves to voting
+        case "results": //moves to voting
           clearInterval(this.interval);
           this.interval = setInterval(this.countdown, 1000);
           if (this.state.ideas.length === 0) {
