@@ -106,7 +106,6 @@ class Room extends React.Component{
 
   //NOTE: when tweaking timer, remember to change local timer as well
   countdown() {
-    debugger;
     this.setState({ timer: this.state.timer - 1 });
     if (this.state.timer === 0) {
       switch (this.state.phase) {
