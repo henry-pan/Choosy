@@ -27,9 +27,9 @@ const receiveRoomByCode = room => ({
   room
 })
 
-const receiveRoom = room => ({
+const receiveRoom = roomId => ({
   type: RECEIVE_ROOM,
-  room
+  roomId
 })
 
 export const receiveErrors = errors => ({
