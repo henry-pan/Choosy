@@ -10,8 +10,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addIdea: idea => dispatch(addIdea(idea)),
-  // fetchUserIdeas: userId => dispatch(fetchUserIdeas(userId)),
-  // fetchRoomIdeas: roomId => dispatch(fetchRoomIdeas(roomId)),
   destroyIdea: ideaId => dispatch(destroyIdea(ideaId)),
 });
 
