@@ -23,8 +23,10 @@ class SplashPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     console.log("NEXTPROPS", nextProps);
-    this.setState({ errors: nextProps.errors.response.data });
-    if (this.state.errors) this.props.openModal("error");
+    if (!Array.isArray(nextProps.errors)) {
+      this.setState({ errors: nextProps.errors.response.data });
+      this.props.openModal("error");
+    }
   }
 
   handleInput(field) {
@@ -34,7 +36,9 @@ class SplashPage extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.fetchRoomByCode(this.state.roomCode)
-    .then(res => console.log(res))
+    .then(res => {
+      if (res.type === 'RECEIVE_ROOM') this.sendRoom(res);
+    });
   }
 
   sendRoom(res){
