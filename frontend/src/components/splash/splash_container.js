@@ -7,7 +7,8 @@ import SplashPage from './splash_page';
 const mapStateToProps = state => ({
   loggedIn: state.session.isAuthenticated,
   currentUser: state.session.user,
-  room: state.rooms
+  room: state.rooms,
+  errors: state.errors.room
 });
 
 const mapDispatchToProps = dispatch => ({
