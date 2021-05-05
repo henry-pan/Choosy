@@ -155,6 +155,8 @@ class Room extends React.Component{
             })
           }
           break;
+        default:
+          break;
       }
     }
   }
@@ -207,6 +209,8 @@ class Room extends React.Component{
       case "winner":
         // CHANGE TO WINNER WHEN WE HAVE WINNER PAGE
         return <VotingWinnerContainer idea={this.state.ideas[0]}/>
+      default:
+        break;
     }
   }
 }

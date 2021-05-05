@@ -5,10 +5,6 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./voting_winner.css";
 
 class VotingWinner extends React.Component {
-  constructor(props){
-    super(props);
-  }
-
   render() {
     let saveIdeasText = (this.props.loggedIn ? "Save them to reuse them later!" : "Create an account to save them to reuse later!");
 
