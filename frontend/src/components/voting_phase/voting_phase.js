@@ -60,9 +60,9 @@ class VotingPhase extends React.Component{
 
     let timerText;
     if (this.state.timer === 0) {
-      timerText = (<span className="voting-timer">Time's up!</span>)
+      timerText = (<span className="title voting-timer">Time's up!</span>)
     } else {
-      timerText = (<span className="voting-timer">{this.state.timer}</span>)
+      timerText = (<span className="title voting-timer">{this.state.timer}</span>)
     }
     
     return (

@@ -20,7 +20,6 @@
 .voting-btn {
   height: 200px;
   width: 200px;
-  min-width: 200px;
   font-size: 100px;
   border-radius: 20px;
   text-align: center;
@@ -37,7 +36,6 @@
   line-height: 200px;
   height: 200px;
   width: 200px;
-  min-width: 200px;
   font-size: 100px;
   border-radius: 20px;
   text-align: center;
@@ -45,4 +43,27 @@
   box-sizing: border-box;
   background-color: #e76f51;
   border: 1px solid #e76f51;
+}
+
+@media only screen and (max-width: 750px) {
+  .voting-idea {
+    font-size: 40px;
+  }
+
+  .voting-vote-container{
+    height: 150px;
+  }
+
+  .voting-btn {
+    height: 150px;
+    width: 150px;
+    font-size: 80px;
+  }
+
+  .voting-voted {
+    line-height: 150px;
+    height: 150px;
+    width: 150px;
+    font-size: 80px;
+  }
 }

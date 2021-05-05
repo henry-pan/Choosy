@@ -10,7 +10,9 @@
 .room-users-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 30px;
+  width: 90%;
 }
 
 .room-user-item {
@@ -47,4 +49,19 @@
 
 .room-blurb {
   margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 750px) {
+  .room-username-input {
+    width: 230px;
+    font-size: 16px;
+  }
+
+  .room-username-btn {
+    width: 100px;
+  }
+  
+  .room-blurb {
+    width: 70%;
+  }
 }

@@ -22,7 +22,7 @@
   line-height: 50px;
 }
 
-.voting-results-votes{
+.voting-results-votes {
   width: 50px;
   min-width: 50px;
   background-color: #f4a261;
@@ -30,7 +30,7 @@
   text-align: center;
 }
 
-.voting-results-idea{
+.voting-results-idea {
   align-items: center;
   background-color: #e9c46a;
   color: #333;
@@ -38,4 +38,11 @@
   min-width: 300px;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.voting-no-ideas {
+  width: 90%;
+  margin-top: 60px;
+  font-size: 30px;
+  text-align: center;
 }
