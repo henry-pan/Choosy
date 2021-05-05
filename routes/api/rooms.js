@@ -26,7 +26,6 @@ router.get("/", (req, res) =>{
 
 //GET route. Fetch by code
 router.get("/code/:code", (req, res) => {
-  // debugger
   const { errors, isValid } = validateRoomCode(req.params);
 
   if (!isValid) return res.status(400).json(errors);
