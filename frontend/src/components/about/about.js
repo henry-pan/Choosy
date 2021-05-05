@@ -5,10 +5,10 @@ import nat from "./nat.jpg";
 import tommy from "./tommy.jpg";
 import "./about.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faExternalLinkAlt  } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faLink  } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin, faAngellist } from "@fortawesome/free-brands-svg-icons";
 
-export default ({ closeModal }) => {
+const About = ({ closeModal }) => {
   return (
     <>
       <div className="modal-header">
@@ -22,46 +22,48 @@ export default ({ closeModal }) => {
       </div>
       <div className="about-team">
         <div className="about-member">
-          <img className="about-member-pic" src={henry} />
+          <img className="about-member-pic" src={henry} alt="Henry Pan"/>
           <span>Henry Pan</span>
           <div className="about-member-links">
             <a href="https://github.com/henry-pan/"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://www.linkedin.com/in/henry-pan/"><FontAwesomeIcon icon={faLinkedin} /></a>
             <a href="https://angel.co/u/henrypan"><FontAwesomeIcon icon={faAngellist} /></a>
-            <a href="https://www.henry-pan.com"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
+            <a href="https://www.henry-pan.com"><FontAwesomeIcon icon={faLink} /></a>
           </div>
         </div>
         <div className="about-member">
-          <img className="about-member-pic" src={ben} />
+          <img className="about-member-pic" src={ben} alt="Ben Young"/>
           <span>Ben Young</span>
           <div className="about-member-links">
             <a href="https://github.com/benyoungmusic"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://www.linkedin.com/in/benjamin-young-63869931/"><FontAwesomeIcon icon={faLinkedin} /></a>
             <a href="https://angel.co/u/benjamin-young-7"><FontAwesomeIcon icon={faAngellist} /></a>
-            <a href="#"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
+            <a href="https://github.com/benyoungmusic"><FontAwesomeIcon icon={faLink} /></a>
           </div>
         </div>
         <div className="about-member">
-          <img className="about-member-pic" src={nat} />
+          <img className="about-member-pic" src={nat} alt="Nat Kozak"/>
           <span>Nat Kozak</span>
           <div className="about-member-links">
             <a href="https://github.com/natkozak"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://www.linkedin.com/in/nat-kozak-23179049/"><FontAwesomeIcon icon={faLinkedin} /></a>
             <a href="https://angel.co/u/nat-kozak"><FontAwesomeIcon icon={faAngellist} /></a>
-            <a href="#"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
+            <a href="https://github.com/natkozak"><FontAwesomeIcon icon={faLink} /></a>
           </div>
         </div>
         <div className="about-member">
-          <img className="about-member-pic" src={tommy} />
+          <img className="about-member-pic" src={tommy} alt="Tommy Lee"/>
           <span>Tommy Lee</span>
           <div className="about-member-links">
             <a href="https://github.com/SouVangLee"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://www.linkedin.com/in/sou-vang-tommy-lee/"><FontAwesomeIcon icon={faLinkedin} /></a>
             <a href="https://angel.co/u/souvanglee"><FontAwesomeIcon icon={faAngellist} /></a>
-            <a href="#"><FontAwesomeIcon icon={faExternalLinkAlt} /></a>
+            <a href="https://github.com/SouVangLee"><FontAwesomeIcon icon={faLink} /></a>
           </div>
         </div>
       </div>
     </>
   );
 }
+
+export default About;

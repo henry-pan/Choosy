@@ -17,7 +17,7 @@ class VotingResults extends React.Component {
   render() {
     let ideaList;
     if (this.props.ideas.length === 0) {
-      ideaList = <h3 className="ideas-please">Please Submit Ideas!</h3>
+      ideaList = <div className="voting-no-ideas"><p>No one submitted ideas!</p><p>Let's try that again!</p></div>
     } else {
       ideaList = <ul className="voting-results-list">
             {

@@ -1,7 +1,8 @@
-import { getIdeas, getIdea, getUserIdeas, createIdea, deleteIdea, updateIdea } from '../util/idea_util';
+import { getIdeas, getIdea, getUserIdeas, getRoomIdeas, createIdea, deleteIdea, updateIdea } from '../util/idea_util';
 
 export const RECEIVE_IDEAS = "RECEIVE_IDEAS";
 export const RECEIVE_USER_IDEAS = "RECEIVE_USER_IDEAS";
+export const RECEIVE_ROOM_IDEAS = "RECEIVE_ROOM_IDEAS";
 export const RECEIVE_IDEA = "RECEIVE_IDEA";
 export const REMOVE_IDEA = "REMOVE_IDEA";
 
@@ -15,6 +16,11 @@ export const receiveUserIdeas = ideas => ({
   type: RECEIVE_USER_IDEAS,
   ideas
 });
+
+export const receiveRoomIdeas = ideas => ({
+  type: RECEIVE_ROOM_IDEAS,
+  ideas
+})
 
 export const receiveIdea = idea => ({
   type: RECEIVE_IDEA,
@@ -41,6 +47,12 @@ export const fetchIdea = id => dispatch => (
 export const fetchUserIdeas = userId => dispatch => (
   getUserIdeas(userId)
     .then(ideas => dispatch(receiveUserIdeas(ideas)))
+    .catch(err => console.log(err))
+);
+
+export const fetchRoomIdeas = roomId => dispatch => (
+  getRoomIdeas(roomId)
+    .then(ideas => dispatch(receiveRoomIdeas(ideas)))
     .catch(err => console.log(err))
 );
 
