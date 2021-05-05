@@ -8,6 +8,10 @@ export const getUserIdeas = userId => {
   return axios.get(`/api/ideas/user/${userId}`)
 };
 
+export const getRoomIdeas = roomId => {
+  return axios.get(`/api/room/${roomId}`)
+}
+
 export const getIdea = id => {
   return axios.get(`/api/ideas/${id}`)
 };

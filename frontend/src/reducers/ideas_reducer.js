@@ -1,4 +1,4 @@
-import { RECEIVE_IDEAS, RECEIVE_USER_IDEAS, RECEIVE_IDEA, REMOVE_IDEA } from '../actions/idea_actions';
+import { RECEIVE_IDEAS, RECEIVE_USER_IDEAS, RECEIVE_ROOM_IDEAS, RECEIVE_IDEA, REMOVE_IDEA } from '../actions/idea_actions';
   
 const IdeasReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
   Object.freeze(state);
@@ -12,6 +12,10 @@ const IdeasReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
         newState.user[idea._id] = idea
       });
       return newState;
+    case RECEIVE_ROOM_IDEAS:
+      action.ideas.data.forEach(idea => {
+        newState.room[idea._id] = idea
+      });
     case RECEIVE_IDEA:
       newState.user[action.idea.data._id] = action.idea.data
       return newState;
