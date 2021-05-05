@@ -44,9 +44,6 @@ router.get("/code/:code", (req, res) => {
 
 // room GET route. Fetches the room with the id.
 router.get("/:id", (req, res) => {
-  const { errors, isValid } = validateRoomCode(req.params);
-
-  if (!isValid) return res.status(400).json(errors);
   Room
     .findById(req.params.id)
     .then(room => res.json(room))
