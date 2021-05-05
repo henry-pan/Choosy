@@ -51,9 +51,11 @@
   .auth-form {
     width: 100%;
   }
+
   .auth-input, .auth-input-pass {
     font-size: 16px;
   }
+  
   .auth-input, .auth-pass-container {
     max-width: 340px;
   }
