@@ -22,7 +22,6 @@ class SplashPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("NEXTPROPS", nextProps);
     if (!Array.isArray(nextProps.errors)) {
       this.setState({ errors: nextProps.errors.response.data });
       this.props.openModal("error");
