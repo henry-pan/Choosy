@@ -22,8 +22,9 @@ class SplashPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ errors: nextProps.errors });
-    // if (this.state.errors) this.props.openModal("error");
+    console.log("NEXTPROPS", nextProps);
+    this.setState({ errors: nextProps.errors.response.data });
+    if (this.state.errors) this.props.openModal("error");
   }
 
   handleInput(field) {

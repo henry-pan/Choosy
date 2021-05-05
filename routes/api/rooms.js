@@ -35,7 +35,7 @@ router.get("/code/:code", (req, res) => {
     .then(room => {
       if (!room) {
         errors.code = "This room does not exist";
-        return res.status(400).json(errors);
+        return json(errors);
       } else {
         return res.json(room);
       }

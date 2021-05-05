@@ -40,35 +40,37 @@ export const receiveErrors = errors => ({
 export const addRoom = data => dispatch => (
   createRoom(data)
     .then(room => dispatch(receiveRoom(room))) //originally dispatch(receiveUsers(roomId)))
-    .catch(err => dispatch(receiveErrors(err)))
+    .catch(err => console.log(err))
 );
 
 export const destroyRoom = roomId => dispatch => (
   deleteRoom(roomId)
     .then(() => dispatch(removeRoom(roomId)))
-    .catch(err => dispatch(receiveErrors(err)))
+    .catch(err => console.log(err))
 );
 
 export const fetchUsers = roomId => dispatch => (
   getUsers(roomId)
     .then(roomId => dispatch(receiveUsers(roomId)))
-    .catch(err => dispatch(receiveErrors(err)))
+    .catch(err => console.log(err))
 );
 
 export const fetchIdeas = roomId => dispatch => (
   getIdeas(roomId)
     .then(roomId => dispatch(receiveIdeas(roomId)))
-    .catch(err => dispatch(receiveErrors(err)))
+    .catch(err => console.log(err))
 );
 
 export const fetchRoom = roomId => dispatch => (
   getRoom(roomId)
     .then(roomId => dispatch(receiveRoom(roomId)))
-    .catch(err => dispatch(receiveErrors(err)))
+    .catch(err => console.log(err))
 );
 
 export const fetchRoomByCode = code => dispatch => (
   getRoomByCode(code)
-    .then(room => dispatch(receiveRoom(room)))
-    .catch(err => dispatch(receiveErrors(err)))
+    .then(
+      room => dispatch(receiveRoom(room)),
+      err => dispatch(receiveErrors(err))
+    )
 );
