@@ -35,7 +35,7 @@ router.get("/code/:code", (req, res) => {
     .then(room => {
       if (!room) {
         errors.code = "This room does not exist";
-        return json(errors);
+        return res.status(400).json(errors);
       } else {
         return res.json(room);
       }
@@ -44,10 +44,14 @@ router.get("/code/:code", (req, res) => {
 
 // room GET route. Fetches the room with the id.
 router.get("/:id", (req, res) => {
+  const { errors, isValid } = validateRoomCode(req.params);
+
+  if (!isValid) return res.status(400).json(errors);
   Room
     .findById(req.params.id)
     .then(room => res.json(room))
     .catch(err => res.status(400).json({ noroomfound: "This room does not exist"}));
+
 });
 
 //room POST route. A user can create a room if they are signed in
@@ -63,6 +67,7 @@ router.post("/",
     newRoom.save()
       .then(room => res.json(room));
 })
+
 // I think this lets any signed-in user delete a room
 //room DELETE route. Only the owner can delete the room
 router.delete("/:id",
