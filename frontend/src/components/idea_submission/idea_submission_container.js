@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import IdeaSubmissionIndex from './idea_submission_index';
-import { addIdea, fetchUserIdeas, destroyIdea } from '../../actions/idea_actions';
+import { addIdea, destroyIdea } from '../../actions/idea_actions';
 
 
 const mapStateToProps = state => ({
@@ -10,7 +10,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addIdea: idea => dispatch(addIdea(idea)),
-  fetchUserIdeas: userId => dispatch(fetchUserIdeas(userId)),
   destroyIdea: ideaId => dispatch(destroyIdea(ideaId)),
 });
 
