@@ -27,9 +27,9 @@ const receiveRoomByCode = room => ({
   room
 })
 
-const receiveRoom = roomId => ({
+const receiveRoom = room => ({
   type: RECEIVE_ROOM,
-  roomId
+  room
 })
 
 export const receiveErrors = errors => ({
@@ -39,7 +39,7 @@ export const receiveErrors = errors => ({
   
 export const addRoom = data => dispatch => (
   createRoom(data)
-    .then(roomId => dispatch(receiveRoom(roomId))) //originally dispatch(receiveUsers(roomId)))
+    .then(room => dispatch(receiveRoom(room))) //originally dispatch(receiveUsers(roomId)))
     .catch(err => dispatch(receiveErrors(err)))
 );
 
