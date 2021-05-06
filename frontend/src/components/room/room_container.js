@@ -8,6 +8,7 @@ import { fetchRoom } from '../../actions/room_actions';
 const mapStateToProps = (state, ownProps) => ({
   loggedIn: state.session.isAuthenticated,
   currentUser: state.session.user,
+  roomIdeas: Object.values(state.ideas.room),
   userIdeas: Object.values(state.ideas.user),
   room: state.rooms.id.data
 });
