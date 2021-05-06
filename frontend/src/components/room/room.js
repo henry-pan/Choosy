@@ -56,15 +56,17 @@ class Room extends React.Component{
 
 
   newScoreIdeas() {
+    const userIdeas = this.state.ideas;
+
     let winner = false;
-    let sortArr = this.state.ideas.sort((idea1, idea2) => idea1.__v - idea2.__v); // this should be roomIdeas
+    let sortArr = userIdeas.sort((idea1, idea2) => idea1.__v - idea2.__v); // this should be roomIdeas
     //arr w/out 0's
     let noLosers = sortArr.filter(idea => idea.__v > 0);
     if (noLosers.length > 0) {
       sortArr = noLosers;
-      for (let i = 0; i < this.state.ideas.length; i++) { // should be roomIdeas
-        if (this.state.ideas[i].__v === 0) {
-          this.props.destroyIdea(this.state.ideas[i]._id); // should be roomIdeas
+      for (let i = 0; i < userIdeas.length; i++) { // should be roomIdeas
+        if (userIdeas[i].__v === 0) {
+          this.props.destroyIdea(userIdeas[i]._id); // should be roomIdeas
         }
       }
     }
@@ -112,6 +114,8 @@ class Room extends React.Component{
 
   //NOTE: when tweaking timer, remember to change local timer as well
   countdown() {
+    const userIdeas = this.state.ideas;
+
     this.setState({ timer: this.state.timer - 1 });
     if (this.state.timer === 0) {
       switch (this.state.phase) {
@@ -122,7 +126,7 @@ class Room extends React.Component{
         case "results": //moves to voting
           clearInterval(this.interval);
           this.interval = setInterval(this.countdown, 1000);
-          if (this.state.ideas.length === 0) {
+          if (userIdeas.length === 0) {
             this.setState({
               ideas: this.props.userIdeas,
               phase: "idea-submission",
@@ -139,7 +143,7 @@ class Room extends React.Component{
           break;
         case "voting": //moves to either results or winner or more voting
           // if the idea number is the number of ideas, check for winner
-          if (this.state.idea_num >= this.state.ideas.length - 1) {
+          if (this.state.idea_num >= userIdeas.length - 1) {
             let winner = this.newScoreIdeas();
             //if there is a winner go to "winner", else go to "results"
             if (winner) {
@@ -203,6 +207,8 @@ class Room extends React.Component{
   }
 
   render() {
+    const userIdeas = this.state.ideas;
+
     if (!this.props.currentUser) return null;
     switch (this.state.phase) {
       case "room":
@@ -212,10 +218,10 @@ class Room extends React.Component{
       case "results":
         return <VotingResultsContainer round={this.state.round} timer={this.state.timer}/>
       case "voting":
-        return <VotingPhaseContainer key={this.state.idea_num} idea={this.state.ideas[this.state.idea_num]} timer={this.state.timer}/>
+        return <VotingPhaseContainer key={this.state.idea_num} idea={userIdeas[this.state.idea_num]} timer={this.state.timer}/>
       case "winner":
         // CHANGE TO WINNER WHEN WE HAVE WINNER PAGE
-        return <VotingWinnerContainer idea={this.state.ideas[0]}/>
+        return <VotingWinnerContainer idea={userIdeas[0]}/>
       default:
         break;
     }
