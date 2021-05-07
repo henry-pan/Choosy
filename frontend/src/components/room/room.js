@@ -20,8 +20,8 @@ class Room extends React.Component{
       round: 1,
       winner: false,
       timer: 15,
-      ideas: this.props.userIdeas,
-      roomIdeas: this.props.roomIdeas,
+      userIdeas: this.props.userIdeas,
+      roomIdeas: this.props.roomIdeas, // 
       idea_num: 0,
       survivors: []
     };
@@ -30,14 +30,15 @@ class Room extends React.Component{
     this.handleRoomStart = this.handleRoomStart.bind(this);
     this.newScoreIdeas = this.newScoreIdeas.bind(this);
     this.submitNick = this.submitNick.bind(this);
+    this.getNextPhase  = this.getNextPhase.bind(this);
   }
 
   handleRoomStart() {
-    this.props.fetchUserIdeas(this.props.currentUser.id);
+    // for figuring out which ideas were persisted. this can be helpful for debugging leaving in the middle of a phase.
+    this.props.fetchUserIdeas(this.props.currentUser.id); 
     // this.props.fetchRoomIdeas(this.props.room._id);
-    // debugger;
 
-    this.setState({ ideas: this.props.userIdeas, phase: "idea-submission" });
+    this.setState({ userIdeas: this.props.userIdeas, phase: "idea-submission" });
     // this.setState({ ideas: this.props.roomIdeas, phase: "idea-submission" });
     // I don't think adding ideas from either the user's old ideas or the old room ideas is the best solution long-term -- do we even need to pre-populate?
     this.interval = setInterval(this.countdown, 1000);
@@ -56,7 +57,7 @@ class Room extends React.Component{
 
 
   newScoreIdeas() {
-    const userIdeas = this.state.ideas;
+    const userIdeas = this.state.userIdeas;
 
     let winner = false;
     let sortArr = userIdeas.sort((idea1, idea2) => idea1.__v - idea2.__v); // this should be roomIdeas
@@ -112,63 +113,72 @@ class Room extends React.Component{
     clearInterval(this.interval);
   }
 
+  getNextPhase(phase){
+    const userIdeas = this.state.userIdeas;
+    const roomIdeas = this.state.roomIdeas;
+
+    switch (phase) {
+      case "idea-submission": //moves to results
+        this.props.fetchUserIdeas(this.props.currentUser.id); // why is it done this way? why not in the idea_submission_index.js file?
+        this.props.fetchRoomIdeas(this.props.room._id);
+        this.setState({ phase: "results", timer: 10, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
+        break;
+      case "results": //moves to voting
+        this.props.fetchRoomIdeas(this.props.room._id);
+        this.setState({ phase: "results", timer: 10, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
+        clearInterval(this.interval);
+        this.interval = setInterval(this.countdown, 1000);
+        if (roomIdeas.length === 0) {
+          this.setState({
+            roomIdeas: this.props.roomIdeas,
+            phase: "idea-submission",
+            timer: 15
+          });
+        } else {
+          this.setState({
+            phase: "voting",
+            timer: 13,
+            round: this.state.round + 1,
+            idea_num: 0
+          });
+        }
+        break;
+      case "voting": //moves to either results or winner or more voting
+        // if the idea number is the number of ideas, check for winner
+        if (this.state.idea_num >= roomIdeas.length - 1) {
+          let winner = this.newScoreIdeas();
+          //if there is a winner go to "winner", else go to "results"
+          if (winner) {
+            clearInterval(this.interval);
+            // scores of remaining ideas should be reset here
+            this.setState({ phase: "winner" });
+            this.setState({ roomIdeas: this.state.survivors });
+          } else {
+            this.setState({ phase: "results", timer: 13 });
+            this.setState({ roomIdeas: this.state.survivors });
+          }
+          //if the idea number is less than the num of ideas, reset voting
+        } else {
+          clearInterval(this.interval);
+          this.interval = setInterval(this.countdown, 1000);
+          this.setState({
+            phase: "voting",
+            idea_num: this.state.idea_num + 1,
+            timer: 13
+          })
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
   //NOTE: when tweaking timer, remember to change local timer as well
   countdown() {
-    const userIdeas = this.state.ideas;
 
     this.setState({ timer: this.state.timer - 1 });
     if (this.state.timer === 0) {
-      switch (this.state.phase) {
-        case "idea-submission": //moves to results
-          this.props.fetchUserIdeas(this.props.currentUser.id); // why is it done this way? why not in the idea_submission_index.js file?
-          this.setState({ phase: "results", timer: 10, ideas: this.props.userIdeas });
-          break;
-        case "results": //moves to voting
-          clearInterval(this.interval);
-          this.interval = setInterval(this.countdown, 1000);
-          if (userIdeas.length === 0) {
-            this.setState({
-              ideas: this.props.userIdeas,
-              phase: "idea-submission",
-              timer: 15
-            });
-          } else {
-            this.setState({
-              phase: "voting",
-              timer: 13,
-              round: this.state.round + 1,
-              idea_num: 0
-             });
-          }
-          break;
-        case "voting": //moves to either results or winner or more voting
-          // if the idea number is the number of ideas, check for winner
-          if (this.state.idea_num >= userIdeas.length - 1) {
-            let winner = this.newScoreIdeas();
-            //if there is a winner go to "winner", else go to "results"
-            if (winner) {
-              clearInterval(this.interval);
-              // scores of remaining ideas should be reset here
-              this.setState({ phase: "winner" });
-              this.setState({ ideas: this.state.survivors });
-            } else {
-              this.setState({ phase: "results", timer: 13 });
-              this.setState({ ideas: this.state.survivors });
-            }
-            //if the idea number is less than the num of ideas, reset voting
-          } else {
-            clearInterval(this.interval);
-            this.interval = setInterval(this.countdown, 1000);
-            this.setState({
-              phase: "voting",
-              idea_num: this.state.idea_num + 1,
-              timer: 13
-            })
-          }
-          break;
-        default:
-          break;
-      }
+      this.getNextPhase(this.state.phase);
     }
   }
 
@@ -207,12 +217,12 @@ class Room extends React.Component{
   }
 
   render() {
-    const userIdeas = this.state.ideas;
+    const userIdeas = this.state.userIdeas;
 
     if (!this.props.currentUser) return null;
     switch (this.state.phase) {
       case "room":
-        return this.room()
+        return this.room();
       case "idea-submission":
         return <IdeaSubmissionContainer timer={this.state.timer} room={this.props.room}/>
       case "results":

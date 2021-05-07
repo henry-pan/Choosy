@@ -22,7 +22,9 @@ const IdeasReducer = (state = { all: {}, user: {}, new: undefined, room: {} }, a
       newState.room[action.idea.data._id] = action.idea.data;
       return newState;
     case REMOVE_IDEA:
+      // only deletes from the front end?/only changes state?
       delete newState.user[action.ideaId];
+      delete newState.room[action.ideaId];
       return newState;
     default:
       return state;
