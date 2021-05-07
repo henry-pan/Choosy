@@ -26,4 +26,4 @@ class IdeaItem extends React.Component {
   }
 }
 
-export default IdeaItem
+export default IdeaItem;

@@ -1,6 +1,6 @@
 import { RECEIVE_IDEAS, RECEIVE_USER_IDEAS, RECEIVE_ROOM_IDEAS, RECEIVE_IDEA, REMOVE_IDEA } from '../actions/idea_actions';
   
-const IdeasReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+const IdeasReducer = (state = { all: {}, user: {}, new: undefined, room: {} }, action) => {
   Object.freeze(state);
   let newState = Object.assign({}, state);
   switch(action.type) {
@@ -18,10 +18,13 @@ const IdeasReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
       });
       return newState;
     case RECEIVE_IDEA:
-      newState.user[action.idea.data._id] = action.idea.data
+      newState.user[action.idea.data._id] = action.idea.data;
+      newState.room[action.idea.data._id] = action.idea.data;
       return newState;
     case REMOVE_IDEA:
+      // only deletes from the front end?/only changes state?
       delete newState.user[action.ideaId];
+      delete newState.room[action.ideaId];
       return newState;
     default:
       return state;

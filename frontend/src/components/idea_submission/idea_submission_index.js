@@ -14,6 +14,7 @@ class IdeaSubmissionIndex extends React.Component {
       user: this.props.currentUser,
       ideaList: this.props.userIdeas,
       currentIdea: {
+        room: this.props.room,
         user: this.props.currentUser,
         body: "",
         score: 0
