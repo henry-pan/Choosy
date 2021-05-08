@@ -36,6 +36,8 @@ class IdeaSubmissionIndex extends React.Component {
     e.target.reset();
   }
 
+  // should potentially have a componentDidUpdate here that looks for for changes in state made by other users (if that's possible)
+
   render() {
     return (
       <div className="content">
