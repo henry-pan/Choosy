@@ -10,8 +10,6 @@ const server = http.createServer(app);
 const io = (module.exports.io = require("socket.io")(server));
 
 
-// const SocketUtil = require("./src/socket_server_util");
-// const SocketTest = require("./src/socket_testing");
 const SocketDraft = require("./src/socket_draft");
 
 
