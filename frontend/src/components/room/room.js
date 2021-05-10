@@ -1,5 +1,4 @@
 import React from "react";
-import { randomizeArr, subDivideArrByScore } from "../../util/algo_util";
 import { socket } from "../../util/socket_util";
 import { Link } from "react-router-dom";
 import IdeaSubmissionContainer from "../idea_submission/idea_submission_container";
@@ -91,7 +90,7 @@ class Room extends React.Component{
   }
 
   getNextPhase(phase){
-    const userIdeas = this.state.userIdeas;
+    // const userIdeas = this.state.userIdeas;
     const roomIdeas = this.state.roomIdeas;
 
     switch (phase) {
@@ -129,11 +128,10 @@ class Room extends React.Component{
             clearInterval(this.interval);
             // scores of remaining ideas should be reset here
             this.setState({ phase: "winner" });
-            this.setState({ roomIdeas: this.state.survivors });
           } else {
             this.setState({ phase: "results", timer: 13 });
-            this.setState({ roomIdeas: this.state.survivors });
           }
+          this.setState({ roomIdeas: this.state.survivors });
           //if the idea number is less than the num of ideas, reset voting
         } else {
           clearInterval(this.interval);
@@ -142,7 +140,7 @@ class Room extends React.Component{
             phase: "voting",
             idea_num: this.state.idea_num + 1,
             timer: 13
-          })
+          });
         }
         break;
       default:

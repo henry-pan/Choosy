@@ -4,7 +4,6 @@ export const RECEIVE_IDEAS = "RECEIVE_IDEAS";
 export const RECEIVE_USERS = "RECEIVE_USERS";
 export const REMOVE_ROOM = "REMOVE_ROOM";
 export const RECEIVE_ROOM = "RECEIVE_ROOM";
-export const RECEIVE_ROOM_BY_CODE = "RECEIVE_ROOM_BY_CODE";
 export const RECEIVE_ROOM_ERRORS = "RECEIVE_ROOM_ERRORS";
 
 const receiveIdeas = roomId => ({
@@ -20,11 +19,6 @@ const receiveUsers = roomId => ({
 const removeRoom = roomId => ({
   type: REMOVE_ROOM,
   roomId
-})
-
-const receiveRoomByCode = room => ({
-  type: RECEIVE_ROOM_BY_CODE,
-  room
 })
 
 const receiveRoom = roomId => ({
