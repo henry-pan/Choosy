@@ -218,13 +218,14 @@ class Room extends React.Component{
 
   render() {
     const userIdeas = this.state.userIdeas;
+    console.log("ROOM ID", this.props.room._id)
 
     if (!this.props.currentUser) return null;
     switch (this.state.phase) {
       case "room":
         return this.room();
       case "idea-submission":
-        return <IdeaSubmissionContainer timer={this.state.timer} room={this.props.room}/>
+        return <IdeaSubmissionContainer timer={this.state.timer} room={this.props.room._id}/>
       case "results":
         return <VotingResultsContainer round={this.state.round} timer={this.state.timer}/>
       case "voting":

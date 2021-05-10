@@ -14,7 +14,7 @@ class IdeaSubmissionIndex extends React.Component {
       user: this.props.currentUser,
       ideaList: this.props.userIdeas,
       currentIdea: {
-        room: this.props.room,
+        roomId: this.props.room,
         user: this.props.currentUser,
         body: "",
         score: 0
@@ -27,11 +27,16 @@ class IdeaSubmissionIndex extends React.Component {
   }
 
   update() {
-    return (e) => this.setState({ currentIdea: { body: e.currentTarget.value } })
-    }
+    return (e) => this.setState({ currentIdea: {
+      body: e.currentTarget.value,
+      roomId: this.props.room
+    } })
+  }
 
   handleIdeaSubmit(e) {
     e.preventDefault();
+    console.log("room id props", this.props.room);
+    console.log("room id state", this.state.currentIdea)
     this.props.addIdea(this.state.currentIdea);
     e.target.reset();
   }
