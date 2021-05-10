@@ -81,30 +81,6 @@ class Room extends React.Component{
     return winner;
   }
 
-  randomizeArr(inputArr) {
-    let arr = [...inputArr];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * i);
-      const temp = arr[i];
-      arr[i] = arr[j];
-      arr[j] = temp;
-    }
-    return arr;
-  }
-
-  subDivideArrByScore(arr) {
-    let newArr = [...arr];
-    let randArr = [];
-    let startI = 0;
-    for (let i = 0; i < newArr.length; i++) {
-      if ((newArr[i].__v < newArr[i + 1].__v || newArr[i + 1] === undefined)) {
-        randArr = randArr.concat([newArr.slice(startI, i + 1)]);
-        startI = i + 1;
-      };
-    }
-    return randArr;
-  }
-
   //separate sorted array into separate arrays by score
   //randomize arrays
   //concat arrays
@@ -114,7 +90,7 @@ class Room extends React.Component{
   }
 
   getNextPhase(phase){
-    const userIdeas = this.state.userIdeas;
+    // const userIdeas = this.state.userIdeas;
     const roomIdeas = this.state.roomIdeas;
 
     switch (phase) {
@@ -152,11 +128,10 @@ class Room extends React.Component{
             clearInterval(this.interval);
             // scores of remaining ideas should be reset here
             this.setState({ phase: "winner" });
-            this.setState({ roomIdeas: this.state.survivors });
           } else {
             this.setState({ phase: "results", timer: 13 });
-            this.setState({ roomIdeas: this.state.survivors });
           }
+          this.setState({ roomIdeas: this.state.survivors });
           //if the idea number is less than the num of ideas, reset voting
         } else {
           clearInterval(this.interval);
@@ -165,7 +140,7 @@ class Room extends React.Component{
             phase: "voting",
             idea_num: this.state.idea_num + 1,
             timer: 13
-          })
+          });
         }
         break;
       default:
@@ -175,7 +150,6 @@ class Room extends React.Component{
 
   //NOTE: when tweaking timer, remember to change local timer as well
   countdown() {
-
     this.setState({ timer: this.state.timer - 1 });
     if (this.state.timer === 0) {
       this.getNextPhase(this.state.phase);
@@ -185,7 +159,7 @@ class Room extends React.Component{
   submitNick(){
     this.setState({
       hasNick: true
-    })
+    });
   }
 
   room() {
@@ -213,7 +187,7 @@ class Room extends React.Component{
   resetIdeas() {
     this.setState({
       ideaList: []
-    })
+    });
   }
 
   render() {
