@@ -62,6 +62,18 @@ export const addIdea = data => dispatch => (
     .catch(err => console.log(err))
 );
 
+// export const addUserIdea = data => dispatch => (
+//   createIdea(data)
+//     .then(idea => dispatch(receiveUserIdea(idea)))
+//     .catch(err => console.log(err))
+// );
+
+// export const addRoomIdea = data => dispatch => (
+//   createIdea(data)
+//     .then(idea => dispatch(receiveRoomIdea(idea)))
+//     .catch(err => console.log(err))
+// );
+
 export const destroyIdea = ideaId => dispatch => (
   deleteIdea(ideaId)
     .then(() => dispatch(removeIdea(ideaId)))
