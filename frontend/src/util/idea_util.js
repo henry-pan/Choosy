@@ -9,7 +9,7 @@ export const getUserIdeas = userId => {
 };
 
 export const getRoomIdeas = roomId => {
-  return axios.get(`/api/room/${roomId}`)
+  return axios.get(`/api/rooms/${roomId}`)
 }
 
 export const getIdea = id => {
