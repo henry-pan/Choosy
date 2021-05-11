@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.set('useCreateIndex', true);
 const Schema = mongoose.Schema;
 
 const RoomSchema = new Schema({
@@ -10,10 +11,6 @@ const RoomSchema = new Schema({
     type: String,
     required: true
   },
-  date: {
-    type: Date,
-    default: Date.now
-  },
   ideas: {
     type: Schema.Types.ObjectId,
     ref: 'ideas'
@@ -21,7 +18,17 @@ const RoomSchema = new Schema({
   guests: {
     type: Schema.Types.ObjectId,
     ref: 'guests'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    expires: 6000
+  },
+  expireAt: {
+    type: Date,
+    default: Date.now() + 60 * 60 * 1000
   }
 });
 
+RoomSchema.index({expireAt: 1}, {expireAfterSeconds: 0 });
 module.exports = Room = mongoose.model('Room', RoomSchema);
