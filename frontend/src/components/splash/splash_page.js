@@ -21,10 +21,12 @@ class SplashPage extends React.Component {
     this.roomId = "";
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!Array.isArray(nextProps.errors)) {
-      this.setState({ errors: nextProps.errors.response.data });
-      this.props.openModal("error");
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      if (!Array.isArray(this.props.errors)) {
+        this.setState({ errors: this.props.errors.response.data });
+        this.props.openModal("error");
+      }
     }
   }
 
