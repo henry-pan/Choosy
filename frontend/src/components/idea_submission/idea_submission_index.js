@@ -14,7 +14,7 @@ class IdeaSubmissionIndex extends React.Component {
       user: this.props.currentUser,
       ideaList: this.props.userIdeas,
       currentIdea: {
-        room: this.props.room,
+        roomId: this.props.room,
         user: this.props.currentUser,
         body: "",
         score: 0
@@ -27,14 +27,19 @@ class IdeaSubmissionIndex extends React.Component {
   }
 
   update() {
-    return (e) => this.setState({ currentIdea: { body: e.currentTarget.value } })
-    }
+    return (e) => this.setState({ currentIdea: {
+      body: e.currentTarget.value,
+      roomId: this.props.room
+    } })
+  }
 
   handleIdeaSubmit(e) {
     e.preventDefault();
     this.props.addIdea(this.state.currentIdea);
     e.target.reset();
   }
+
+  // should potentially have a componentDidUpdate here that looks for for changes in state made by other users (if that's possible)
 
   render() {
     return (
