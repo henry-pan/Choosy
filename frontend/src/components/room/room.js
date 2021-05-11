@@ -192,7 +192,6 @@ class Room extends React.Component{
 
   render() {
     const roomIdeas = this.state.roomIdeas;
-    console.log("ROOM ID", this.state)
 
     if (!this.props.currentUser) return null;
     switch (this.state.phase) {

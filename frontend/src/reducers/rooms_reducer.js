@@ -7,7 +7,7 @@ import { RECEIVE_IDEAS, RECEIVE_ROOM, RECEIVE_USERS, REMOVE_ROOM } from '../acti
       case RECEIVE_IDEAS:
         newState.ideas.all = action.ideas.data;
         return newState;
-      case RECEIVE_USERS:
+      case RECEIVE_USERS: // do we use this?
         newState.users.all = action.users.data;
         return newState;
       case RECEIVE_ROOM:
