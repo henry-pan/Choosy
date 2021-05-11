@@ -21,13 +21,9 @@ const RoomSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    expires: 3600
   },
-  expireAt: {
-    type: Date,
-    default: Date.now() + 60 * 60 * 1000
-  }
 });
 
-RoomSchema.index({expireAt: 1}, {expireAfterSeconds: 0 });
 module.exports = Room = mongoose.model('Room', RoomSchema);
