@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "../modal/modal";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./auth.css";
@@ -25,7 +25,6 @@ class SessionForm extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      if (this.props.signedIn === true) this.props.history.push("/");
       this.setState({ errors: this.props.errors });
       if (this.state.errors) this.props.openModal("error");
     }
@@ -107,4 +106,4 @@ class SessionForm extends React.Component {
   }
 }
 
-export default withRouter(SessionForm);
+export default SessionForm;
