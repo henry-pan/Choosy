@@ -21,8 +21,7 @@ const RoomSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
-    expires: 6000
+    default: Date.now
   },
   expireAt: {
     type: Date,
