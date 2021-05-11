@@ -57,17 +57,17 @@ class Room extends React.Component{
 
 
   newScoreIdeas() {
-    const userIdeas = this.state.userIdeas;
+    const roomIdeas = this.state.roomIdeas;
 
     let winner = false;
-    let sortArr = userIdeas.sort((idea1, idea2) => idea1.__v - idea2.__v); // this should be roomIdeas
+    let sortArr = roomIdeas.sort((idea1, idea2) => idea1.__v - idea2.__v); // this should be roomIdeas
     //arr w/out 0's
     let noLosers = sortArr.filter(idea => idea.__v > 0);
     if (noLosers.length > 0) {
       sortArr = noLosers;
-      for (let i = 0; i < userIdeas.length; i++) { // should be roomIdeas
-        if (userIdeas[i].__v === 0) {
-          this.props.destroyIdea(userIdeas[i]._id); // should be roomIdeas
+      for (let i = 0; i < roomIdeas.length; i++) { // should be roomIdeas
+        if (roomIdeas[i].__v === 0) {
+          this.props.destroyIdea(roomIdeas[i]._id); // should be roomIdeas
         }
       }
     }
