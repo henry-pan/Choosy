@@ -191,8 +191,8 @@ class Room extends React.Component{
   }
 
   render() {
-    const userIdeas = this.state.userIdeas;
-    console.log("ROOM ID", this.props.room._id)
+    const roomIdeas = this.state.roomIdeas;
+    console.log("ROOM ID", this.state)
 
     if (!this.props.currentUser) return null;
     switch (this.state.phase) {
@@ -203,10 +203,10 @@ class Room extends React.Component{
       case "results":
         return <VotingResultsContainer round={this.state.round} timer={this.state.timer}/>
       case "voting":
-        return <VotingPhaseContainer key={this.state.idea_num} idea={userIdeas[this.state.idea_num]} timer={this.state.timer}/>
+        return <VotingPhaseContainer key={this.state.idea_num} idea={roomIdeas[this.state.idea_num]} timer={this.state.timer}/>
       case "winner":
         // CHANGE TO WINNER WHEN WE HAVE WINNER PAGE
-        return <VotingWinnerContainer idea={userIdeas[0]}/>
+        return <VotingWinnerContainer idea={roomIdeas[0]}/>
       default:
         break;
     }
