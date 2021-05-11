@@ -78,12 +78,12 @@ router.post("/login", (req, res) => {
 module.exports = router;
 
 // fetch a single guest by id
-router.get("/:id", (req, res) => {
-  Guest
-    .findById(req.params.id)
-    .then(guest => res.json(guest))
-    .catch(err => res.status(400).json({ noguestfound: "This guest does not exist"}));
-});
+// router.get("/:id", (req, res) => {
+//   Guest
+//     .findById(req.params.id)
+//     .then(guest => res.json(guest))
+//     .catch(err => res.status(400).json({ noguestfound: "This guest does not exist"}));
+// });
 
 
 // delete a guest by id
