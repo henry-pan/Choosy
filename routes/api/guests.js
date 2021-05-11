@@ -10,6 +10,14 @@ const passport = require("passport");
 
 router.get("/test", (req, res) => res.json({ msg: "This is the guests route" }));
 
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.json({
+    id: req.guest.id,
+    name: req.guest.name,
+    email: req.guest.email
+  });
+})
+
 //fetch all guests
 router.get("/", (req, res) => {
   Guest
@@ -24,15 +32,17 @@ router.post("/register", (req, res) => {
 
   const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
   let email = "";
+  let password = "";
   for (let i = 0; i < 15; i++) {
     email += chars[Math.floor(Math.random() * chars.length)];
+    password += chars[Math.floor(Math.random() * chars.length)];
   }
   email += '@choosy.com';
 
   const newGuest = new Guest({
     name: 'Guest',
     email,
-    password: '123123'
+    password
   });
 
   bcrypt.genSalt(10, (err, salt) => {
@@ -53,7 +63,34 @@ router.post("/register", (req, res) => {
         })
         .catch(err => console.log(err));
     });
-  })
+  });
+});
+
+router.post("/login", (req, res) => {
+
+  const email = req.body.email;
+  const password = req.body.password;
+
+  Guest.findOne({ email }).then(guest => {
+    if (!guest) {
+      return res.status(404).json("This user does not exist");
+    }
+
+    bcrypt.compare(password, guest.password).then(isMatch => {
+      if (isMatch) {
+        const payload = { id: guest.id, name: guest.name };
+
+        jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+          res.json({
+            sucess: true,
+            token: "Bearer " + token
+          });
+        });
+      } else {
+        return res.status(400).json(errors);
+      }
+    });
+  });
 });
 
 
