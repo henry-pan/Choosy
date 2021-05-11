@@ -23,12 +23,12 @@ class SessionForm extends React.Component {
     this.togglePassword2 = this.togglePassword2.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.signedIn === true) {
-      this.props.history.push("/");
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      if (this.props.signedIn === true) this.props.history.push("/");
+      this.setState({ errors: this.props.errors });
+      if (this.state.errors) this.props.openModal("error");
     }
-    this.setState({ errors: nextProps.errors });
-    if (this.state.errors) this.props.openModal("error");
   }
 
   handleInput(field) {
