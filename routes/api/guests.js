@@ -5,10 +5,6 @@ const keys = require('../../config/keys');
 const jwt = require('jsonwebtoken');
 const passport = require("passport");
 
-// const validateGuestNameInput = require('../../validation/guests');
-
-router.get("/test", (req, res) => res.json({ msg: "This is the guests route" }));
-
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({
     id: req.guest.id,
@@ -17,7 +13,6 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
   });
 })
 
-//fetch all guests
 router.get("/", (req, res) => {
   Guest
     .find()
@@ -25,8 +20,6 @@ router.get("/", (req, res) => {
     .catch(err => res.status(400).json(err));
 });
 
-
-//create a guest
 router.post("/register", (req, res) => {
 
   const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
@@ -84,13 +77,13 @@ router.post("/login", (req, res) => {
 
 module.exports = router;
 
-//fetch a single guest by id
-// router.get("/:id", (req, res) => {
-//   Guest
-//     .findById(req.params.id)
-//     .then(guest => res.json(guest))
-//     .catch(err => res.status(400).json({ noguestfound: "This guest does not exist"}));
-// });
+// fetch a single guest by id
+router.get("/:id", (req, res) => {
+  Guest
+    .findById(req.params.id)
+    .then(guest => res.json(guest))
+    .catch(err => res.status(400).json({ noguestfound: "This guest does not exist"}));
+});
 
 
 // delete a guest by id
