@@ -32,7 +32,7 @@
   display: flex;
   flex-direction: column-reverse;
   overflow: auto;
-  width: 400px;
+  max-width: 400px;
   max-height: 65vh;
 }
 
@@ -46,6 +46,8 @@
   margin: 10px;
   padding-right: 15px;
   height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .idea-btn {
@@ -68,5 +70,25 @@
 
   .idea-btn {
     margin-top: 19px;
+  }
+
+  .idea-item {
+    min-width: 250px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .idea-submission-input {
+    width: 200px;
+    font-size: 14px;
+  }
+
+  .idea-submit-btn {
+    width: 80px;
+    font-size: 14px;
+  }
+
+  .idea-item {
+    max-width: 250px;
   }
 }

@@ -10,6 +10,8 @@
   padding: 0 25px;
   min-width: 150px;
   width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .splash-auth {
@@ -38,7 +40,15 @@
   }
 
   .logout-btn {
+    padding: 0 10px;
     font-size: 16px;
     min-width: 0;
+  }
+} 
+
+@media only screen and (max-width: 400px) {
+  .logout-btn {
+    max-width: 150px;
+    font-size: 12px;
   }
 } 
