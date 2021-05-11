@@ -195,8 +195,6 @@ class Room extends React.Component{
     const roomIdeas = this.state.roomIdeas.sort(
       (idea1, idea2) => Date.parse(idea1.date) - Date.parse(idea2.date)
     );
-    console.log("ROOM ID", this.state.roomIdeas)
-    console.log("room id2", roomIdeas)
 
     if (!this.props.currentUser) return null;
     switch (this.state.phase) {

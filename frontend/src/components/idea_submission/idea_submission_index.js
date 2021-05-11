@@ -35,8 +35,6 @@ class IdeaSubmissionIndex extends React.Component {
 
   handleIdeaSubmit(e) {
     e.preventDefault();
-    console.log("room id props", this.props.room);
-    console.log("room id state", this.state.currentIdea)
     this.props.addIdea(this.state.currentIdea);
     e.target.reset();
   }
