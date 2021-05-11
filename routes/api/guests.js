@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const Guest = require('../../models/Guest');
-const validateGuestNameInput = require('../../validation/guests');
-const { json } = require('body-parser');
-const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const keys = require('../../config/keys');
+const jwt = require('jsonwebtoken');
+const passport = require("passport");
+
+// const validateGuestNameInput = require('../../validation/guests');
 
 router.get("/test", (req, res) => res.json({ msg: "This is the guests route" }));
 
@@ -15,37 +18,61 @@ router.get("/", (req, res) => {
     .catch(err => res.status(400).json(err));
 });
 
-//fetch a single guest by id
-router.get("/:id", (req, res) => {
-  Guest
-    .findById(req.params.id)
-    .then(guest => res.json(guest))
-    .catch(err => res.status(400).json({ noguestfound: "This guest does not exist"}));
-});
 
 //create a guest
-router.post("/", (req, res) => {
-  const { errors, isValid } = validateGuestNameInput(req.body);
+router.post("/register", (req, res) => {
 
-  if (!isValid) {
-    return res.status(400).json(errors);
+  const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+  let email = "";
+  for (let i = 0; i < 15; i++) {
+    email += chars[Math.floor(Math.random() * chars.length)];
   }
+  email += '@choosy.com';
 
   const newGuest = new Guest({
-    name: req.body.name
+    name: 'Guest',
+    email,
+    password: '123123'
   });
 
-  newGuest
-    .save()
-    .then(guest => res.json(guest));
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newGuest.password, salt, (err, hash) => {
+      if (err) throw err;
+      newGuest.password = hash;
+      newGuest
+        .save()
+        .then(guest => {
+          const payload = { id: guest.id, name: guest.name };
+
+          jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600}, (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          });
+        })
+        .catch(err => console.log(err));
+    });
+  })
 });
 
-//delete a guest by id
-router.delete("/:id", (req, res) => {
-  Guest
-    .findByIdAndDelete(req.params.id)
-    .then(guest => res.json(guest))
-    .catch(err => res.status(400).json(err));
-});
 
 module.exports = router;
+
+//fetch a single guest by id
+// router.get("/:id", (req, res) => {
+//   Guest
+//     .findById(req.params.id)
+//     .then(guest => res.json(guest))
+//     .catch(err => res.status(400).json({ noguestfound: "This guest does not exist"}));
+// });
+
+
+// delete a guest by id
+// router.delete("/:id", (req, res) => {
+//   Guest
+//     .findByIdAndDelete(req.params.id)
+//     .then(guest => res.json(guest))
+//     .catch(err => res.status(400).json(err));
+// });
+
