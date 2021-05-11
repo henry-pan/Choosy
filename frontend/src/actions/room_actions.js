@@ -1,4 +1,7 @@
-import { createRoom, deleteRoom, getUsers, getIdeas, getRoom, getRoomByCode } from '../util/room_util';
+import { createRoom, deleteRoom, 
+  // getUsers, 
+  // getIdeas, 
+  getRoom, getRoomByCode } from '../util/room_util';
 
 // export const RECEIVE_IDEAS = "RECEIVE_IDEAS";
 // export const RECEIVE_USERS = "RECEIVE_USERS";
