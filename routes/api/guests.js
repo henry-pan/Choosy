@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Guest = require('../../models/Guest');
-const bcrypt = require("bcryptjs");
 const keys = require('../../config/keys');
 const jwt = require('jsonwebtoken');
 const passport = require("passport");
@@ -32,38 +31,30 @@ router.post("/register", (req, res) => {
 
   const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
   let email = "";
-  let password = "";
   for (let i = 0; i < 15; i++) {
     email += chars[Math.floor(Math.random() * chars.length)];
-    password += chars[Math.floor(Math.random() * chars.length)];
   }
   email += '@choosy.com';
 
   const newGuest = new Guest({
     name: 'Guest',
     email,
-    password
+    password: 'choosy'
   });
 
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newGuest.password, salt, (err, hash) => {
-      if (err) throw err;
-      newGuest.password = hash;
-      newGuest
-        .save()
-        .then(guest => {
-          const payload = { id: guest.id, name: guest.name };
+  newGuest
+    .save()
+    .then(guest => {
+      const payload = { id: guest.id, name: guest.name };
 
-          jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600}, (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
-          });
-        })
-        .catch(err => console.log(err));
-    });
-  });
+      jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600}, (err, token) => {
+        res.json({
+          success: true,
+          token: "Bearer " + token
+        });
+      });
+    })
+    .catch(err => console.log(err));
 });
 
 router.post("/login", (req, res) => {
@@ -75,20 +66,17 @@ router.post("/login", (req, res) => {
     if (!guest) {
       return res.status(404).json("This user does not exist");
     }
+    else if (guest.password !== password) {
+      return res.status(400).json("Incorrect password!");
+    }
 
-    bcrypt.compare(password, guest.password).then(isMatch => {
-      if (isMatch) {
-        const payload = { id: guest.id, name: guest.name };
+    const payload = { id: guest.id, name: guest.name };
 
-        jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
-          res.json({
-            sucess: true,
-            token: "Bearer " + token
-          });
-        });
-      } else {
-        return res.status(400).json(errors);
-      }
+    jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+      res.json({
+        sucess: true,
+        token: "Bearer " + token
+      });
     });
   });
 });
