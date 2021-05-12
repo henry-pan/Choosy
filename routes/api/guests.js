@@ -7,9 +7,9 @@ const passport = require("passport");
 
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({
-    id: req.guest.id,
-    name: req.guest.name,
-    email: req.guest.email
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email
   });
 })
 
@@ -21,7 +21,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-
   const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
   let email = "";
   for (let i = 0; i < 15; i++) {
