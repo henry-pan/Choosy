@@ -109,6 +109,16 @@ router.delete("/:id",
       .findByIdAndDelete(req.params.id)
       .then(idea => res.json(idea))
       .catch(err => res.status(400).json(err));
-  });
+});
+
+//delete all ideas from a single user
+router.delete("/user/:user_id", 
+  passport.authenticate("jwt", { session: false }), 
+  (req, res) => {
+    Idea
+    .deleteMany({ user: req.params.user_id })
+    .then(ideas => res.json(ideas))
+    .catch(err => res.status(400).json(err));
+});
 
 module.exports = router;
