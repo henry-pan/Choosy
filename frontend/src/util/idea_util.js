@@ -27,3 +27,7 @@ export const updateIdea = data => {
 export const deleteIdea = ideaId => {
   return axios.delete(`/api/ideas/${ideaId}`)
 }
+
+export const deleteUserIdeas = userId => {
+  return axios.delete(`/api/ideas/user/${userId}`)
+};

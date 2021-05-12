@@ -1,10 +1,12 @@
-import { getIdeas, getIdea, getUserIdeas, getRoomIdeas, createIdea, deleteIdea, updateIdea } from '../util/idea_util';
+import { getIdeas, getIdea, getUserIdeas, getRoomIdeas, createIdea,
+  deleteIdea, updateIdea, deleteUserIdeas } from '../util/idea_util';
 
 export const RECEIVE_IDEAS = "RECEIVE_IDEAS";
 export const RECEIVE_USER_IDEAS = "RECEIVE_USER_IDEAS";
 export const RECEIVE_ROOM_IDEAS = "RECEIVE_ROOM_IDEAS";
 export const RECEIVE_IDEA = "RECEIVE_IDEA";
 export const REMOVE_IDEA = "REMOVE_IDEA";
+export const REMOVE_USER_IDEAS = "REMOVE_USER_IDEAS";
 
 
 export const receiveIdeas = ideas => ({
@@ -30,6 +32,11 @@ export const receiveIdea = idea => ({
 export const removeIdea = ideaId => ({
   type: REMOVE_IDEA,
   ideaId
+})
+
+export const removeUserIdeas = userId => ({
+  type: REMOVE_USER_IDEAS,
+  userId
 })
 
 export const fetchIdeas = () => dispatch => (
@@ -77,6 +84,12 @@ export const addIdea = data => dispatch => (
 export const destroyIdea = ideaId => dispatch => (
   deleteIdea(ideaId)
     .then(() => dispatch(removeIdea(ideaId)))
+    .catch(err => console.log(err))
+);
+
+export const destroyUserIdeas = userId => dispatch => (
+  deleteUserIdeas(userId)
+    .then(() => dispatch(removeUserIdeas(userId)))
     .catch(err => console.log(err))
 );
 
