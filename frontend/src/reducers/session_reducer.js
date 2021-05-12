@@ -2,9 +2,7 @@ import { RECEIVE_CURRENT_USER,
          RECEIVE_USER_LOGOUT, 
          RECEIVE_USER_SIGN_IN } from '../actions/session_actions';
 
-import { RECEIVE_GUESTS, 
-         RECEIVE_GUEST, 
-         REMOVE_GUEST } from '../actions/guest_actions';
+import { RECEIVE_GUEST } from '../actions/guest_actions';
 
 
 const initialState = {
@@ -35,11 +33,6 @@ const sessionReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: !!action.currentUser,
         user: action.currentUser
-      };
-    case REMOVE_GUEST:
-      return {
-        isAuthenticated: false,
-        user: undefined
       };
     default:
       return state;
