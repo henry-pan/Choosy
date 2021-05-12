@@ -36,7 +36,13 @@ class SplashPage extends React.Component {
     e.preventDefault();
     this.props.fetchRoomByCode(this.state.roomCode)
     .then(res => {
-      if (res.type === 'RECEIVE_ROOM') this.sendRoom(res);
+      if (res.type === 'RECEIVE_ROOM') {
+        if (!this.props.currentUser || Object.keys(this.props.currentUser).length === 0) {
+          console.log(this.props.currentUser);
+          this.props.addGuest();
+        };
+        this.sendRoom(res);
+      }
     });
   }
 
