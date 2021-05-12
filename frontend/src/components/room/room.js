@@ -52,7 +52,7 @@ class Room extends React.Component{
       this.setState({
         roomId: (this.props.match.params._id)
       })
-    ).then(console.log(this.props.match.params._id));
+    )
 
     socket();
   }
