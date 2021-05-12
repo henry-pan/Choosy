@@ -8,13 +8,17 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 60px;
-  width: 100%;
+  width: 95%;
   padding: 25px;
 }
 
 .voting-idea {
   margin: auto;
   font-size: 56px;
+  max-width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25em;
 }
 
 .voting-btn {
@@ -29,7 +33,7 @@
 .voting-vote-container {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 95%;
 }
 
 .voting-voted {
@@ -65,5 +69,29 @@
     height: 150px;
     width: 150px;
     font-size: 80px;
+  }
+}
+
+
+@media only screen and (max-width: 400px) {
+  .voting-idea {
+    font-size: 32px;
+  }
+
+  .voting-vote-container{
+    height: 120px;
+  }
+
+  .voting-btn {
+    height: 120px;
+    width: 120px;
+    font-size: 60px;
+  }
+
+  .voting-voted {
+    line-height: 120px;
+    height: 120px;
+    width: 120px;
+    font-size: 60px;
   }
 }

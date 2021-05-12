@@ -5,8 +5,16 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./voting_winner.css";
 
 class VotingWinner extends React.Component {
+  handleRegister() {
+    this.props.logout();
+    this.props.history.push("/register");
+  }
+
   render() {
-    let saveIdeasText = (this.props.loggedIn ? "Save them to reuse them later!" : "Create an account to save them to reuse later!");
+    let registerBlurb = (<>
+      <p className="voting-winner-blurb">Liked Choosy? Create an account to host your own rooms!</p>
+      <button className="link-btn" onClick={()=>this.handleRegister()}>Register</button>
+    </>);
 
     return (
       <div className="content">
@@ -16,9 +24,8 @@ class VotingWinner extends React.Component {
         <div className="voting-winner-container">
           <h1 className="title voting-winner-title">Winner</h1>
           <h1 className="voting-winner-item">{this.props.idea.body}</h1>
-          <p className="voting-winner-blurb">Liked this set of ideas?</p>
-          <p className="voting-winner-blurb">{saveIdeasText}</p>
-          <button className="link-btn">{this.props.loggedIn ? "Save" : "Register"}</button>
+          <p className="voting-winner-blurb">Thank you for choosing Choosy!</p>
+          {!this.props.loggedIn && registerBlurb}
         </div>
       </div>
     );
