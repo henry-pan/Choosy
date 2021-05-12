@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
 }
 
 .voting-results-list {
@@ -10,7 +10,8 @@
   flex-direction: column;
   padding: 25px;
   overflow: auto;
-  width: 400px;
+  width: 85%;
+  max-width: 400px;
   max-height: 60vh;
   margin-top: 10px;
 }
@@ -20,6 +21,7 @@
   margin-bottom: 15px;
   height: 50px;
   line-height: 50px;
+  width: 100%;
 }
 
 .voting-results-votes {
@@ -35,9 +37,11 @@
   background-color: #e9c46a;
   color: #333;
   border-radius: 0 15px 15px 0;
-  min-width: 300px;
   padding-left: 15px;
   padding-right: 15px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .voting-no-ideas {

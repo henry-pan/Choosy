@@ -60,3 +60,13 @@
     max-width: 340px;
   }
 }
+
+@media only screen and (max-width: 400px) {
+  .auth-input, .auth-input-pass {
+    font-size: 14px;
+  }
+  
+  .auth-input, .auth-pass-container {
+    max-width: 270px;
+  }
+}

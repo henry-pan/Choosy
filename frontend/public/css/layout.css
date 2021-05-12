@@ -155,7 +155,7 @@ a:hover {
 
 @media only screen and (max-width: 750px) {
   .content {
-    width: 100%
+    width: 90%
   }
 
   .link-btn:first-child {

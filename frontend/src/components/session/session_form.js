@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "../modal/modal";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./auth.css";
@@ -23,12 +23,11 @@ class SessionForm extends React.Component {
     this.togglePassword2 = this.togglePassword2.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.signedIn === true) {
-      this.props.history.push("/");
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.setState({ errors: this.props.errors });
+      if (this.state.errors) this.props.openModal("error");
     }
-    this.setState({ errors: nextProps.errors });
-    if (this.state.errors) this.props.openModal("error");
   }
 
   handleInput(field) {
@@ -107,4 +106,4 @@ class SessionForm extends React.Component {
   }
 }
 
-export default withRouter(SessionForm);
+export default SessionForm;

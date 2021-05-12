@@ -65,3 +65,14 @@
     width: 70%;
   }
 }
+
+@media only screen and (max-width: 400px) {
+  .room-username-input {
+    width: 200px;
+    font-size: 14px;
+  }
+
+  .room-username-btn {
+    width: 80px;
+  }
+}
