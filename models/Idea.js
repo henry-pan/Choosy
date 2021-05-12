@@ -16,9 +16,10 @@ const IdeaSchema = new Schema({
   score: {
     type: Number
   },
-  date: {
+  createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    expires: 3600
   }
 });
 
