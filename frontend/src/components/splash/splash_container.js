@@ -3,6 +3,7 @@ import { logout } from '../../actions/session_actions';
 import { openModal } from '../../actions/modal_actions';
 import { addRoom, fetchRoom, fetchRoomByCode } from '../../actions/room_actions';
 import { addGuest } from '../../actions/guest_actions';
+import { destroyUserIdeas } from '../../actions/idea_actions';
 import SplashPage from './splash_page';
 
 const mapStateToProps = state => ({
@@ -18,7 +19,8 @@ const mapDispatchToProps = dispatch => ({
   addRoom: data => dispatch(addRoom(data)),
   fetchRoom: roomId => dispatch(fetchRoom(roomId)),
   fetchRoomByCode: code => dispatch(fetchRoomByCode(code)),
-  addGuest: () => dispatch(addGuest())
+  addGuest: () => dispatch(addGuest()),
+  destroyUserIdeas: userId => dispatch(destroyUserIdeas(userId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashPage);

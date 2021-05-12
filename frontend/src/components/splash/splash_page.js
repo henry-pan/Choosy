@@ -42,11 +42,11 @@ class SplashPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    if (this.props.currentUser) this.props.destroyUserIdeas(this.props.currentUser.id);
     this.props.fetchRoomByCode(this.state.roomCode)
     .then(res => {
       if (res.type === 'RECEIVE_ROOM') {
         if (!this.props.currentUser || Object.keys(this.props.currentUser).length === 0) {
-          console.log(this.props.currentUser);
           this.props.addGuest()
             .then(response => this.sendRoom(res));
         } else {
@@ -62,6 +62,7 @@ class SplashPage extends React.Component {
 
 
   createRoom() {
+    this.props.destroyUserIdeas(this.props.currentUser.id);
     this.props.addRoom().then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
   }
 
