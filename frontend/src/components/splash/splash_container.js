@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
   addRoom: data => dispatch(addRoom(data)),
   fetchRoom: roomId => dispatch(fetchRoom(roomId)),
   fetchRoomByCode: code => dispatch(fetchRoomByCode(code)),
-    addGuest: () => dispatch(addGuest())
+  addGuest: () => dispatch(addGuest())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashPage);
