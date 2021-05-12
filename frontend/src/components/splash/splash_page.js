@@ -30,6 +30,12 @@ class SplashPage extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.currentUser && this.props.currentUser.name === "Guest") {
+      this.props.logout()
+    }
+  }
+
   handleInput(field) {
     return e => this.setState({ [field]: e.target.value });
   }
