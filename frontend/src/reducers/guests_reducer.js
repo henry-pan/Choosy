@@ -7,12 +7,12 @@ const GuestsReducer = (state = { all: {}, user: {}, new: undefined }, action) =>
     case RECEIVE_GUESTS:
       newState.all = action.guests.data;
       return newState;
-    case RECEIVE_GUEST:
-      newState.new = action.guest.data
-      return newState;
-    case REMOVE_GUEST:
-      delete newState[action.guestId];
-      return newState;
+    // case RECEIVE_GUEST:
+    //   newState.new = action.guest.data
+    //   return newState;
+    // case REMOVE_GUEST:
+    //   delete newState[action.guestId];
+    //   return newState;
     default:
       return state;
   }

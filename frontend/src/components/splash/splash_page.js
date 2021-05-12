@@ -30,6 +30,12 @@ class SplashPage extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.currentUser && this.props.currentUser.name === "Guest") {
+      this.props.logout()
+    }
+  }
+
   handleInput(field) {
     return e => this.setState({ [field]: e.target.value });
   }
@@ -38,7 +44,15 @@ class SplashPage extends React.Component {
     e.preventDefault();
     this.props.fetchRoomByCode(this.state.roomCode)
     .then(res => {
-      if (res.type === 'RECEIVE_ROOM') this.sendRoom(res);
+      if (res.type === 'RECEIVE_ROOM') {
+        if (!this.props.currentUser || Object.keys(this.props.currentUser).length === 0) {
+          console.log(this.props.currentUser);
+          this.props.addGuest()
+            .then(response => this.sendRoom(res));
+        } else {
+          this.sendRoom(res);
+        }
+      }
     });
   }
 
