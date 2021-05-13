@@ -87,7 +87,10 @@ class SplashPage extends React.Component {
           <button className="btn-circle" onClick={() => this.props.openModal("about")}><FontAwesomeIcon icon={faQuestion} /></button>
           {logoutButton}
         </nav>
-        <h1 className="logo">choosy</h1>
+        <div className="logo-container">
+          <h1 className="logo">choosy</h1>
+          <h2 className="tagline">Make your decisions easy</h2>
+        </div>
         <div className="splash-auth">
           {authButtons}
         </div>

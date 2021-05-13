@@ -88,7 +88,10 @@ class SessionForm extends React.Component {
         <nav className="nav">
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faChevronLeft} /></Link>
         </nav>
-        <h1 className="logo">choosy</h1>
+        <div className="logo-container">
+          <h1 className="logo">choosy</h1>
+          <h2 className="tagline">Make your decisions easy</h2>
+        </div>
         {demoLogin}
         <form className="auth-form" onSubmit={this.handleSubmit}>
           {usernameInput}
