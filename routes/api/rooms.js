@@ -60,7 +60,7 @@ router.post("/",
     const ALL_CODES = []
     Room.find().then(res => {
       res.forEach(room => ALL_CODES.push(room.code));
-      console.log("ALLCODES", ALL_CODES)
+      console.log("ALLCODES", ALL_CODE)
     })
 
     while (ALL_CODES.includes(RANDOM_CODE)) {
