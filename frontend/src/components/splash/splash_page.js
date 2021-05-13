@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Modal from "../modal/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faQuestion, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 import "./splash.css";
 
 class SplashPage extends React.Component {
@@ -70,7 +70,7 @@ class SplashPage extends React.Component {
     let logoutButton;
     let authButtons;
     if (this.props.loggedIn) {
-      logoutButton = <button className="link-btn logout-btn" onClick={this.props.logout}><FontAwesomeIcon icon={faUser} /> {this.props.currentUser.name}</button>
+      logoutButton = <button className="link-btn logout-btn" onClick={this.props.logout}>Log Out</button>
       authButtons = <>
         <Link onClick={this.createRoom} className="link-btn room-btn" to={"/room"}>Create Room</Link>
       </>
@@ -88,7 +88,10 @@ class SplashPage extends React.Component {
           <button className="btn-circle" onClick={() => this.props.openModal("about")}><FontAwesomeIcon icon={faQuestion} /></button>
           {logoutButton}
         </nav>
-        <h1 className="logo">choosy</h1>
+        <div className="logo-container">
+          <h1 className="logo">choosy</h1>
+          <h2 className="tagline">Make your decisions easy</h2>
+        </div>
         <div className="splash-auth">
           {authButtons}
         </div>

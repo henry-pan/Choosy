@@ -112,10 +112,23 @@ a:hover {
   color: white;
 }
 
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
 .logo {
   font-family: 'Pacifico', cursive;
   font-size: 56px;
-  margin-bottom: 60px;
+  margin-bottom: 25px;
+  user-select: none;
+}
+
+.tagline {
+  font-family: 'Londrina Solid', cursive;
   user-select: none;
 }
 
