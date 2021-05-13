@@ -30,15 +30,29 @@ class SplashPage extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.currentUser && this.props.currentUser.name === "Guest") {
+      this.props.logout()
+    }
+  }
+
   handleInput(field) {
     return e => this.setState({ [field]: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    if (this.props.currentUser) this.props.destroyUserIdeas(this.props.currentUser.id);
     this.props.fetchRoomByCode(this.state.roomCode)
     .then(res => {
-      if (res.type === 'RECEIVE_ROOM') this.sendRoom(res);
+      if (res.type === 'RECEIVE_ROOM') {
+        if (!this.props.currentUser || Object.keys(this.props.currentUser).length === 0) {
+          this.props.addGuest()
+            .then(response => this.sendRoom(res));
+        } else {
+          this.sendRoom(res);
+        }
+      }
     });
   }
 
@@ -48,6 +62,7 @@ class SplashPage extends React.Component {
 
 
   createRoom() {
+    this.props.destroyUserIdeas(this.props.currentUser.id);
     this.props.addRoom().then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
   }
 

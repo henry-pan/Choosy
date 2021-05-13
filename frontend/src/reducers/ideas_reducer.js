@@ -1,4 +1,5 @@
-import { RECEIVE_IDEAS, RECEIVE_USER_IDEAS, RECEIVE_ROOM_IDEAS, RECEIVE_IDEA, REMOVE_IDEA } from '../actions/idea_actions';
+import { RECEIVE_IDEAS, RECEIVE_USER_IDEAS, RECEIVE_ROOM_IDEAS, RECEIVE_IDEA,
+  REMOVE_IDEA, REMOVE_USER_IDEAS } from '../actions/idea_actions';
   
 const IdeasReducer = (state = { all: {}, user: {}, new: undefined, room: {} }, action) => {
   Object.freeze(state);
@@ -25,6 +26,10 @@ const IdeasReducer = (state = { all: {}, user: {}, new: undefined, room: {} }, a
       // only deletes from the front end?/only changes state?
       delete newState.user[action.ideaId];
       delete newState.room[action.ideaId];
+      return newState;
+    case REMOVE_USER_IDEAS:
+      // only deletes from the front end?/only changes state?
+      newState.user = {};
       return newState;
     default:
       return state;

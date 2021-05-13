@@ -23,7 +23,8 @@ class Room extends React.Component{
       userIdeas: this.props.userIdeas,
       roomIdeas: this.props.roomIdeas,
       idea_num: 0,
-      survivors: []
+      survivors: [],
+      nick: (this.props.currentUser.name === "Guest" ? "" : this.props.currentUser.name)
     };
     this.interval = 0;
     this.countdown = this.countdown.bind(this);
@@ -31,6 +32,7 @@ class Room extends React.Component{
     this.newScoreIdeas = this.newScoreIdeas.bind(this);
     this.submitNick = this.submitNick.bind(this);
     this.getNextPhase  = this.getNextPhase.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
 
   handleRoomStart() {
@@ -50,7 +52,7 @@ class Room extends React.Component{
       this.setState({
         roomId: (this.props.match.params._id)
       })
-    ).then(console.log(this.props.match.params._id));
+    )
 
     socket();
   }
@@ -162,6 +164,10 @@ class Room extends React.Component{
     });
   }
 
+  handleInput(e) {
+    this.setState({ nick: e.target.value });
+  }
+
   room() {
     return (
       <div className="content">
@@ -174,7 +180,7 @@ class Room extends React.Component{
         </ul>
         
         {this.state.hasNick ? null : <form id="form-test" className="room-username-form" onSubmit={this.submitNick}>
-          <input id="input-test" className="room-username-input" placeholder="Your name" autoComplete="off" />
+          <input id="input-test" className="room-username-input" placeholder="Your name" value={this.state.nick} onChange={this.handleInput} autoComplete="off" />
           <button className="link-btn room-username-btn">Join</button>
         </form>}
         

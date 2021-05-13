@@ -25,7 +25,7 @@ class VotingWinner extends React.Component {
           <h1 className="title voting-winner-title">Winner</h1>
           <h1 className="voting-winner-item">{this.props.idea.body}</h1>
           <p className="voting-winner-blurb">Thank you for choosing Choosy!</p>
-          {!this.props.loggedIn && registerBlurb}
+          {(this.props.currentUser.name === "Guest") && registerBlurb}
         </div>
       </div>
     );
