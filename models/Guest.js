@@ -6,7 +6,7 @@ const GuestSchema = new Schema({
     type: String,
     required: true
   },
-  email: {
+  email: { // fill in other places?
     type: String,
     required: true
   },

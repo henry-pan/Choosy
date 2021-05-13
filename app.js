@@ -10,7 +10,7 @@ const server = http.createServer(app);
 const io = (module.exports.io = require("socket.io")(server));
 
 
-const SocketDraft = require("./src/socket_draft");
+const socket = require("./src/socket_backend");
 
 
 // Set up routes

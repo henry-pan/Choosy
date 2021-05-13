@@ -35,3 +35,6 @@ io
   });
 
 
+io.on('disconnect', () => {
+  usernames = [];
+});

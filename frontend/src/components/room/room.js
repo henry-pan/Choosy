@@ -21,7 +21,7 @@ class Room extends React.Component{
       winner: false,
       timer: 15,
       userIdeas: this.props.userIdeas,
-      roomIdeas: this.props.roomIdeas, // 
+      roomIdeas: this.props.roomIdeas,
       idea_num: 0,
       survivors: []
     };
