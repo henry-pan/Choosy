@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 
-export const socket = () => {
+export const socket = (roomCode, handleRoomStart) => {
 
   let socketURL = "127.0.0.1:5000";
   if (process.env.NODE_ENV === "production") {
@@ -12,34 +12,48 @@ export const socket = () => {
   // submit name form
   const form = document.getElementById('form-test');
   const input = document.getElementById('input-test');
+  const start = document.getElementById('start-button');
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (input.value) {
-      socket.emit('submit username', input.value);
+      socket.emit('submit username', input.value, roomCode);
       input.value = '';
     }
   });
 
-  //add username to list
-  const usernames = document.getElementById('usernames');
+  start.addEventListener('click', function (e) {
+    e.preventDefault();
+    socket.emit('start button', roomCode);
+  });
 
-  socket.on('load usernames', (usernamesArr) => {
-    for (let i = 0; i < usernamesArr.length; i++) {
+  socket.on('load usernames', (usernames) => {
+    const usernamesEl = document.getElementById('usernames');
+    usernamesEl.innerHTML = '';
+    console.log(usernames);
+    for (const username of usernames) {
       var item = document.createElement('li');
-      item.textContent = usernamesArr[i];
+      item.textContent = username;
       item.classList.add('room-user-item');
-      console.log(usernamesArr);
-      usernames.appendChild(item);
+      usernamesEl.appendChild(item);
     }
   });
 
-  socket.on('submit username', function (username) {
-    var item = document.createElement('li');
-    item.textContent = username;
-    item.classList.add('room-user-item');
-    usernames.appendChild(item);
-    // window.scrollTo(0, document.body.scrollHeight);
+  socket.on('start phases', () => {
+    handleRoomStart();
+    console.log("hi");
   });
 
+  // socket.on('submit username', function (username) {
+  //   var item = document.createElement('li');
+  //   item.textContent = username;
+  //   item.classList.add('room-user-item');
+  //   usernamesEl.appendChild(item);
+  // });
+
+  socket.on('error', (error) => {
+    alert(error);
+  });
+
+  socket.emit('join room', roomCode);
 }

@@ -54,7 +54,7 @@ class Room extends React.Component{
       })
     )
 
-    socket();
+    socket(this.props.room.code, this.handleRoomStart);
   }
 
 
@@ -185,7 +185,8 @@ class Room extends React.Component{
         </form>}
         
         <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>
-        <button className="link-btn" onClick={this.handleRoomStart}>Start</button>
+        {/* make this button viewable to the host only */}
+        <button className="link-btn" id="start-button">Start</button>
       </div>
     );
   }
@@ -213,7 +214,6 @@ class Room extends React.Component{
       case "voting":
         return <VotingPhaseContainer key={this.state.idea_num} idea={roomIdeas[this.state.idea_num]} timer={this.state.timer}/>
       case "winner":
-        // CHANGE TO WINNER WHEN WE HAVE WINNER PAGE
         return <VotingWinnerContainer idea={roomIdeas[0]}/>
       default:
         break;
