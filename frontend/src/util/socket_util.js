@@ -5,7 +5,7 @@ export const socket = (roomCode, handleRoomStart) => {
   let socketURL = "127.0.0.1:5000";
   if (process.env.NODE_ENV === "production") {
     socketURL =
-      process.env.REACT_APP_SOCKET_URL || "http://choosyapp.herokuapp.com/";
+      process.env.REACT_APP_SOCKET_URL || "https://choosyapp.herokuapp.com/";
   }
   let socket = io(socketURL, { transports: ["websocket"] });
 
