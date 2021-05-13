@@ -13,7 +13,7 @@ const About = ({ closeModal }) => {
     <>
       <div className="modal-header">
         <span className="modal-icon" onClick={closeModal}><FontAwesomeIcon icon={faTimes} /></span>
-        <a className="modal-icon" href="https://github.com/henry-pan/Choosy"><FontAwesomeIcon icon={faGithub} /></a>
+        <a className="modal-icon" href="https://github.com/henry-pan/Choosy" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
       </div>
       <div className="modal-content">
         <h1 className="title">About</h1>
@@ -25,40 +25,40 @@ const About = ({ closeModal }) => {
           <img className="about-member-pic" src={henry} alt="Henry Pan"/>
           <span>Henry Pan</span>
           <div className="about-member-links">
-            <a href="https://github.com/henry-pan/"><FontAwesomeIcon icon={faGithub} /></a>
-            <a href="https://www.linkedin.com/in/henry-pan/"><FontAwesomeIcon icon={faLinkedin} /></a>
-            <a href="https://angel.co/u/henrypan"><FontAwesomeIcon icon={faAngellist} /></a>
-            <a href="https://www.henry-pan.com"><FontAwesomeIcon icon={faLink} /></a>
+            <a href="https://github.com/henry-pan/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
+            <a href="https://www.linkedin.com/in/henry-pan/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>
+            <a href="https://angel.co/u/henrypan" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faAngellist} /></a>
+            <a href="https://www.henry-pan.com" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLink} /></a>
           </div>
         </div>
         <div className="about-member">
           <img className="about-member-pic" src={ben} alt="Ben Young"/>
           <span>Ben Young</span>
           <div className="about-member-links">
-            <a href="https://github.com/benyoungmusic"><FontAwesomeIcon icon={faGithub} /></a>
-            <a href="https://www.linkedin.com/in/benjamin-young-63869931/"><FontAwesomeIcon icon={faLinkedin} /></a>
-            <a href="https://angel.co/u/benjamin-young-7"><FontAwesomeIcon icon={faAngellist} /></a>
-            <a href="https://github.com/benyoungmusic"><FontAwesomeIcon icon={faLink} /></a>
+            <a href="https://github.com/benyoungmusic" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
+            <a href="https://www.linkedin.com/in/benjamin-young-63869931/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>
+            <a href="https://angel.co/u/benjamin-young-7" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faAngellist} /></a>
+            <a href="https://github.com/benyoungmusic" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLink} /></a>
           </div>
         </div>
         <div className="about-member">
           <img className="about-member-pic" src={nat} alt="Nat Kozak"/>
           <span>Nat Kozak</span>
           <div className="about-member-links">
-            <a href="https://github.com/natkozak"><FontAwesomeIcon icon={faGithub} /></a>
-            <a href="https://www.linkedin.com/in/nat-kozak-23179049/"><FontAwesomeIcon icon={faLinkedin} /></a>
-            <a href="https://angel.co/u/nat-kozak"><FontAwesomeIcon icon={faAngellist} /></a>
-            <a href="https://github.com/natkozak"><FontAwesomeIcon icon={faLink} /></a>
+            <a href="https://github.com/natkozak" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
+            <a href="https://www.linkedin.com/in/nat-kozak-23179049/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>
+            <a href="https://angel.co/u/nat-kozak" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faAngellist} /></a>
+            <a href="https://github.com/natkozak" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLink} /></a>
           </div>
         </div>
         <div className="about-member">
           <img className="about-member-pic" src={tommy} alt="Tommy Lee"/>
           <span>Tommy Lee</span>
           <div className="about-member-links">
-            <a href="https://github.com/SouVangLee"><FontAwesomeIcon icon={faGithub} /></a>
-            <a href="https://www.linkedin.com/in/sou-vang-tommy-lee/"><FontAwesomeIcon icon={faLinkedin} /></a>
-            <a href="https://angel.co/u/souvanglee"><FontAwesomeIcon icon={faAngellist} /></a>
-            <a href="https://github.com/SouVangLee"><FontAwesomeIcon icon={faLink} /></a>
+            <a href="https://github.com/SouVangLee" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
+            <a href="https://www.linkedin.com/in/sou-vang-tommy-lee/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>
+            <a href="https://angel.co/u/souvanglee" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faAngellist} /></a>
+            <a href="https://github.com/SouVangLee" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLink} /></a>
           </div>
         </div>
       </div>
