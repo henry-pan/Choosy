@@ -55,7 +55,18 @@ router.get("/:id", (req, res) => {
 router.post("/", 
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const RANDOM_CODE = (Math.random() * 9876543210).toString().slice(0, 6);
+    let RANDOM_CODE = (Math.random() * 9876543210).toString().slice(0, 6);
+
+    const ALL_CODES = []
+    Room.find().then(res => {
+      res.forEach(room => ALL_CODES.push(room.code));
+      console.log("ALLCODES", ALL_CODES)
+    })
+
+    while (ALL_CODES.includes(RANDOM_CODE)) {
+      RANDOM_CODE = (Math.random() * 9876543210).toString().slice(0, 6);
+    }
+    
     const newRoom = new Room({
       host: req.user.id,
       code: RANDOM_CODE
