@@ -22,10 +22,12 @@ export const socket = (roomCode, handleRoomStart) => {
     }
   });
 
-  start.addEventListener('click', function (e) {
-    e.preventDefault();
-    socket.emit('start button', roomCode);
-  });
+  if (start) {
+    start.addEventListener('click', function (e) {
+      e.preventDefault();
+      socket.emit('start button', roomCode);
+    });
+  }
 
   socket.on('load usernames', (usernames) => {
     const usernamesEl = document.getElementById('usernames');

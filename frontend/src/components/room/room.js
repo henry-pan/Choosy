@@ -169,6 +169,15 @@ class Room extends React.Component{
   }
 
   room() {
+    let hostControls;
+    if (this.props.room.host === this.props.currentUser.id) {
+      hostControls = <>
+      <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>
+      <button className="link-btn" id="start-button">Start</button>
+      </>
+    } else {
+      hostControls = <p className="room-blurb">Waiting for the host to start...</p>
+    }
     return (
       <div className="content">
         <div className="nav">
@@ -184,9 +193,7 @@ class Room extends React.Component{
           <button className="link-btn room-username-btn">Join</button>
         </form>}
         
-        <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>
-        {/* make this button viewable to the host only */}
-        <button className="link-btn" id="start-button">Start</button>
+        {hostControls}
       </div>
     );
   }
