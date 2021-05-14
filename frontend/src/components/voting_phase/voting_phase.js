@@ -55,7 +55,7 @@ class VotingPhase extends React.Component{
 
   render() {
     if (!this.props.currentUser) return null;
-    let voteButtons, blurb;
+    let voteButtons;
     if (this.state.voted) {
       if (this.state.vote === 0) {
         voteButtons = <span className="voting-voted"><FontAwesomeIcon icon={faThumbsDown} /></span>;
