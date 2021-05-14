@@ -7,8 +7,10 @@ import "./voting_results.css";
 class VotingResults extends React.Component {
   constructor(props){
     super(props);
+
     this.state = {
-      timer: 5
+      timer: 5,
+      blurb: (this.props.ideas.length === 0 ? "Returning back to submissions in ": "Voting starts in ")
     };
 
     this.interval = 0;
@@ -37,8 +39,10 @@ class VotingResults extends React.Component {
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
         <div className="voting-results-container">
-          <h1 className="title">Round {this.props.round}</h1>
-          <p>Voting starts in {this.props.timer}</p>
+          <div className="title-container">
+            <h1 className="title">Round {this.props.round}</h1>
+            <h2 className="title-blurb">{this.state.blurb}{this.props.timer}</h2>
+          </div>
           {ideaList}
         </div>
       </div>
