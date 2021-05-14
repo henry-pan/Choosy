@@ -43,9 +43,13 @@ io.on('connection', (socket) => {
 
     room.emit('start phases');
   });
+
+  socket.on('disconnect', () => {
+    console.log('socket disconnected');
+  })
 });
 
 
 io.on('disconnect', () => {
-  // do something
+  console.log('socket.io backend server disconnected');
 });
