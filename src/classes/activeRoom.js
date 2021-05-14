@@ -20,21 +20,27 @@ class ActiveRoom {
     this.emit('load usernames', this.usernames);
   }
 
-  shuffle(array){
-    placeholderArray = array;
-    newArray = [];
-    while (placeholderArray.length > 0){
+  shuffle(array) {
+  let currentIndex = array.length, temporaryValue, randomIndex;
 
-      Math.floor(Math.random()*placeholderArray.length+1);
-      // splice at that index (removing element)
-      // push the element to newArray
-      // join parts of old array together, mutating array 
-    }
-    return newArray;
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
   }
 
+  return array;
+}
+
   emitDummyUsernames(){
-    const dummies = 
+    const shuffled = shuffle(this.dummyUsernames);
     this.emit('demo load usernames', [...this.usernames, ...this.dummyUsernames]);
   }
 }
