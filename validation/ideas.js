@@ -10,8 +10,8 @@ module.exports = function validateIdeaInput(data) {
     errors.text = 'Idea body is required';
   }
 
-  if (!Validator.isLength(data.body, { min: 2, max: 80 })) {
-    errors.text = 'Idea must be between 5 and 80 characters';
+  if (!Validator.isLength(data.body, { min: 1, max: 30 })) {
+    errors.text = 'Idea must be between 1 and 30 characters';
   }
 
   return {
