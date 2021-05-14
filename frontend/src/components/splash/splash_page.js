@@ -90,7 +90,7 @@ class SplashPage extends React.Component {
         </nav>
         <div className="logo-container">
           <h1 className="logo">choosy</h1>
-          <h2 className="tagline">Make your decisions easy</h2>
+          <h2 className="tagline">Make choosing easy</h2>
         </div>
         <div className="splash-auth">
           {authButtons}
