@@ -5,6 +5,17 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./voting_winner.css";
 
 class VotingWinner extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.winnerBlurbs = ["One idea stood above all, and it was...",
+    "Everyone liked...", "Congratulations to...", "We have a winner..."];
+
+    this.state = {
+      blurb: this.winnerBlurbs[Math.floor(Math.random() * this.winnerBlurbs.length)]
+    }
+  }
+
   handleRegister() {
     this.props.logout();
     this.props.history.push("/register");
@@ -22,7 +33,10 @@ class VotingWinner extends React.Component {
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
         <div className="voting-winner-container">
-          <h1 className="title voting-winner-title">Winner</h1>
+          <div className="title-container">
+            <h1 className="title">Winner</h1>
+            <h2 className="title-blurb">{this.state.blurb}</h2>
+          </div>
           <h1 className="voting-winner-item">{this.props.idea.body}</h1>
           <p className="voting-winner-blurb">Thank you for choosing Choosy!</p>
           {(this.props.currentUser.name === "Guest") && registerBlurb}

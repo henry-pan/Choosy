@@ -8,10 +8,15 @@ class VotingPhase extends React.Component{
   constructor(props){
     super(props);
 
+    this.voteBlurbs = ["What do you think of...", "Thoughts on...", "Hot or not...", "Perhaps..."];
+    this.playerBlurbs = ["Good choice!", "An excellent decision.", "Nice."];
+    this.appBlurbs = ["Don't worry, we chose for you.", "Tough decision? We've got you."];
+
     this.state = {
       timer: 10,
       vote: 0,
       voted: false,
+      blurb: this.voteBlurbs[Math.floor(Math.random() * this.voteBlurbs.length)],
       idea: this.props.idea
     };
 
@@ -28,7 +33,11 @@ class VotingPhase extends React.Component{
     if (this.state.timer === 0) {
       clearInterval(this.interval);
       if (!this.state.voted) {
-        this.setState({ vote: Math.floor(Math.random() * 2), voted: true });
+        this.setState({
+          vote: Math.floor(Math.random() * 2),
+          voted: true,
+          blurb: this.appBlurbs[Math.floor(Math.random() * this.appBlurbs.length)]
+        });
       }
       // Redirect in three seconds.
     }
@@ -40,12 +49,13 @@ class VotingPhase extends React.Component{
       idea.__v += 1;
       this.props.updateIdea(idea);
     }
-    this.setState({ idea: idea, vote: vote, voted: true });
+    this.setState({ idea: idea, vote: vote, voted: true, 
+      blurb: this.playerBlurbs[Math.floor(Math.random() * this.playerBlurbs.length)] });
   }
 
   render() {
     if (!this.props.currentUser) return null;
-    let voteButtons;
+    let voteButtons, blurb;
     if (this.state.voted) {
       if (this.state.vote === 0) {
         voteButtons = <span className="voting-voted"><FontAwesomeIcon icon={faThumbsDown} /></span>;
@@ -59,19 +69,15 @@ class VotingPhase extends React.Component{
       </>);
     }
 
-    let timerText;
-    if (this.state.timer === 0) {
-      timerText = (<span className="title voting-timer">Time's up!</span>)
-    } else {
-      timerText = (<span className="title voting-timer">{this.state.timer}</span>)
-    }
-    
     return (
       <div className="content">
         <div className="nav">
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
-          {timerText}
+        <div className="title-container">
+          <h1 className="title">{(this.state.timer === 0 ? "Time's up!" : this.state.timer)}</h1>
+          <h2 className="title-blurb">{this.state.blurb}</h2>
+        </div>
         <div className="voting-idea-container">
           <span className="voting-idea">{this.props.idea.body}</span>
         </div>
