@@ -15,6 +15,8 @@ class Room extends React.Component{
     super(props);
     
     this.state = {
+      showcase: true,
+      showcaseUsers: ["Ben", "Henry", "Nat", "Tommy"],
       hasNick: false,
       phase: "room",
       round: 1,
@@ -185,6 +187,7 @@ class Room extends React.Component{
         </div>
         <h1 className="title room-code">{this.props.room.code}</h1>
         <h2 className="room-subtitle">Room Code</h2>
+        {/* {!this.state.showcase ? null : this.showcaseUsers()} */}
         <ul id="usernames" className="room-users-container">
         </ul>
         
@@ -196,6 +199,17 @@ class Room extends React.Component{
         {hostControls}
       </div>
     );
+  }
+
+  showcaseUsers() {
+    console.log(this.state.showcaseUsers)
+    return (
+      <ul>
+      {this.state.showcaseUsers.map(username => (
+        <li className="room-user-item">{username}</li>
+      ))}
+      </ul>
+    )
   }
 
   resetIdeas() {

@@ -37,7 +37,7 @@ class VotingPhase extends React.Component{
   handleVote(vote) {
     let idea = this.state.idea;
     if (vote === 1) {
-      idea.__v += 1;
+      // idea.__v += 1;
       this.props.updateIdea(idea);
     }
     this.setState({ idea: idea, vote: vote, voted: true });

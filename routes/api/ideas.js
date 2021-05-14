@@ -85,7 +85,6 @@ router.post("/",
 router.patch("/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-
     const { isValid, errors } = validateIdeaInput(req.body);
 
     if (!isValid) {
@@ -93,7 +92,7 @@ router.patch("/:id",
     };
 
     Idea
-      .findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .findByIdAndUpdate(req.params.id, {$inc: { __v: 1 }}, { new: true })
       .then(idea => res.json(idea))
       .catch(err => res.status(400).json(err));
   }
