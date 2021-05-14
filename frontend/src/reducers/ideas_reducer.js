@@ -9,6 +9,7 @@ const IdeasReducer = (state = { all: {}, user: {}, new: undefined, room: {} }, a
       newState.all = action.ideas.data;
       return newState;
     case RECEIVE_USER_IDEAS:
+      newState.user = {};
       action.ideas.data.forEach(idea => {
         newState.user[idea._id] = idea
       });
