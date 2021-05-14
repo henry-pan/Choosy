@@ -38,9 +38,9 @@ class Room extends React.Component{
   handleRoomStart() {
     // for figuring out which ideas were persisted. this can be helpful for debugging leaving in the middle of a phase.
     this.props.fetchUserIdeas(this.props.currentUser.id); 
-    // this.props.fetchRoomIdeas(this.props.room._id);
+    this.props.fetchRoomIdeas(this.props.room._id);
 
-    this.setState({ userIdeas: this.props.userIdeas, phase: "idea-submission" });
+    this.setState({ roomIdeas: this.props.roomIdeas, userIdeas: this.props.userIdeas, phase: "idea-submission" });
     // this.setState({ ideas: this.props.roomIdeas, phase: "idea-submission" });
     // I don't think adding ideas from either the user's old ideas or the old room ideas is the best solution long-term -- do we even need to pre-populate?
     this.interval = setInterval(this.countdown, 1000);
