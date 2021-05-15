@@ -132,11 +132,23 @@ a:hover {
   user-select: none;
 }
 
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
 .title {
   font-family: 'Londrina Solid', cursive;
   font-size: 72px;
   user-select: none;
   text-align: center;
+}
+
+.title-blurb {
+  margin-top: 15px;
 }
 
 .divider {

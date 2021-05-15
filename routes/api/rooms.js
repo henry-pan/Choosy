@@ -1,20 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const User = require('../../models/User');
-const bcrypt = require("bcryptjs");
-const keys = require('../../config/keys');
-const jwt = require('jsonwebtoken'); // does not end up in the final version
 const passport = require("passport"); // Post action required passport
 const validateRoomCode = require("../../validation/rooms");
 const Room = require('../../models/Room');
-const Idea = require("../../models/Idea");
-const { json } = require("body-parser");
-
-router.get("/test", (req, res) => {
-  res.json({
-    msg: "This is the rooms route"
-  });
-});
 
 //GET route. Fetch all rooms.
 router.get("/", (req, res) =>{
@@ -57,10 +45,9 @@ router.post("/",
   (req, res) => {
     let RANDOM_CODE = (Math.random() * 9876543210).toString().slice(0, 6);
 
-    const ALL_CODES = []
+    const ALL_CODES = [];
     Room.find().then(res => {
       res.forEach(room => ALL_CODES.push(room.code));
-      console.log("ALLCODES", ALL_CODE)
     })
 
     while (ALL_CODES.includes(RANDOM_CODE)) {
@@ -87,6 +74,5 @@ router.delete("/:id",
       .catch(err => res.status(400).json(err));
   }
 );
-
 
 module.exports = router;

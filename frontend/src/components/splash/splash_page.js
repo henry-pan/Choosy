@@ -90,7 +90,7 @@ class SplashPage extends React.Component {
         </nav>
         <div className="logo-container">
           <h1 className="logo">choosy</h1>
-          <h2 className="tagline">Make your decisions easy</h2>
+          <h2 className="tagline">Make choosing easy</h2>
         </div>
         <div className="splash-auth">
           {authButtons}
@@ -100,6 +100,7 @@ class SplashPage extends React.Component {
           <input className="join-input" onChange={this.handleInput("roomCode")} type="text" value={this.state.roomCode} placeholder="Enter room code"/>
           <button className="link-btn">Join Room</button>
         </form>
+        <button className="link-btn demo-btn">Demo Showcase</button>
       </div>
     );
   }

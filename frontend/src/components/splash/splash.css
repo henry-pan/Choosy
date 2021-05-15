@@ -3,10 +3,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .logout-btn {
-  border-radius: 1000px;
   padding: 0 25px;
   min-width: 150px;
   width: auto;
@@ -23,6 +23,10 @@
 
 .room-btn {
   width: 220px;
+}
+
+.demo-btn {
+  width: 240px;
 }
 
 .join-input {

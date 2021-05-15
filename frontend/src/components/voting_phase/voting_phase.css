@@ -1,9 +1,3 @@
-.voting-timer {
-  user-select: none;
-  font-size: 72px;
-  margin-bottom: 30px;
-}
-
 .voting-idea-container {
   display: flex;
   justify-content: space-between;

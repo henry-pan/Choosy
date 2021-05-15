@@ -90,7 +90,7 @@ class SessionForm extends React.Component {
         </nav>
         <div className="logo-container">
           <h1 className="logo">choosy</h1>
-          <h2 className="tagline">Make your decisions easy</h2>
+          <h2 className="tagline">Make choosing easy</h2>
         </div>
         {demoLogin}
         <form className="auth-form" onSubmit={this.handleSubmit}>
