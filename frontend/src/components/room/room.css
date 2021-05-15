@@ -49,6 +49,7 @@
 
 .room-blurb {
   margin-bottom: 30px;
+  text-align: center;
 }
 
 @media only screen and (max-width: 750px) {
