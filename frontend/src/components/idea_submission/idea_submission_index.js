@@ -48,8 +48,8 @@ class IdeaSubmissionIndex extends React.Component {
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
         <div className="title-container idea-submission-timer">
-        <h1 className="title">{this.props.timer}</h1>
-        <h2 className="title-blurb">Enter some ideas!</h2>
+          <h1 className="title">{this.props.timer}</h1>
+          <h2 className="title-blurb">Enter some ideas!</h2>
         </div>
         <form className="idea-submission-form" onSubmit={this.handleIdeaSubmit}>
           <input type="text"
