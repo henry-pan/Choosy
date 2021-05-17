@@ -5,14 +5,18 @@
   width: 95%;
 }
 
+.voting-results-title {
+  margin-bottom: 30px;
+}
+
 .voting-results-list {
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  padding: 0 25px;
   overflow: auto;
   width: 85%;
   max-width: 400px;
-  height: calc(100vh - 340px);
+  height: calc(100vh - 290px);
   margin-top: 10px;
 }
 

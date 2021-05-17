@@ -108,7 +108,8 @@ class Room extends React.Component{
         break;
       case "results": //moves to voting
         this.props.fetchRoomIdeas(this.props.room._id);
-        // this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
+        // send ideas to all users
+        this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
         clearInterval(this.interval);
         this.interval = setInterval(this.countdown, 1000);
         if (roomIdeas.length === 0) {

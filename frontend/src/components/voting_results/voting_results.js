@@ -36,7 +36,7 @@ class VotingResults extends React.Component {
           <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
         </div>
         <div className="voting-results-container">
-          <div className="title-container">
+          <div className="title-container voting-results-title">
             <h1 className="title">Round {this.props.round}</h1>
             <h2 className="title-blurb">{this.state.blurb}{this.props.timer}</h2>
           </div>

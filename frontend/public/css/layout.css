@@ -7,7 +7,8 @@
 html {
   font-family: 'Montserrat', sans-serif;
   color: white;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
@@ -49,7 +50,6 @@ a:hover {
   flex-direction: column;
   width: 740px;
   margin: 0 auto;
-  min-height: 700px;
 }
 
 .nav {
