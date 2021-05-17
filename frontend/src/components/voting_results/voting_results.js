@@ -9,28 +9,25 @@ class VotingResults extends React.Component {
     super(props);
 
     this.state = {
-      timer: 5,
-      blurb: (this.props.ideas.length === 0 ? "Returning back to submissions in ": "Voting starts in ")
+      blurb: (this.props.ideas.length === 0 ? "Returning to submissions in ": "Voting starts in ")
     };
 
     this.interval = 0;
   }
 
   render() {
-    let ideaList;
+    let ideaList = this.props.ideas.map(idea => (
+        <li key={`idea${idea._id}`} className="voting-results-item">
+          <span className="voting-results-votes">{idea.__v}</span>
+          <span className="voting-results-idea">{idea.body}</span>
+        </li>
+      ));
+
+    let ideaContainer;
     if (this.props.ideas.length === 0) {
-      ideaList = <div className="voting-no-ideas"><p>No one submitted ideas!</p><p>Let's try that again!</p></div>
+      ideaContainer = (<div className="voting-no-ideas"><p>No one submitted ideas!</p><p>Let's try that again!</p></div>);
     } else {
-      ideaList = <ul className="voting-results-list">
-            {
-              this.props.ideas.map(idea => (
-                <li key={`idea${idea._id}`} className="voting-results-item">
-                  <span className="voting-results-votes">{idea.__v}</span>
-                  <span className="voting-results-idea">{idea.body}</span>
-                </li>
-              ))
-            }
-          </ul>
+      ideaContainer = (<ul className="voting-results-list">{ideaList}</ul>);
     }
 
     return (
@@ -43,7 +40,7 @@ class VotingResults extends React.Component {
             <h1 className="title">Round {this.props.round}</h1>
             <h2 className="title-blurb">{this.state.blurb}{this.props.timer}</h2>
           </div>
-          {ideaList}
+          {ideaContainer}
         </div>
       </div>
     );

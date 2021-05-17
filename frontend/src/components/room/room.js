@@ -9,6 +9,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./room.css";
 
+const SUBMISSION_TIME = 10;
+const RESULTS_TIME = 7;
+const VOTING_TIME = 8; // TOTAL time, including countdown and after
 
 class Room extends React.Component{
   constructor(props){
@@ -21,7 +24,7 @@ class Room extends React.Component{
       phase: "room",
       round: 1,
       winner: false,
-      timer: 150,
+      timer: SUBMISSION_TIME,
       userIdeas: this.props.userIdeas,
       roomIdeas: this.props.roomIdeas,
       idea_num: 0,
@@ -101,23 +104,23 @@ class Room extends React.Component{
       case "idea-submission": //moves to results
         this.props.fetchUserIdeas(this.props.currentUser.id); // why is it done this way? why not in the idea_submission_index.js file?
         this.props.fetchRoomIdeas(this.props.room._id);
-        this.setState({ phase: "results", timer: 10, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
+        this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
         break;
       case "results": //moves to voting
         this.props.fetchRoomIdeas(this.props.room._id);
-        this.setState({ phase: "results", timer: 10, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
+        // this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
         clearInterval(this.interval);
         this.interval = setInterval(this.countdown, 1000);
         if (roomIdeas.length === 0) {
           this.setState({
             roomIdeas: this.props.roomIdeas,
             phase: "idea-submission",
-            timer: 15
+            timer: SUBMISSION_TIME
           });
         } else {
           this.setState({
             phase: "voting",
-            timer: 13,
+            timer: VOTING_TIME,
             round: this.state.round + 1,
             idea_num: 0
           });
@@ -133,7 +136,7 @@ class Room extends React.Component{
             // scores of remaining ideas should be reset here
             this.setState({ phase: "winner" });
           } else {
-            this.setState({ phase: "results", timer: 13 });
+            this.setState({ phase: "results", timer: RESULTS_TIME });
           }
           this.setState({ roomIdeas: this.state.survivors });
           //if the idea number is less than the num of ideas, reset voting
@@ -143,7 +146,7 @@ class Room extends React.Component{
           this.setState({
             phase: "voting",
             idea_num: this.state.idea_num + 1,
-            timer: 13
+            timer: VOTING_TIME
           });
         }
         break;

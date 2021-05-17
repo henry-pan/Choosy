@@ -13,7 +13,7 @@ class VotingPhase extends React.Component{
     this.appBlurbs = ["Don't worry, we chose for you.", "Tough decision? We've got you."];
 
     this.state = {
-      timer: 10,
+      timer: this.props.timer - 3,
       vote: 0,
       voted: false,
       blurb: this.voteBlurbs[Math.floor(Math.random() * this.voteBlurbs.length)],
@@ -26,6 +26,10 @@ class VotingPhase extends React.Component{
   
   componentDidMount() {
     this.interval = setInterval(this.countdown, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   countdown() {
