@@ -63,6 +63,10 @@
   }
 
   .about-member-links {
+    margin-top: 0;
+  }
+
+  .about-member-links a {
     margin-top: 10px;
   }
 }
