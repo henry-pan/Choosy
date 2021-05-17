@@ -21,7 +21,7 @@ class Room extends React.Component{
       phase: "room",
       round: 1,
       winner: false,
-      timer: 15,
+      timer: 150,
       userIdeas: this.props.userIdeas,
       roomIdeas: this.props.roomIdeas,
       idea_num: 0,

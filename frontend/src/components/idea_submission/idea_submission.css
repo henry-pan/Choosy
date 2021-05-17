@@ -31,7 +31,7 @@
   flex-direction: column-reverse;
   overflow: auto;
   max-width: 400px;
-  max-height: 65vh;
+  height: calc(100vh - 340px);
 }
 
 .idea-item {
@@ -44,6 +44,9 @@
   margin: 10px;
   padding-right: 15px;
   height: 50px;
+}
+
+.idea-item-body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -67,7 +70,7 @@
   }
 
   .idea-btn {
-    margin-top: 19px;
+    margin-top: 20px;
   }
 
   .idea-item {

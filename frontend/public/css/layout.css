@@ -7,6 +7,7 @@
 html {
   font-family: 'Montserrat', sans-serif;
   color: white;
+  overflow: hidden;
 }
 
 body {
@@ -149,6 +150,7 @@ a:hover {
 
 .title-blurb {
   margin-top: 15px;
+  text-align: center;
 }
 
 .divider {

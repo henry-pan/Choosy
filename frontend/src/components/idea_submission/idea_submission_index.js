@@ -19,7 +19,7 @@ class IdeaSubmissionIndex extends React.Component {
         body: "",
         score: 0
       },
-      secondsLeft: 31,
+      secondsLeft: 310,
       update: false
     }
     this.update = this.update.bind(this);
