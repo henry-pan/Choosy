@@ -8,8 +8,6 @@ const http = require('http');
 const server = http.createServer(app);
 
 const io = (module.exports.io = require("socket.io")(server));
-
-
 const socket = require("./src/socket_backend");
 
 
@@ -18,6 +16,17 @@ const users = require('./routes/api/users');
 const ideas = require('./routes/api/ideas');
 const rooms = require('./routes/api/rooms');
 const guests = require('./routes/api/guests');
+
+
+// HTTPS redirect
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production' && (req.headers['x-forwarded-proto'] !== 'https')) {
+    res.redirect('https://' + req.headers.host + req.url);
+  } else {
+    next();
+  }
+});
+
 
 // heroku
 const path = require('path');
