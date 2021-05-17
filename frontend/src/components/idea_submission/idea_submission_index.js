@@ -19,7 +19,7 @@ class IdeaSubmissionIndex extends React.Component {
         body: "",
         score: 0
       },
-      secondsLeft: 31,
+      secondsLeft: 310,
       update: false
     }
     this.update = this.update.bind(this);
@@ -42,6 +42,14 @@ class IdeaSubmissionIndex extends React.Component {
   // should potentially have a componentDidUpdate here that looks for for changes in state made by other users (if that's possible)
 
   render() {
+    let ideas = this.props.userIdeas.map(idea => (
+      <IdeaItem
+      key={`idea${idea._id}`}
+      id={`${idea._id}`}
+      body={idea.body}
+      deleteIdea={this.props.destroyIdea}/>
+    ));
+
     return (
       <div className="content">
         <div className="nav">
@@ -59,18 +67,11 @@ class IdeaSubmissionIndex extends React.Component {
             onChange={this.update()} />
           <button className="link-btn idea-submit-btn">Submit</button>
         </form>
-        <ul className="ideas-list">
-          {
-            this.props.userIdeas.map(idea => (
-                <IdeaItem
-                  key={`idea${idea._id}`}
-                  id={`${idea._id}`}
-                  body={idea.body}
-                  deleteIdea={this.props.destroyIdea}/>
-              )
-            )
-          }
-        </ul>
+        <div className="ideas-list-container">
+          <ul className="ideas-list">
+            {ideas}
+          </ul>
+        </div>
       </div>
     )
   };

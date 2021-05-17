@@ -13,7 +13,7 @@ class VotingPhase extends React.Component{
     this.appBlurbs = ["Don't worry, we chose for you.", "Tough decision? We've got you."];
 
     this.state = {
-      timer: 10,
+      timer: this.props.timer - 3,
       vote: 0,
       voted: false,
       blurb: this.voteBlurbs[Math.floor(Math.random() * this.voteBlurbs.length)],
@@ -28,29 +28,34 @@ class VotingPhase extends React.Component{
     this.interval = setInterval(this.countdown, 1000);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   countdown() {
     this.setState({ timer: this.state.timer - 1});
     if (this.state.timer === 0) {
       clearInterval(this.interval);
-      if (!this.state.voted) {
-        this.setState({
-          vote: Math.floor(Math.random() * 2),
-          voted: true,
-          blurb: this.appBlurbs[Math.floor(Math.random() * this.appBlurbs.length)]
-        });
-      }
-      // Redirect in three seconds.
+      if (!this.state.voted) this.handleAppVote(Math.floor(Math.random() * 2));
     }
   }
 
-  handleVote(vote) {
-    let idea = this.state.idea;
-    if (vote === 1) {
-      // idea.__v += 1;
-      this.props.updateIdea(idea);
-    }
-    this.setState({ idea: idea, vote: vote, voted: true, 
+  handlePlayerVote(vote) {
+    this.setState({ vote: vote, voted: true, 
       blurb: this.playerBlurbs[Math.floor(Math.random() * this.playerBlurbs.length)] });
+    this.processVote(vote);
+  }
+
+  handleAppVote(vote) {
+    this.setState({ vote: vote, voted: true,
+      blurb: this.appBlurbs[Math.floor(Math.random() * this.appBlurbs.length)]
+    });
+    this.processVote(vote);
+  }
+
+  processVote(vote) {
+    let idea = this.state.idea;
+    if (vote === 1) this.props.updateIdea(idea);
   }
 
   render() {
@@ -64,8 +69,8 @@ class VotingPhase extends React.Component{
       }
     } else {
       voteButtons = (<>
-        <button onClick={() => this.handleVote(0)} className="link-btn voting-btn"><FontAwesomeIcon icon={faThumbsDown} /></button>
-        <button onClick={() => this.handleVote(1)} className="link-btn voting-btn"><FontAwesomeIcon icon={faThumbsUp} /></button>
+        <button onClick={() => this.handlePlayerVote(0)} className="link-btn voting-btn"><FontAwesomeIcon icon={faThumbsDown} /></button>
+        <button onClick={() => this.handlePlayerVote(1)} className="link-btn voting-btn"><FontAwesomeIcon icon={faThumbsUp} /></button>
       </>);
     }
 
