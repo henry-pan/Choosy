@@ -19,6 +19,10 @@ const RoomSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'guests'
   },
+  started: {
+    type: Boolean,
+    default: false
+  },
   createdAt: {
     type: Date,
     default: Date.now,

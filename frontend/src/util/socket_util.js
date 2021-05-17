@@ -46,13 +46,6 @@ export const socket = (roomCode, handleRoomStart) => {
     console.log("hi");
   });
 
-  // socket.on('submit username', function (username) {
-  //   var item = document.createElement('li');
-  //   item.textContent = username;
-  //   item.classList.add('room-user-item');
-  //   usernamesEl.appendChild(item);
-  // });
-
   socket.on('error', (error) => {
     alert(error);
   });
