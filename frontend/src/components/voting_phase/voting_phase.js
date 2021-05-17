@@ -47,7 +47,6 @@ class VotingPhase extends React.Component{
   }
 
   handleAppVote(vote) {
-    console.log("App voted", vote);
     this.setState({ vote: vote, voted: true,
       blurb: this.appBlurbs[Math.floor(Math.random() * this.appBlurbs.length)]
     });
