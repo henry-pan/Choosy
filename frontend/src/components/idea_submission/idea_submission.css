@@ -26,12 +26,17 @@
   border-radius: 0 15px 15px 0;
 }
 
+.ideas-list-container {
+  overflow-y: auto;
+  max-width: 400px;
+  width: 90%;
+  height: calc(100vh - 340px);
+}
+
 .ideas-list {
   display: flex;
   flex-direction: column-reverse;
-  overflow: auto;
-  max-width: 400px;
-  height: calc(100vh - 340px);
+  justify-content: flex-end;
 }
 
 .idea-item {
@@ -49,6 +54,8 @@
 .idea-item-body {
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 30px;
+  white-space: nowrap;
 }
 
 .idea-btn {

@@ -13,6 +13,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.25em;
+  text-align: center;
 }
 
 .voting-btn {
