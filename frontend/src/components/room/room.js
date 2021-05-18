@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./room.css";
 
-const SUBMISSION_TIME = 60;
+const SUBMISSION_TIME = 10;
 const RESULTS_TIME = 7;
 const VOTING_TIME = 8; // TOTAL time, including countdown and after
 
@@ -200,18 +200,6 @@ class Room extends React.Component{
     } else {
       hostControls = <p className="room-blurb">Waiting for the host to start...</p>
     }
-    //iterates through showcaseIdeas and adds them all
-    if (this.showcase) {
-      this.showcaseIdeas.forEach(ideaName => {
-        let currentIdea = { 
-          roomId: this.props.room._id,
-          user: this.props.currentUser,
-          body: ideaName,
-          score: 0
-        }
-        this.props.addIdea(currentIdea);
-      })
-    };
     return (
       <div className="content">
         <div className="nav">
@@ -231,6 +219,24 @@ class Room extends React.Component{
         {hostControls}
       </div>
     );
+  }
+
+  showcaseIdeas() {
+    //iterates through showcaseIdeas and adds them all
+    console.log("showcase")
+    if (this.state.showcaseIdeas.length > 0) {
+      console.log(this.state.showcaseIdeas)
+      this.state.showcaseIdeas.forEach(ideaName => {
+        let currentIdea = { 
+          roomId: this.props.room._id,
+          user: this.props.currentUser,
+          body: ideaName,
+          score: 0
+        }
+        this.props.addIdea(currentIdea);
+      })
+      this.setState({ showcaseIdeas: [] })
+    };
   }
 
   showcaseUsers() {
@@ -262,6 +268,7 @@ class Room extends React.Component{
       case "idea-submission":
         return <IdeaSubmissionContainer timer={this.state.timer} room={this.props.room._id}/>
       case "results":
+        if (this.state.showcase) this.showcaseIdeas();
         return <VotingResultsContainer round={this.state.round} timer={this.state.timer}/>
       case "voting":
         return <VotingPhaseContainer key={this.state.idea_num} idea={roomIdeas[this.state.idea_num]} timer={this.state.timer}/>
