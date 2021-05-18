@@ -210,7 +210,8 @@ class Room extends React.Component{
           score: 0
         }
         this.props.addIdea(currentIdea);
-    });
+      })
+    };
     return (
       <div className="content">
         <div className="nav">
