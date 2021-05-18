@@ -2,7 +2,7 @@ import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import AboutContainer from '../about/about_container';
 import Errors from '../errors/errors';
-import Join from '../join/join';
+import JoinContainer from '../join/join_container';
 import { connect } from 'react-redux';
 import "./modal.css";
 
@@ -22,7 +22,7 @@ function Modal({ modal, closeModal, errors, roomCode }) {
       modalClass = "modal-error";
       break;
     case 'join':
-      component = <Join roomCode={roomCode}/>;
+      component = <JoinContainer roomCode={roomCode}/>;
       modalClass = "modal-join";
       break;
     default:

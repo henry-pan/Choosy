@@ -84,7 +84,7 @@ class SplashPage extends React.Component {
 
     return (
       <div className="content">
-        <Modal errors={this.state.errors} />
+        <Modal errors={this.state.errors} roomCode={this.state.roomCode}/>
         <nav className="nav">
           <button className="btn-circle" onClick={() => this.props.openModal("about")}><FontAwesomeIcon icon={faQuestion} /></button>
           {logoutButton}
@@ -102,6 +102,7 @@ class SplashPage extends React.Component {
           <button className="link-btn">Join Room</button>
         </form>
         <button className="link-btn demo-btn">Demo Showcase</button>
+        <button className="link-btn demo-btn" onClick={() => this.props.openModal("join")}>Join Modal</button>
       </div>
     );
   }
