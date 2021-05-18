@@ -144,7 +144,9 @@ class Room extends React.Component{
         // if the idea number is the number of ideas, check for winner
         if (this.state.idea_num >= roomIdeas.length - 1) {
           this.props.fetchRoomIdeas(this.props.room._id)
-            .then(res => {this.setState({ roomIdeas: res.ideas.data})
+            // .then(res => {
+            //   this.setState({ roomIdeas: res.ideas.data });
+              this.setState({ roomIdeas: this.props.roomIdeas });
               let winner = this.newScoreIdeas();
               //if there is a winner go to "winner", else go to "results"
               if (winner) {
@@ -156,7 +158,7 @@ class Room extends React.Component{
               }
               this.setState({ roomIdeas: this.state.survivors });
               //if the idea number is less than the num of ideas, reset voting
-            });
+            // });
         } else {
           clearInterval(this.interval);
           this.interval = setInterval(this.countdown, 1000);
