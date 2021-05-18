@@ -4,6 +4,7 @@ import Modal from "../modal/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 import "./splash.css";
+import SocketClass from "../../util/socket_class";
 
 class SplashPage extends React.Component {
   constructor(props){
@@ -44,18 +45,13 @@ class SplashPage extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    if (this.props.currentUser) this.props.destroyUserIdeas(this.props.currentUser.id);
-
     this.props.fetchRoomByCode(this.state.roomCode)
     .then(res => {
       this.setState({res: res});
-      console.log("res", res);
-      console.log("this.state.res", this.state.res);
       if (res.type === 'RECEIVE_ROOM') {
         if (!this.props.currentUser || Object.keys(this.props.currentUser).length === 0) {
           this.props.openModal("join");
         } else {
-          // add username using sockets
           this.sendRoom(res);
         }
       }

@@ -63,10 +63,11 @@ class Room extends React.Component{
     )
 
     const socket = new SocketClass(this.props.room.code);
-    const form = document.getElementById('form-test');
-    const input = document.getElementById('input-test');
+    if (this.props.currentUser && this.props.currentUser.name !== "Guest"){
+      socket.addUsername(this.props.currentUser.name);
+    }
+
     const start = document.getElementById('start-button');
-    socket.submitUsername(form, input);
     socket.startButton(start);
     socket.loadUsernames();
     socket.startPhases(this.handleRoomStart);
@@ -80,7 +81,7 @@ class Room extends React.Component{
     const roomIdeas = this.state.roomIdeas;
 
     let winner = false;
-    let sortArr = roomIdeas.sort((idea1, idea2) => idea1.__v - idea2.__v); // this should be roomIdeas
+    let sortArr = roomIdeas.sort((idea1, idea2) => idea1.__v - idea2.__v);
     //arr w/out 0's
     let noLosers = sortArr.filter(idea => idea.__v > 0);
     if (noLosers.length > 0) {
@@ -209,10 +210,10 @@ class Room extends React.Component{
         <ul id="usernames" className="room-users-container">
         </ul>
         
-        {this.state.hasNick ? null : <form id="form-test" className="room-username-form" onSubmit={this.submitNick}>
+        {/* {this.state.hasNick ? null : <form id="form-test" className="room-username-form" onSubmit={this.submitNick}>
           <input id="input-test" className="room-username-input" placeholder="Your name" value={this.state.nick} onChange={this.handleInput} autoComplete="off" />
           <button className="link-btn room-username-btn">Join</button>
-        </form>}
+        </form>} */}
         
         {hostControls}
       </div>

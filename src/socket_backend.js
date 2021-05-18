@@ -20,6 +20,16 @@ io.on('connection', (socket) => {
     room.emitUsernames();
   });
 
+  socket.on('add username', (username, code) => {
+    const room = rooms.get(code);
+    if (!room) {
+      socket.emit('error', 'something went wrong with the add username event');
+      return;
+    }
+    room.usernames.push(username);
+    room.emitUsernames();
+  })
+
   // maps room codes to ActiveRoom instance
   socket.on('join room', (code) => {
     let room = rooms.get(code);

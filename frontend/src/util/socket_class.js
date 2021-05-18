@@ -22,6 +22,10 @@ class SocketClass {
     });
   }
 
+  addUsername(name){
+      this.socket.emit('add username', name, this.roomCode);
+  }
+
   startButton(start){
     if (start) {
       start.addEventListener('click', (e) => {

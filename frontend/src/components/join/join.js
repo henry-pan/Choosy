@@ -25,7 +25,7 @@ class Join extends React.Component {
     // const start = document.getElementById('start-button');
     socket.submitUsername(form, input);
     // socket.startButton(start);
-    // socket.loadUsernames();
+    socket.loadUsernames();
     // socket.startPhases(this.handleRoomStart);
     // socket.error();
     // socket.joinRoom();
