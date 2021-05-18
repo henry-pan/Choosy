@@ -143,6 +143,8 @@ class Room extends React.Component{
       case "voting": //moves to either results or winner or more voting
         // if the idea number is the number of ideas, check for winner
         if (this.state.idea_num >= roomIdeas.length - 1) {
+          this.props.fetchRoomIdeas(this.props.room._id);
+          this.setState({ roomIdeas: this.props.roomIdeas });
           let winner = this.newScoreIdeas();
           //if there is a winner go to "winner", else go to "results"
           if (winner) {
