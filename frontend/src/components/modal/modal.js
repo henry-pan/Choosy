@@ -2,6 +2,7 @@ import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import AboutContainer from '../about/about_container';
 import Errors from '../errors/errors';
+import Join from '../join/join';
 import { connect } from 'react-redux';
 import "./modal.css";
 
@@ -19,6 +20,10 @@ function Modal({ modal, closeModal, errors }) {
     case 'error':
       component = <Errors errors={errors} closeModal={closeModal}/>;
       modalClass = "modal-error";
+      break;
+    case 'join':
+      component = <Join closeModal={closeModal}/>;
+      modalClass = "modal-join";
       break;
     default:
       return null;
