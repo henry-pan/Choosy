@@ -34,7 +34,8 @@ class Join extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     this.props.addGuest()
-    .then(() => this.sendRoom(this.props.res));
+    .then(() => this.sendRoom(this.props.res))
+    .then(() => this.props.closeModal());
   }
 
   sendRoom(res) {
