@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 import { openModal } from '../../actions/modal_actions';
-import { addRoom, fetchRoom, fetchRoomByCode } from '../../actions/room_actions';
+import { addRoom, fetchRoomByCode } from '../../actions/room_actions';
 import { addGuest } from '../../actions/guest_actions';
 import { destroyUserIdeas } from '../../actions/idea_actions';
 import SplashPage from './splash_page';
@@ -17,7 +17,6 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
   openModal: modal => dispatch(openModal(modal)),
   addRoom: data => dispatch(addRoom(data)),
-  fetchRoom: roomId => dispatch(fetchRoom(roomId)),
   fetchRoomByCode: code => dispatch(fetchRoomByCode(code)),
   addGuest: () => dispatch(addGuest()),
   destroyUserIdeas: userId => dispatch(destroyUserIdeas(userId))

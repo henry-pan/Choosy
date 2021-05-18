@@ -2,10 +2,11 @@ import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import AboutContainer from '../about/about_container';
 import Errors from '../errors/errors';
+import JoinContainer from '../join/join_container';
 import { connect } from 'react-redux';
 import "./modal.css";
 
-function Modal({ modal, closeModal, errors }) {
+function Modal({ modal, closeModal, errors, roomCode, res }) {
   if (!modal) {
     return null;
   }
@@ -14,11 +15,15 @@ function Modal({ modal, closeModal, errors }) {
   switch (modal) {
     case 'about':
       component = <AboutContainer />;
-      modalClass = "modal-about";
+      modalClass = "modal-child modal-about";
       break;
     case 'error':
       component = <Errors errors={errors} closeModal={closeModal}/>;
-      modalClass = "modal-error";
+      modalClass = "modal-child modal-error";
+      break;
+    case 'join':
+      component = <JoinContainer roomCode={roomCode} res={res}/>;
+      modalClass = "modal-child modal-join";
       break;
     default:
       return null;

@@ -1,0 +1,44 @@
+.join-username-title {
+  margin-bottom: 30px;
+}
+
+.join-username-blurb {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.join-username-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.join-username-input {
+  padding: 15px;
+  font-size: 20px;
+  width: 230px;
+  height: 50px;
+  border-radius: 15px 0 0 15px;
+  border-right: none;
+}
+
+.join-username-input:focus {
+  border-right: none;
+}
+
+.join-username-btn {
+  border-radius: 0 15px 15px 0;
+  width: 100px;
+}
+
+@media only screen and (max-width: 400px) {
+  .join-username-input {
+    width: 200px;
+    font-size: 16px;
+  }
+
+  .join-username-btn {
+    width: 80px;
+  }
+}
