@@ -15,15 +15,15 @@ function Modal({ modal, closeModal, errors, roomCode }) {
   switch (modal) {
     case 'about':
       component = <AboutContainer />;
-      modalClass = "modal-about";
+      modalClass = "modal-child modal-about";
       break;
     case 'error':
       component = <Errors errors={errors} closeModal={closeModal}/>;
-      modalClass = "modal-error";
+      modalClass = "modal-child modal-error";
       break;
     case 'join':
       component = <JoinContainer roomCode={roomCode}/>;
-      modalClass = "modal-join";
+      modalClass = "modal-child modal-join";
       break;
     default:
       return null;
