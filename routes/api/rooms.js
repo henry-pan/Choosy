@@ -63,6 +63,17 @@ router.post("/",
       .then(room => res.json(room));
 })
 
+router.patch("/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+
+    Room
+      .findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .then(room => res.json(room))
+      .catch(err => res.status(400).json(err));
+  }
+);
+
 // I think this lets any signed-in user delete a room
 //room DELETE route. Only the owner can delete the room
 router.delete("/:id",

@@ -4,6 +4,10 @@ export const createRoom = data => {
   return axios.post('/api/rooms/', data)
 }
 
+export const updateRoom = data => {
+  return axios.patch(`/api/rooms/${data._id}`, data)
+}
+
 export const deleteRoom = roomId => {
   return axios.delete(`/api/rooms/${roomId}`)
 }

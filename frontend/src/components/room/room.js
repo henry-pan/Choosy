@@ -1,5 +1,6 @@
 import React from "react";
 import { socket } from "../../util/socket_util";
+import SocketClass from "../../util/socket_class";
 import { Link } from "react-router-dom";
 import IdeaSubmissionContainer from "../idea_submission/idea_submission_container";
 import VotingResultsContainer from "../voting_results/voting_results_container";
@@ -44,6 +45,9 @@ class Room extends React.Component{
     // for figuring out which ideas were persisted. this can be helpful for debugging leaving in the middle of a phase.
     this.props.fetchUserIdeas(this.props.currentUser.id); 
     this.props.fetchRoomIdeas(this.props.room._id);
+    const startedRoom = Object.assign({}, this.props.room);
+    startedRoom.started = true;
+    this.props.patchRoom(startedRoom);
 
     this.setState({ roomIdeas: this.props.roomIdeas, userIdeas: this.props.userIdeas, phase: "idea-submission" });
     // this.setState({ ideas: this.props.roomIdeas, phase: "idea-submission" });
@@ -59,7 +63,17 @@ class Room extends React.Component{
       })
     )
 
-    socket(this.props.room.code, this.handleRoomStart);
+    const socket = new SocketClass(this.props.room.code);
+    const form = document.getElementById('form-test');
+    const input = document.getElementById('input-test');
+    const start = document.getElementById('start-button');
+    socket.submitUsername(form, input);
+    socket.startButton(start);
+    socket.loadUsernames();
+    socket.startPhases(this.handleRoomStart);
+    socket.error();
+    socket.joinRoom();
+    
   }
 
 
@@ -97,7 +111,6 @@ class Room extends React.Component{
   }
 
   getNextPhase(phase){
-    // const userIdeas = this.state.userIdeas;
     const roomIdeas = this.state.roomIdeas;
 
     switch (phase) {
