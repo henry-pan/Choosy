@@ -20,6 +20,7 @@ class Room extends React.Component{
     this.state = {
       showcase: true,
       showcaseUsers: ["Ben", "Henry", "Nat", "Tommy"],
+      showcaseIdeas: ["Wendy's", "Micky D's", "Your Mom", "Taco Bell", "Pizza"],
       hasNick: false,
       phase: "room",
       round: 1,
@@ -199,6 +200,17 @@ class Room extends React.Component{
     } else {
       hostControls = <p className="room-blurb">Waiting for the host to start...</p>
     }
+    //iterates through showcaseIdeas and adds them all
+    if (this.showcase) {
+      this.showcaseIdeas.forEach(ideaName => {
+        let currentIdea = { 
+          roomId: this.props.room._id,
+          user: this.props.currentUser,
+          body: ideaName,
+          score: 0
+        }
+        this.props.addIdea(currentIdea);
+    });
     return (
       <div className="content">
         <div className="nav">
