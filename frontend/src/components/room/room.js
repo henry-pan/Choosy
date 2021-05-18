@@ -1,5 +1,4 @@
 import React from "react";
-import { socket } from "../../util/socket_util";
 import SocketClass from "../../util/socket_class";
 import { Link } from "react-router-dom";
 import IdeaSubmissionContainer from "../idea_submission/idea_submission_container";

@@ -6,7 +6,7 @@ import JoinContainer from '../join/join_container';
 import { connect } from 'react-redux';
 import "./modal.css";
 
-function Modal({ modal, closeModal, errors, roomCode }) {
+function Modal({ modal, closeModal, errors, roomCode, res }) {
   if (!modal) {
     return null;
   }
@@ -22,7 +22,7 @@ function Modal({ modal, closeModal, errors, roomCode }) {
       modalClass = "modal-child modal-error";
       break;
     case 'join':
-      component = <JoinContainer roomCode={roomCode}/>;
+      component = <JoinContainer roomCode={roomCode} res={res}/>;
       modalClass = "modal-child modal-join";
       break;
     default:

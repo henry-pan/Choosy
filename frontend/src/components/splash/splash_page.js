@@ -11,7 +11,8 @@ class SplashPage extends React.Component {
 
     this.state = {
       roomCode: "",
-      errors: {}
+      errors: {},
+      res: {}
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,14 +43,19 @@ class SplashPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     if (this.props.currentUser) this.props.destroyUserIdeas(this.props.currentUser.id);
+
     this.props.fetchRoomByCode(this.state.roomCode)
     .then(res => {
+      this.setState({res: res});
+      console.log("res", res);
+      console.log("this.state.res", this.state.res);
       if (res.type === 'RECEIVE_ROOM') {
         if (!this.props.currentUser || Object.keys(this.props.currentUser).length === 0) {
-          this.props.addGuest()
-            .then(response => this.sendRoom(res));
+          this.props.openModal("join");
         } else {
+          // add username using sockets
           this.sendRoom(res);
         }
       }
@@ -84,7 +90,7 @@ class SplashPage extends React.Component {
 
     return (
       <div className="content">
-        <Modal errors={this.state.errors} roomCode={this.state.roomCode}/>
+        <Modal errors={this.state.errors} roomCode={this.state.roomCode} res={this.state.res} />
         <nav className="nav">
           <button className="btn-circle" onClick={() => this.props.openModal("about")}><FontAwesomeIcon icon={faQuestion} /></button>
           {logoutButton}
@@ -99,10 +105,11 @@ class SplashPage extends React.Component {
         <div className="divider"><p>or</p></div>
         <form className="splash-join-room" onSubmit={this.handleSubmit}>
           <input className="join-input" onChange={this.handleInput("roomCode")} type="text" value={this.state.roomCode} placeholder="Enter room code"/>
-          <button className="link-btn">Join Room</button>
+          {/* <button className="link-btn">Join Room</button> */}
+          <button className="link-btn demo-btn">Join Modal</button>
         </form>
         <button className="link-btn demo-btn">Demo Showcase</button>
-        <button className="link-btn demo-btn" onClick={() => this.props.openModal("join")}>Join Modal</button>
+        
       </div>
     );
   }
