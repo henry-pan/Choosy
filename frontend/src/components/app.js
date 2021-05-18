@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthRoute } from '../util/route_util';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import SplashContainer from './splash/splash_container';
 import LoginFormContainer from './session/login_form_container';
@@ -22,6 +22,7 @@ const App = () => (
       <Route exact path="/result" component={VotingResultsContainer} />
       <Route exact path="/winner" component={VotingWinnerContainer} />
       <Route exact path="/" component={SplashContainer} />
+      <Redirect to="/" />
     </Switch>
   </>
 );
