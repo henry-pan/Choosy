@@ -61,18 +61,18 @@ class Room extends React.Component{
         roomId: (this.props.match.params._id)
       })
     )
-
+    
     const socket = new SocketClass(this.props.room.code);
-    if (this.props.currentUser && this.props.currentUser.name !== "Guest"){
+    socket.joinRoom();
+    socket.error();
+    if (this.props.currentUser.name !== "Guest" ){
       socket.addUsername(this.props.currentUser.name);
     }
 
+    socket.startPhases(this.handleRoomStart);
     const start = document.getElementById('start-button');
     socket.startButton(start);
     socket.loadUsernames();
-    socket.startPhases(this.handleRoomStart);
-    socket.error();
-    socket.joinRoom();
     
   }
 
@@ -221,7 +221,6 @@ class Room extends React.Component{
   }
 
   showcaseUsers() {
-    console.log(this.state.showcaseUsers)
     return (
       <ul>
       {this.state.showcaseUsers.map(username => (

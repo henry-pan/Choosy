@@ -32,7 +32,6 @@ export const socket = (roomCode, handleRoomStart) => {
   socket.on('load usernames', (usernames) => {
     const usernamesEl = document.getElementById('usernames');
     usernamesEl.innerHTML = '';
-    console.log(usernames);
     for (const username of usernames) {
       var item = document.createElement('li');
       item.textContent = username;
@@ -43,7 +42,6 @@ export const socket = (roomCode, handleRoomStart) => {
 
   socket.on('start phases', () => {
     handleRoomStart();
-    console.log("hi");
   });
 
   socket.on('error', (error) => {
