@@ -68,7 +68,7 @@ router.patch("/:id",
   (req, res) => {
 
     Room
-      .findByIdAndUpdate(req.params.id, { $inc: { __v: 1 } }, { new: true })
+      .findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then(room => res.json(room))
       .catch(err => res.status(400).json(err));
   }

@@ -45,6 +45,9 @@ class Room extends React.Component{
     // for figuring out which ideas were persisted. this can be helpful for debugging leaving in the middle of a phase.
     this.props.fetchUserIdeas(this.props.currentUser.id); 
     this.props.fetchRoomIdeas(this.props.room._id);
+    const startedRoom = Object.assign({}, this.props.room);
+    startedRoom.started = true;
+    this.props.patchRoom(startedRoom);
 
     this.setState({ roomIdeas: this.props.roomIdeas, userIdeas: this.props.userIdeas, phase: "idea-submission" });
     // this.setState({ ideas: this.props.roomIdeas, phase: "idea-submission" });
@@ -108,7 +111,6 @@ class Room extends React.Component{
   }
 
   getNextPhase(phase){
-    // const userIdeas = this.state.userIdeas;
     const roomIdeas = this.state.roomIdeas;
 
     switch (phase) {

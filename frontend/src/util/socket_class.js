@@ -15,7 +15,6 @@ class SocketClass {
   submitUsername(form, input){
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      console.log(this.input);
       if (input.value) {
         this.socket.emit('submit username', input.value, this.roomCode);
         input.value = '';
@@ -36,7 +35,6 @@ class SocketClass {
     this.socket.on('load usernames', (usernames) => {
       const usernamesEl = document.getElementById('usernames');
       usernamesEl.innerHTML = '';
-      console.log(usernames);
       for (const username of usernames) {
         var item = document.createElement('li');
         item.textContent = username;
