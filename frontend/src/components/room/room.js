@@ -271,7 +271,11 @@ class Room extends React.Component{
         if (this.state.showcase) this.showcaseIdeas();
         return <VotingResultsContainer round={this.state.round} timer={this.state.timer}/>
       case "voting":
-        return <VotingPhaseContainer key={this.state.idea_num} idea={roomIdeas[this.state.idea_num]} timer={this.state.timer}/>
+        return <VotingPhaseContainer
+          key={this.state.idea_num}
+          idea={roomIdeas[this.state.idea_num]}
+          timer={this.state.timer}
+          showcaseIdeas={this.state.showcaseIdeas}/>
       case "winner":
         return <VotingWinnerContainer idea={roomIdeas[0]}/>
       default:
