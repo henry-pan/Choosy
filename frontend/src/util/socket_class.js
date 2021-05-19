@@ -4,7 +4,7 @@ class SocketClass {
   constructor(roomCode) {
     this.roomCode = roomCode;
 
-    let socketURL = "127.0.0.1:5000";
+    let socketURL = "localhost:5000";
     if (process.env.NODE_ENV === "production") {
       socketURL =
         process.env.REACT_APP_SOCKET_URL || "https://choosyapp.herokuapp.com/";
