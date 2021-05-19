@@ -14,7 +14,11 @@ io.on('connection', (socket) => {
     if (!room) {
       socket.emit('error', 'something went wrong with the guest username event');
       return;
-    }
+    } 
+    // else if (room.started) {
+    //   socket.emit('error', 'the room has already started!');
+    //   return;
+    // }
 
     room.usernames.push(username);
     room.emitUsernames();
