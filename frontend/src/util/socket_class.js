@@ -12,11 +12,11 @@ class SocketClass {
     this.socket = io(socketURL, { transports: ["websocket"] });
   }
 
-  submitUsername(form, input){
+  guestUsername(form, input){
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (input.value) {
-        this.socket.emit('submit username', input.value, this.roomCode);
+        this.socket.emit('guest username', input.value, this.roomCode);
         input.value = '';
       }
     });

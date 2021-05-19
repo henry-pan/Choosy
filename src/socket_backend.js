@@ -9,10 +9,10 @@ const rooms = new Map();
 io.on('connection', (socket) => {
 
   // emits the username
-  socket.on('submit username', (username, code) => {
+  socket.on('guest username', (username, code) => {
     const room = rooms.get(code);
     if (!room) {
-      socket.emit('error', 'something went wrong with the submit username event');
+      socket.emit('error', 'something went wrong with the guest username event');
       return;
     }
 

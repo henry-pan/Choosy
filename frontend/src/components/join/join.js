@@ -23,7 +23,7 @@ class Join extends React.Component {
     const form = document.getElementById('join-form-modal');
     const input = document.getElementById('join-input-modal');
     input.focus();
-    socket.submitUsername(form, input);
+    socket.guestUsername(form, input);
     // socket.startButton(start);
     socket.loadUsernames();
     // socket.startPhases(this.handleRoomStart);
