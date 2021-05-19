@@ -20,7 +20,6 @@ class Room extends React.Component{
     this.state = {
       showcase: true,
       showcaseUsers: ["Ben", "Henry", "Nat", "Tommy"],
-      hasNick: false,
       phase: "room",
       round: 1,
       winner: false,
@@ -28,16 +27,13 @@ class Room extends React.Component{
       userIdeas: this.props.userIdeas,
       roomIdeas: this.props.roomIdeas,
       idea_num: 0,
-      survivors: [],
-      nick: (this.props.currentUser.name === "Guest" ? "" : this.props.currentUser.name)
+      survivors: []
     };
     this.interval = 0;
     this.countdown = this.countdown.bind(this);
     this.handleRoomStart = this.handleRoomStart.bind(this);
     this.newScoreIdeas = this.newScoreIdeas.bind(this);
-    this.submitNick = this.submitNick.bind(this);
     this.getNextPhase  = this.getNextPhase.bind(this);
-    this.handleInput = this.handleInput.bind(this);
   }
 
   handleRoomStart() {
@@ -182,15 +178,6 @@ class Room extends React.Component{
     }
   }
 
-  submitNick(){
-    this.setState({
-      hasNick: true
-    });
-  }
-
-  handleInput(e) {
-    this.setState({ nick: e.target.value });
-  }
 
   room() {
     let hostControls;
@@ -212,12 +199,6 @@ class Room extends React.Component{
         {/* {!this.state.showcase ? null : this.showcaseUsers()} */}
         <ul id="usernames" className="room-users-container">
         </ul>
-        
-        {/* {this.state.hasNick ? null : <form id="form-test" className="room-username-form" onSubmit={this.submitNick}>
-          <input id="input-test" className="room-username-input" placeholder="Your name" value={this.state.nick} onChange={this.handleInput} autoComplete="off" />
-          <button className="link-btn room-username-btn">Join</button>
-        </form>} */}
-        
         {hostControls}
       </div>
     );
