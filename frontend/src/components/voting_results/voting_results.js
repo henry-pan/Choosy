@@ -16,6 +16,7 @@ class VotingResults extends React.Component {
   }
 
   render() {
+    console.log("VOTING RESULT PROPS", this.props);
     let ideaList = this.props.ideas.map(idea => (
         <li key={`idea${idea._id}`} className="voting-results-item">
           <span className="voting-results-votes">{idea.__v}</span>
