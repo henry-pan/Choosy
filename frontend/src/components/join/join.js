@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { Redirect }
 import SocketClass from "../../util/socket_class";
@@ -11,7 +11,7 @@ class Join extends React.Component {
     super(props);
 
     this.state = {
-      nick: (this.props.currentUser ? this.props.currentUser.name : "")
+      nick: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,7 +22,7 @@ class Join extends React.Component {
     const socket = new SocketClass(this.props.roomCode);
     const form = document.getElementById('join-form-modal');
     const input = document.getElementById('join-input-modal');
-    // const start = document.getElementById('start-button');
+    input.focus();
     socket.submitUsername(form, input);
     // socket.startButton(start);
     socket.loadUsernames();
