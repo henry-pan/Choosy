@@ -53,6 +53,13 @@ class VotingPhase extends React.Component{
     this.processVote(vote);
   }
 
+  showcaseVoting() {
+    let numVotes = Math.floor(Math.random() * 4);
+    for (let i = 0; i < numVotes; i++) {
+      this.processVote(1)
+    }
+  }
+
   processVote(vote) {
     let idea = this.state.idea;
     if (vote === 1) this.props.updateIdea(idea);
