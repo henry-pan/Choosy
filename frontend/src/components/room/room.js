@@ -29,16 +29,13 @@ class Room extends React.Component{
       userIdeas: this.props.userIdeas,
       roomIdeas: this.props.roomIdeas,
       idea_num: 0,
-      survivors: [],
-      nick: (this.props.currentUser.name === "Guest" ? "" : this.props.currentUser.name)
+      survivors: []
     };
     this.interval = 0;
     this.countdown = this.countdown.bind(this);
     this.handleRoomStart = this.handleRoomStart.bind(this);
     this.newScoreIdeas = this.newScoreIdeas.bind(this);
-    this.submitNick = this.submitNick.bind(this);
     this.getNextPhase  = this.getNextPhase.bind(this);
-    this.handleInput = this.handleInput.bind(this);
   }
 
   handleRoomStart() {
@@ -144,19 +141,22 @@ class Room extends React.Component{
       case "voting": //moves to either results or winner or more voting
         // if the idea number is the number of ideas, check for winner
         if (this.state.idea_num >= roomIdeas.length - 1) {
-          this.props.fetchRoomIdeas(this.props.room._id);
-          this.setState({ roomIdeas: this.props.roomIdeas });
-          let winner = this.newScoreIdeas();
-          //if there is a winner go to "winner", else go to "results"
-          if (winner) {
-            clearInterval(this.interval);
-            // scores of remaining ideas should be reset here
-            this.setState({ phase: "winner" });
-          } else {
-            this.setState({ phase: "results", timer: RESULTS_TIME });
-          }
-          this.setState({ roomIdeas: this.state.survivors });
-          //if the idea number is less than the num of ideas, reset voting
+          this.props.fetchRoomIdeas(this.props.room._id)
+            // .then(res => {
+            //   this.setState({ roomIdeas: res.ideas.data });
+              this.setState({ roomIdeas: this.props.roomIdeas });
+              let winner = this.newScoreIdeas();
+              //if there is a winner go to "winner", else go to "results"
+              if (winner) {
+                clearInterval(this.interval);
+                // scores of remaining ideas should be reset here
+                this.setState({ phase: "winner" });
+              } else {
+                this.setState({ phase: "results", timer: RESULTS_TIME });
+              }
+              this.setState({ roomIdeas: this.state.survivors });
+              //if the idea number is less than the num of ideas, reset voting
+            // });
         } else {
           clearInterval(this.interval);
           this.interval = setInterval(this.countdown, 1000);
@@ -180,15 +180,6 @@ class Room extends React.Component{
     }
   }
 
-  submitNick(){
-    this.setState({
-      hasNick: true
-    });
-  }
-
-  handleInput(e) {
-    this.setState({ nick: e.target.value });
-  }
 
   room() {
     let hostControls;
@@ -210,12 +201,6 @@ class Room extends React.Component{
         {/* {!this.state.showcase ? null : this.showcaseUsers()} */}
         <ul id="usernames" className="room-users-container">
         </ul>
-        
-        {/* {this.state.hasNick ? null : <form id="form-test" className="room-username-form" onSubmit={this.submitNick}>
-          <input id="input-test" className="room-username-input" placeholder="Your name" value={this.state.nick} onChange={this.handleInput} autoComplete="off" />
-          <button className="link-btn room-username-btn">Join</button>
-        </form>} */}
-        
         {hostControls}
       </div>
     );

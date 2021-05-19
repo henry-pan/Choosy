@@ -70,6 +70,7 @@ class VotingPhase extends React.Component{
 
   render() {
     if (!this.props.currentUser) return null;
+    if (!this.props.idea) return null;
     let voteButtons;
     if (this.state.voted) {
       if (this.state.vote === 0) {
