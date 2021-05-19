@@ -5,6 +5,7 @@ class ActiveRoom {
     this.code = code;
     this.usernames = [];
     this.dummyUsernames = ['ben', 'henry', 'nat', 'tommy'];
+    this.started = false;
   }
 
   addSocket(socket) {
@@ -17,6 +18,11 @@ class ActiveRoom {
 
   emitUsernames(){
     this.emit('load usernames', this.usernames);
+  }
+
+  startPhases(){
+    this.emit('start phases');
+    this.started = true;
   }
 
 }

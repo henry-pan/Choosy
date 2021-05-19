@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
       return;
     }
 
-    room.emit('start phases');
+    room.startPhases();
   });
 
   socket.on('disconnect', () => {
