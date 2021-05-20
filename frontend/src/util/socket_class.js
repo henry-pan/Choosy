@@ -4,7 +4,7 @@ class SocketClass {
   constructor(roomCode) {
     this.roomCode = roomCode;
 
-    let socketURL = "127.0.0.1:5000";
+    let socketURL = "localhost:5000";
     if (process.env.NODE_ENV === "production") {
       socketURL =
         process.env.REACT_APP_SOCKET_URL || "https://choosyapp.herokuapp.com/";
@@ -12,11 +12,11 @@ class SocketClass {
     this.socket = io(socketURL, { transports: ["websocket"] });
   }
 
-  submitUsername(form, input){
+  guestUsername(form, input){
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (input.value) {
-        this.socket.emit('submit username', input.value, this.roomCode);
+        this.socket.emit('guest username', input.value, this.roomCode);
         input.value = '';
       }
     });
@@ -38,6 +38,7 @@ class SocketClass {
   loadUsernames(){
     this.socket.on('load usernames', (usernames) => {
       const usernamesEl = document.getElementById('usernames');
+      if (!usernamesEl) return;
       usernamesEl.innerHTML = '';
       for (const username of usernames) {
         var item = document.createElement('li');
