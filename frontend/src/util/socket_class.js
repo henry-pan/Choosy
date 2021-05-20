@@ -12,11 +12,11 @@ class SocketClass {
     this.socket = io(socketURL, { transports: ["websocket"] });
   }
 
-  submitUsername(form, input){
+  guestUsername(form, input){
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (input.value) {
-        this.socket.emit('submit username', input.value, this.roomCode);
+        this.socket.emit('guest username', input.value, this.roomCode);
         input.value = '';
       }
     });
@@ -38,6 +38,7 @@ class SocketClass {
   loadUsernames(){
     this.socket.on('load usernames', (usernames) => {
       const usernamesEl = document.getElementById('usernames');
+      if (!usernamesEl) return;
       usernamesEl.innerHTML = '';
       for (const username of usernames) {
         var item = document.createElement('li');
