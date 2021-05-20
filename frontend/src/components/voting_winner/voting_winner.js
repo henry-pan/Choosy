@@ -9,7 +9,8 @@ class VotingWinner extends React.Component {
     super(props);
 
     this.winnerBlurbs = ["One idea stood above all, and it was...",
-    "Everyone liked...", "Congratulations to...", "We have a winner..."];
+    "Everyone liked...", "Congratulations to...", "We have a winner...",
+    "This is it! The winning idea..."];
 
     this.state = {
       blurb: this.winnerBlurbs[Math.floor(Math.random() * this.winnerBlurbs.length)]
