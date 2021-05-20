@@ -260,7 +260,8 @@ class Room extends React.Component{
           key={this.state.idea_num}
           idea={roomIdeas[this.state.idea_num]}
           timer={this.state.timer}
-          showcaseIdeas={this.state.showcaseIdeas}/>
+          showcaseIdeas={this.state.showcaseIdeas}
+          showcase={this.state.showcase}/>
       case "winner":
         return <VotingWinnerContainer idea={roomIdeas[0]}/>
       default:
