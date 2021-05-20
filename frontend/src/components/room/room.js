@@ -69,7 +69,6 @@ class Room extends React.Component{
     const start = document.getElementById('start-button');
     socket.startButton(start);
     socket.loadUsernames();
-    
   }
 
 

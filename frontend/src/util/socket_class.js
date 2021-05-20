@@ -38,6 +38,7 @@ class SocketClass {
   loadUsernames(){
     this.socket.on('load usernames', (usernames) => {
       const usernamesEl = document.getElementById('usernames');
+      if (!usernamesEl) return;
       usernamesEl.innerHTML = '';
       for (const username of usernames) {
         var item = document.createElement('li');

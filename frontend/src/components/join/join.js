@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { Redirect }
 import SocketClass from "../../util/socket_class";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./join.css"
@@ -24,7 +23,6 @@ class Join extends React.Component {
     const input = document.getElementById('join-input-modal');
     input.focus();
     socket.guestUsername(form, input);
-    socket.loadUsernames();
     socket.error();
   }
 
