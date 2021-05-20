@@ -17,7 +17,7 @@ class VotingPhase extends React.Component{
       vote: 0,
       voted: false,
       blurb: this.voteBlurbs[Math.floor(Math.random() * this.voteBlurbs.length)],
-      idea: this.props.idea,
+      idea: this.props.idea
     };
 
     this.interval = 0;
