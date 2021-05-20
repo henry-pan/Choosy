@@ -10,9 +10,8 @@
   font-size: 60px;
   margin-bottom: 120px;
   max-width: 85%;
-  min-height: 70px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-align: center;
+  overflow-wrap: break-word;
 }
 
 .voting-winner-blurb {
@@ -26,6 +25,10 @@
   .voting-winner-item {
     font-size: 40px;
     margin-bottom: 100px;
-    min-height: 60px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .voting-winner-item {
+    font-size: 28px;
   }
 }

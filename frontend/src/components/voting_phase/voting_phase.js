@@ -8,9 +8,9 @@ class VotingPhase extends React.Component{
   constructor(props){
     super(props);
 
-    this.voteBlurbs = ["What do you think of...", "Thoughts on...", "Hot or not...", "Perhaps..."];
-    this.playerBlurbs = ["Good choice!", "An excellent decision.", "Nice."];
-    this.appBlurbs = ["Don't worry, we chose for you.", "Tough decision? We've got you."];
+    this.voteBlurbs = ["What do you think of...", "Thoughts on...", "Hot or not...", "Perhaps...", "Choose..."];
+    this.playerBlurbs = ["Good choice!", "An excellent decision.", "Nice one.", "Great call!"];
+    this.appBlurbs = ["Don't worry, we chose for you.", "Tough decision? We've got you.", "That was tricky, huh? We'll take this one."];
 
     this.state = {
       timer: this.props.timer - 3,
