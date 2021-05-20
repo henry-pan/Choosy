@@ -119,13 +119,18 @@ class Room extends React.Component{
     switch (phase) {
       case "idea-submission": //moves to results
         console.log("IDEA SUBMISSION PHASE");
+        // debugger
         this.props.fetchUserIdeas(this.props.currentUser.id); // why is it done this way? why not in the idea_submission_index.js file?
         this.props.fetchRoomIdeas(this.props.room._id);
-        this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
+        // this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
+
+        setTimeout(() => {
+          this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
+        }, 800);
         break;
       case "results": //moves to voting
         console.log("RESULTS PHASE");
-        this.props.fetchRoomIdeas(this.props.room._id);
+        this.props.fetchRoomIdeas(this.props.room._id)
           // .then(res => {
             this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
           // })
