@@ -12,7 +12,6 @@ import "./room.css";
 const SUBMISSION_TIME = 10;
 const RESULTS_TIME = 7;
 const VOTING_TIME = 8; // TOTAL time, including countdown and after
-// const CULL_TIME = 2;
 
 class Room extends React.Component{
   constructor(props){
@@ -75,8 +74,6 @@ class Room extends React.Component{
 
   newScoreIdeas() {
     const roomIdeas = this.state.roomIdeas;
-    console.log("FIRST STATE IN NEWSCOREIDEAS", this.state);
-    // debugger
     let sortArr = roomIdeas.sort((idea1, idea2) => idea1.__v - idea2.__v);
     //arr w/out 0's
     let noLosers = sortArr.filter(idea => idea.__v > 0);
@@ -96,13 +93,11 @@ class Room extends React.Component{
         this.props.destroyIdea(sortArr[i]._id);
       }
     }
-    // let survivors = sortArr.slice(deleteIndex, sortArr.length);
+
     this.props.fetchRoomIdeas(this.props.room._id)
       .then(res => {
         this.setState({ roomIdeas: res.ideas.data});
       })
-    console.log("2ND STATE", this.state);
-    // debugger
   }
 
   //separate sorted array into separate arrays by score
@@ -118,22 +113,15 @@ class Room extends React.Component{
 
     switch (phase) {
       case "idea-submission": //moves to results
-        console.log("IDEA SUBMISSION PHASE");
-        // debugger
         this.props.fetchUserIdeas(this.props.currentUser.id); // why is it done this way? why not in the idea_submission_index.js file?
         this.props.fetchRoomIdeas(this.props.room._id);
-        // this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
-
         setTimeout(() => {
           this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
         }, 800);
         break;
       case "results": //moves to voting
-        console.log("RESULTS PHASE");
         this.props.fetchRoomIdeas(this.props.room._id)
-          // .then(res => {
-            this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
-          // })
+        this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
         // send ideas to all users
         clearInterval(this.interval);
         this.interval = setInterval(this.countdown, 1000);
@@ -152,37 +140,12 @@ class Room extends React.Component{
           });
         }
         break;
-      // case "cull":
-      //   console.log("CULL");
-      //   // if (this.props.room.host !== this.props.currentUser.id) {
-      //   //   //wait for 2 seconds
-
-      //   // }
-      //   clearInterval(this.interval);
-      //   this.interval = setInterval(this.countdown, 1000);
-      //   this.props.fetchRoomIdeas(this.props.room._id)
-      //     .then(res => {
-      //       this.setState({ roomIdeas: res.ideas.data });
-      //       this.newScoreIdeas();
-
-      //       if (this.state.winner) {
-      //         clearInterval(this.interval);
-      //         // scores of remaining ideas should be reset here
-      //         this.setState({ phase: "winner" });
-      //       } else {
-      //         this.setState({ phase: "results", timer: RESULTS_TIME });
-      //       }
-      //     });
-      //   break;
       case "voting": //moves to either results or winner or more voting
         // if the idea number is the number of ideas, check for winner
         if (this.state.idea_num >= roomIdeas.length - 1) {
-          console.log("VOTING PHASE");
           this.props.fetchRoomIdeas(this.props.room._id)
             .then(res => {
-              // this.setState({ roomIdeas: res.ideas.data, phase: "cull", timer: CULL_TIME });
               this.setState({ roomIdeas: res.ideas.data });
-              // this.newScoreIdeas();
               // if there is a winner go to "winner", else go to "results"
               if (this.state.winner) {
                 clearInterval(this.interval);
@@ -268,8 +231,6 @@ class Room extends React.Component{
   }
 
   render() {
-    // console.log("ROOM PROPS", this.props);
-    // const roomIdeas = this.state.roomIdeas;
     const roomIdeas = this.state.roomIdeas.sort(
       (idea1, idea2) => Date.parse(idea1.date) - Date.parse(idea2.date)
     );
@@ -282,16 +243,11 @@ class Room extends React.Component{
         return <IdeaSubmissionContainer timer={this.state.timer} room={this.props.room._id}/>
       case "results":
         return <VotingResultsContainer round={this.state.round} timer={this.state.timer}/>
-      // case "cull":
-      //   return null;
       case "voting":
         return <VotingPhaseContainer 
                 key={this.state.idea_num} 
                 idea={roomIdeas[this.state.idea_num]} 
                 timer={this.state.timer}
-                roomIdeas={this.state.roomIdeas}
-                idea_num={this.state.idea_num}
-                newScoreIdeas={this.newScoreIdeas}
                />
       case "winner":
         return <VotingWinnerContainer idea={roomIdeas[0]}/>

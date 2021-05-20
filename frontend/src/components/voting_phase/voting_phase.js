@@ -18,8 +18,6 @@ class VotingPhase extends React.Component{
       voted: false,
       blurb: this.voteBlurbs[Math.floor(Math.random() * this.voteBlurbs.length)],
       idea: this.props.idea,
-      roomIdeas: this.props.roomIdeas,
-      idea_num: this.props.idea_num
     };
 
     this.interval = 0;
@@ -40,9 +38,6 @@ class VotingPhase extends React.Component{
       clearInterval(this.interval);
       if (!this.state.voted) this.handleAppVote(Math.floor(Math.random() * 2));
     }
-    // if (this.state.timer === 0 && this.state.idea_num >= this.state.roomIdeas.length - 1) {
-    //   this.props.newScoreIdeas();
-    // }
   }
 
   handlePlayerVote(vote) {
@@ -60,7 +55,7 @@ class VotingPhase extends React.Component{
 
   processVote(vote) {
     let idea = this.state.idea;
-    if (vote === 1) this.props.updateIdea(idea).then(res => console.log(res));
+    if (vote === 1) this.props.updateIdea(idea);
   }
 
   render() {
