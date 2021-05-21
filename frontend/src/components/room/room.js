@@ -31,33 +31,18 @@ class Room extends React.Component{
       idea_num: 0,
     };
     this.interval = 0;
+    this.isHost = (this.props.room.host === this.props.currentUser.id);
     this.countdown = this.countdown.bind(this);
     this.handleRoomStart = this.handleRoomStart.bind(this);
     this.newScoreIdeas = this.newScoreIdeas.bind(this);
     this.getNextPhase  = this.getNextPhase.bind(this);
   }
 
-  handleRoomStart() {
-    // for figuring out which ideas were persisted. this can be helpful for debugging leaving in the middle of a phase.
-    this.props.fetchUserIdeas(this.props.currentUser.id); 
-    this.props.fetchRoomIdeas(this.props.room._id);
-    const startedRoom = Object.assign({}, this.props.room);
-    startedRoom.started = true;
-    this.props.patchRoom(startedRoom);
-
-    this.setState({ roomIdeas: this.props.roomIdeas, userIdeas: this.props.userIdeas, phase: "idea-submission" });
-    // this.setState({ ideas: this.props.roomIdeas, phase: "idea-submission" });
-    // I don't think adding ideas from either the user's old ideas or the old room ideas is the best solution long-term -- do we even need to pre-populate?
-    this.interval = setInterval(this.countdown, 1000);
-  }
-
   componentDidMount(){
     this.props.fetchRoom(this.props.match.params._id)
     .then(
-      this.setState({
-        roomId: (this.props.match.params._id)
-      })
-    )
+      this.setState({ roomId: this.props.match.params._id })
+    );
     
     const socket = new SocketClass(this.props.room.code);
     socket.joinRoom();
@@ -73,6 +58,24 @@ class Room extends React.Component{
   }
 
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+
+  handleRoomStart() {
+    // for figuring out which ideas were persisted. this can be helpful for debugging leaving in the middle of a phase.
+    this.props.fetchUserIdeas(this.props.currentUser.id); 
+    this.props.fetchRoomIdeas(this.props.room._id);
+    const startedRoom = Object.assign({}, this.props.room);
+    startedRoom.started = true;
+    this.props.patchRoom(startedRoom);
+
+    this.setState({ roomIdeas: this.props.roomIdeas, userIdeas: this.props.userIdeas, phase: "idea-submission" });
+    this.interval = setInterval(this.countdown, 1000);
+  }
+
+
   newScoreIdeas() {
     const roomIdeas = this.state.roomIdeas;
     let sortArr = roomIdeas.sort((idea1, idea2) => idea1.__v - idea2.__v);
@@ -80,9 +83,9 @@ class Room extends React.Component{
     let noLosers = sortArr.filter(idea => idea.__v > 0);
     if (noLosers.length > 0) {
       sortArr = noLosers;
-      for (let i = 0; i < roomIdeas.length; i++) { // should be roomIdeas
-        if (roomIdeas[i].__v === 0 && this.props.room.host === this.props.currentUser.id) {
-          this.props.destroyIdea(roomIdeas[i]._id); // should be roomIdeas
+      for (let i = 0; i < roomIdeas.length; i++) {
+        if (roomIdeas[i].__v === 0 && this.isHost) {
+          this.props.destroyIdea(roomIdeas[i]._id);
         }
       }
     }
@@ -90,24 +93,24 @@ class Room extends React.Component{
 
     let deleteIndex = Math.floor(sortArr.length / 2);
     for (let i = 0; i < deleteIndex; i++) {
-      if (this.props.room.host === this.props.currentUser.id) {
-        this.props.destroyIdea(sortArr[i]._id);
-      }
+      if (this.isHost) this.props.destroyIdea(sortArr[i]._id);
     }
 
-    this.props.fetchRoomIdeas(this.props.room._id)
+    if (this.isHost) {
+      this.props.fetchRoomIdeas(this.props.room._id)
       .then(res => {
-        this.setState({ roomIdeas: res.ideas.data});
-      })
+        this.setState({ roomIdeas: res.ideas.data });
+      });
+    } else {
+      setTimeout(()=>{
+        this.props.fetchRoomIdeas(this.props.room._id)
+        .then(res => {
+          this.setState({ roomIdeas: res.ideas.data });
+        })
+      }, 500);
+    }
   }
 
-  //separate sorted array into separate arrays by score
-  //randomize arrays
-  //concat arrays
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
 
   getNextPhase(phase){
     const roomIdeas = this.state.roomIdeas;
@@ -116,6 +119,7 @@ class Room extends React.Component{
       case "idea-submission": //moves to results
         this.props.fetchUserIdeas(this.props.currentUser.id); // why is it done this way? why not in the idea_submission_index.js file?
         this.props.fetchRoomIdeas(this.props.room._id);
+
         setTimeout(() => {
           this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
         }, 800);
@@ -123,22 +127,13 @@ class Room extends React.Component{
       case "results": //moves to voting
         this.props.fetchRoomIdeas(this.props.room._id)
         this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
-        // send ideas to all users
+
         clearInterval(this.interval);
         this.interval = setInterval(this.countdown, 1000);
         if (roomIdeas.length === 0) {
-          this.setState({
-            roomIdeas: this.props.roomIdeas,
-            phase: "idea-submission",
-            timer: SUBMISSION_TIME
-          });
+          this.setState({ phase: "idea-submission", timer: SUBMISSION_TIME, roomIdeas: this.props.roomIdeas });
         } else {
-          this.setState({
-            phase: "voting",
-            timer: VOTING_TIME,
-            round: this.state.round + 1,
-            idea_num: 0
-          });
+          this.setState({ phase: "voting", timer: VOTING_TIME, round: this.state.round + 1, idea_num: 0 });
         }
         break;
       case "voting": //moves to either results or winner or more voting
@@ -160,11 +155,7 @@ class Room extends React.Component{
         } else {
           clearInterval(this.interval);
           this.interval = setInterval(this.countdown, 1000);
-          this.setState({
-            phase: "voting",
-            idea_num: this.state.idea_num + 1,
-            timer: VOTING_TIME
-          });
+          this.setState({ phase: "voting", timer: VOTING_TIME, idea_num: this.state.idea_num + 1 });
         }
         break;
       default:
@@ -172,7 +163,7 @@ class Room extends React.Component{
     }
   }
 
-  //NOTE: when tweaking timer, remember to change local timer as well
+
   countdown() {
     this.setState({ timer: this.state.timer - 1 });
     if (this.state.timer === 0) {
@@ -192,7 +183,7 @@ class Room extends React.Component{
 
   room() {
     let hostControls;
-    if (this.props.room.host === this.props.currentUser.id) {
+    if (this.isHost) {
       hostControls = <>
       <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>
       <button className="link-btn" id="start-button">Start</button>
@@ -243,11 +234,13 @@ class Room extends React.Component{
     )
   }
 
+
   resetIdeas() {
     this.setState({
       ideaList: []
     });
   }
+
 
   render() {
     const roomIdeas = this.state.roomIdeas.sort(
@@ -255,6 +248,7 @@ class Room extends React.Component{
     );
 
     if (!this.props.currentUser) return null;
+
     switch (this.state.phase) {
       case "room":
         return this.room();
