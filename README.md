@@ -21,11 +21,11 @@ Choosy is built using the MERN stack, with the voting and logic on the frontend,
 
 * Create Room
 
-Users who are logged in can create a room. Other users can join this room. In the room lobby, users can enter their name and also see other people who have joined the room.
+Users who are logged in can create a room, which has a room code. Other users can enter this room code on the front page to join the room, regardless of logged in status. If a guest isn't logged in, they are prompted to enter a name. In the room lobby, all users can see other people who have joined the room.
 
 * Idea Submissions
 
-Users can submit ideas during the submission phase. The user's personal idea list is then combined with other users' personal idea list to form one big list of ideas.
+Users are given one minute to submit any ideas during the submission phase. The user's submissions list is then combined with other users' submissions list to form one big list of ideas.
 
 * Idea Voting
 
@@ -35,10 +35,6 @@ Users can vote on ideas they like or dislike. Users only have a limited time to 
 
 Only the ideas that receive the most votes are allowed to move on to the next round. Half of all ideas are culled every round. This ensures there will always be one idea left, helping indecisive people pick ideas.
 
-# Planned Features
-* Joining a room as a guest using room codes
-* Synchronize user ideas with the server
-* Saving lists after a session
 
 # Contributors
 * **Henry Pan** - Team Lead
