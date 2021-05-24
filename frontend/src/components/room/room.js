@@ -18,6 +18,7 @@ class Room extends React.Component{
     super(props);
     
     this.state = {
+      showcase: false,
       showcaseUsers: ["Ben", "Henry", "Nat", "Tommy"],
       showcaseIdeas: ["Wendy's", "Micky D's", "Your Mom", "Taco Bell", "Pizza"],
       hasNick: false,
@@ -48,6 +49,10 @@ class Room extends React.Component{
     socket.error();
     if (this.props.currentUser.name !== "Guest" ){
       socket.addUsername(this.props.currentUser.name);
+    }
+
+    if (this.props.location.state) {
+      this.setState({ showcase: true })
     }
 
     socket.startPhases(this.handleRoomStart);
