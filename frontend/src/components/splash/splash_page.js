@@ -70,7 +70,6 @@ class SplashPage extends React.Component {
   }
 
   handleDemo() {
-    debugger
     if (!this.props.loggedIn){
       this.props.processForm({ email: "demo@demo.com", password: "123456" })
     } else {
