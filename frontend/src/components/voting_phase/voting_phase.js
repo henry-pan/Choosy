@@ -35,6 +35,7 @@ class VotingPhase extends React.Component{
   countdown() {
     this.setState({ timer: this.state.timer - 1});
     if (this.state.timer === 0) {
+      if (this.props.showcase) {this.showcaseVoting();}
       clearInterval(this.interval);
       if (!this.state.voted) this.handleAppVote(Math.floor(Math.random() * 2));
     }
@@ -51,6 +52,16 @@ class VotingPhase extends React.Component{
       blurb: this.appBlurbs[Math.floor(Math.random() * this.appBlurbs.length)]
     });
     this.processVote(vote);
+  }
+
+  showcaseVoting() {
+      let numVotes = Math.floor(Math.random() * 3) + 1;
+    if (this.props.showcaseIdeas.includes(this.props.idea.body)) {
+      numVotes = Math.floor(Math.random() * 4);
+    }
+    for (let i = 0; i < numVotes; i++) {
+      this.processVote(1)
+    }
   }
 
   processVote(vote) {

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./room.css";
 
-const SUBMISSION_TIME = 60;
+const SUBMISSION_TIME = 10;
 const RESULTS_TIME = 7;
 const VOTING_TIME = 8; // TOTAL time, including countdown and after
 
@@ -18,7 +18,10 @@ class Room extends React.Component{
     super(props);
     
     this.state = {
+      showcase: false,
       showcaseUsers: ["Ben", "Henry", "Nat", "Tommy"],
+      showcaseIdeas: ["Wendy's", "Micky D's", "Your Mom", "Taco Bell", "Pizza"],
+      hasNick: false,
       phase: "room",
       round: 1,
       winner: false,
@@ -46,6 +49,10 @@ class Room extends React.Component{
     socket.error();
     if (this.props.currentUser.name !== "Guest" ){
       socket.addUsername(this.props.currentUser.name);
+    }
+
+    if (this.props.location.state) {
+      this.setState({ showcase: true })
     }
 
     socket.startPhases(this.handleRoomStart);
@@ -209,12 +216,29 @@ class Room extends React.Component{
     );
   }
 
+  showcaseIdeas() {
+    //iterates through showcaseIdeas and adds them all
+    console.log("showcase")
+    if (this.state.showcaseIdeas.length > 0) {
+      console.log(this.state.showcaseIdeas)
+      this.state.showcaseIdeas.forEach(ideaName => {
+        let currentIdea = { 
+          roomId: this.props.room._id,
+          user: this.props.currentUser,
+          body: ideaName,
+          score: 0
+        }
+        this.props.addIdea(currentIdea);
+      })
+      this.setState({ showcaseIdeas: [] })
+    };
+  }
 
   showcaseUsers() {
     return (
       <ul>
       {this.state.showcaseUsers.map(username => (
-        <li className="room-user-item">{username}</li>
+        <li key={this.state.showcaseUsers.indexOf(username)} className="room-user-item">{username}</li>
       ))}
       </ul>
     )
@@ -241,13 +265,15 @@ class Room extends React.Component{
       case "idea-submission":
         return <IdeaSubmissionContainer timer={this.state.timer} room={this.props.room._id}/>
       case "results":
+        if (this.state.showcase) this.showcaseIdeas();
         return <VotingResultsContainer round={this.state.round} timer={this.state.timer}/>
       case "voting":
-        return <VotingPhaseContainer 
-                key={this.state.idea_num} 
-                idea={roomIdeas[this.state.idea_num]} 
-                timer={this.state.timer}
-               />
+        return <VotingPhaseContainer
+          key={this.state.idea_num}
+          idea={roomIdeas[this.state.idea_num]}
+          timer={this.state.timer}
+          showcaseIdeas={this.state.showcaseIdeas}
+          showcase={this.state.showcase}/>
       case "winner":
         return <VotingWinnerContainer idea={roomIdeas[0]}/>
       default:
