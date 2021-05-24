@@ -238,7 +238,7 @@ class Room extends React.Component{
     return (
       <ul>
       {this.state.showcaseUsers.map(username => (
-        <li className="room-user-item">{username}</li>
+        <li key={this.state.showcaseUsers.indexOf(username)} className="room-user-item">{username}</li>
       ))}
       </ul>
     )

@@ -72,15 +72,19 @@ class SplashPage extends React.Component {
   handleDemo() {
     if (!this.props.loggedIn){
       this.props.processForm({ email: "demo@demo.com", password: "123456" })
-    } else {
-      this.props.destroyUserIdeas(this.props.currentUser.id);
-      this.props.addRoom()
-        .then(res => this.props.history.push({
-          pathname: `/room/${res.roomId.data._id}`,
-          state: { showcase: true }
-        })
-        );
-    }
+        .then(() => { this.joinShowcase() }
+        )
+    } else { this.joinShowcase() }
+  }
+
+  joinShowcase() {
+    this.props.destroyUserIdeas(this.props.currentUser.id);
+    this.props.addRoom()
+      .then(res => this.props.history.push({
+        pathname: `/room/${res.roomId.data._id}`,
+        state: { showcase: true }
+      })
+      );
   }
 
   render() {
@@ -117,7 +121,7 @@ class SplashPage extends React.Component {
           <input className="join-input" onChange={this.handleInput("roomCode")} type="text" value={this.state.roomCode} placeholder="Enter room code"/>
           <button className="link-btn">Join Room</button>
         </form>
-        <button className="link-btn demo-btn" onClick={this.handleDemo}>{this.props.loggedIn ? "Demo Start" : "Demo Log In"}</button>
+        <button className="link-btn demo-btn" onClick={this.handleDemo}>Demo Showcase</button>
         
       </div>
     );
