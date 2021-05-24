@@ -4,7 +4,6 @@ import Modal from "../modal/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 import "./splash.css";
-import SocketClass from "../../util/socket_class";
 
 class SplashPage extends React.Component {
   constructor(props){
@@ -18,6 +17,7 @@ class SplashPage extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.createRoom = this.createRoom.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
 
     this.sendRoom = this.sendRoom.bind(this);
     this.roomId = "";
@@ -69,6 +69,20 @@ class SplashPage extends React.Component {
     .then(res => this.props.history.push(`/room/${res.roomId.data._id}`));
   }
 
+  handleDemo() {
+    if (!this.props.loggedIn){
+      this.props.processForm({ email: "demo@demo.com", password: "123456" })
+    } else {
+      this.props.destroyUserIdeas(this.props.currentUser.id);
+      this.props.addRoom()
+        .then(res => this.props.history.push({
+          pathname: `/room/${res.roomId.data._id}`,
+          state: { showcase: true }
+        })
+        );
+    }
+  }
+
   render() {
     let logoutButton;
     let authButtons;
@@ -103,7 +117,7 @@ class SplashPage extends React.Component {
           <input className="join-input" onChange={this.handleInput("roomCode")} type="text" value={this.state.roomCode} placeholder="Enter room code"/>
           <button className="link-btn">Join Room</button>
         </form>
-        <button className="link-btn demo-btn">Demo Showcase</button>
+        <button className="link-btn demo-btn" onClick={this.handleDemo}>{this.props.loggedIn ? "Demo Start" : "Demo Log In"}</button>
         
       </div>
     );

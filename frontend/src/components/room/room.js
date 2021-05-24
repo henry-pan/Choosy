@@ -18,7 +18,6 @@ class Room extends React.Component{
     super(props);
     
     this.state = {
-      showcase: true,
       showcaseUsers: ["Ben", "Henry", "Nat", "Tommy"],
       showcaseIdeas: ["Wendy's", "Micky D's", "Your Mom", "Taco Bell", "Pizza"],
       hasNick: false,
@@ -183,6 +182,7 @@ class Room extends React.Component{
 
   room() {
     let hostControls;
+
     if (this.isHost) {
       hostControls = <>
       <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>
@@ -191,6 +191,11 @@ class Room extends React.Component{
     } else {
       hostControls = <p className="room-blurb">Waiting for the host to start...</p>
     }
+
+    let showcase;
+    if (this.props.location.state) {
+      !this.props.location.state.showcase ? showcase = null : showcase = this.showcaseUsers()
+    }
     return (
       <div className="content">
         <div className="nav">
@@ -198,7 +203,7 @@ class Room extends React.Component{
         </div>
         <h1 className="title room-code">{this.props.room.code}</h1>
         <h2 className="room-subtitle">Room Code</h2>
-        {/* {!this.state.showcase ? null : this.showcaseUsers()} */}
+        {showcase}
         <ul id="usernames" className="room-users-container">
         </ul>
         {hostControls}
