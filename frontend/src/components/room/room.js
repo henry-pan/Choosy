@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./room.css";
 
-const SUBMISSION_TIME = 10;
+const SUBMISSION_TIME = 60;
 const RESULTS_TIME = 7;
 const VOTING_TIME = 8; // TOTAL time, including countdown and after
 
@@ -20,7 +20,7 @@ class Room extends React.Component{
     this.state = {
       showcase: false,
       showcaseUsers: ["Ben", "Henry", "Nat", "Tommy"],
-      showcaseIdeas: ["Wendy's", "Micky D's", "Your Mom", "Taco Bell", "Pizza"],
+      showcaseIdeas: ["Wendy's", "McDonald's", "Gas Station Sushi", "Pho King", "Taco Bell", "Costco Pizza"],
       hasNick: false,
       phase: "room",
       round: 1,
@@ -217,28 +217,25 @@ class Room extends React.Component{
   }
 
   showcaseIdeas() {
-    //iterates through showcaseIdeas and adds them all
-    console.log("showcase")
     if (this.state.showcaseIdeas.length > 0) {
-      console.log(this.state.showcaseIdeas)
       this.state.showcaseIdeas.forEach(ideaName => {
         let currentIdea = { 
           roomId: this.props.room._id,
           user: this.props.currentUser,
           body: ideaName,
           score: 0
-        }
+        };
         this.props.addIdea(currentIdea);
-      })
-      this.setState({ showcaseIdeas: [] })
-    };
+      });
+      this.setState({ showcaseIdeas: [] });
+    }
   }
 
   showcaseUsers() {
     return (
       <ul>
-      {this.state.showcaseUsers.map(username => (
-        <li key={this.state.showcaseUsers.indexOf(username)} className="room-user-item">{username}</li>
+      {this.state.showcaseUsers.map((username, i) => (
+        <li key={`${i}-${username}`} className="room-user-item">{username}</li>
       ))}
       </ul>
     )
@@ -246,9 +243,7 @@ class Room extends React.Component{
 
 
   resetIdeas() {
-    this.setState({
-      ideaList: []
-    });
+    this.setState({ ideaList: [] });
   }
 
 

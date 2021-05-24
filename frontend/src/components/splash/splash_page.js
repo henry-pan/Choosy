@@ -34,7 +34,7 @@ class SplashPage extends React.Component {
 
   componentDidMount() {
     if (this.props.currentUser && this.props.currentUser.name === "Guest") {
-      this.props.logout()
+      this.props.logout();
     }
   }
 
@@ -72,9 +72,10 @@ class SplashPage extends React.Component {
   handleDemo() {
     if (!this.props.loggedIn){
       this.props.processForm({ email: "demo@demo.com", password: "123456" })
-        .then(() => { this.joinShowcase() }
-        )
-    } else { this.joinShowcase() }
+        .then(() => this.joinShowcase());
+    } else {
+      this.joinShowcase();
+    }
   }
 
   joinShowcase() {
@@ -83,8 +84,7 @@ class SplashPage extends React.Component {
       .then(res => this.props.history.push({
         pathname: `/room/${res.roomId.data._id}`,
         state: { showcase: true }
-      })
-      );
+      }));
   }
 
   render() {
