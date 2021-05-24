@@ -35,7 +35,7 @@ class VotingPhase extends React.Component{
   countdown() {
     this.setState({ timer: this.state.timer - 1});
     if (this.state.timer === 0) {
-      if (this.props.showcase) {this.showcaseVoting();}
+      if (this.props.showcase) this.showcaseVoting();
       clearInterval(this.interval);
       if (!this.state.voted) this.handleAppVote(Math.floor(Math.random() * 2));
     }

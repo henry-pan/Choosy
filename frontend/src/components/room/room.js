@@ -20,7 +20,7 @@ class Room extends React.Component{
     this.state = {
       showcase: false,
       showcaseUsers: ["Ben", "Henry", "Nat", "Tommy"],
-      showcaseIdeas: ["Wendy's", "McDonald's", "Gas Station Sushi", "Pho King", "Taco Bell", "Costco Pizza"],
+      showcaseIdeas: ["McDonald's", "Gas Station Sushi", "Pho King", "Taco Bell", "Costco Pizza", "Chipotle", "In-N-Out Burger"],
       hasNick: false,
       phase: "room",
       round: 1,
@@ -51,9 +51,7 @@ class Room extends React.Component{
       socket.addUsername(this.props.currentUser.name);
     }
 
-    if (this.props.location.state) {
-      this.setState({ showcase: true })
-    }
+    if (this.props.location.state) this.setState({ showcase: true });
 
     socket.startPhases(this.handleRoomStart);
     const start = document.getElementById('start-button');
@@ -185,37 +183,6 @@ class Room extends React.Component{
   }
 
 
-  room() {
-    let hostControls;
-
-    if (this.isHost) {
-      hostControls = <>
-      <p className="room-blurb">Click Start when everyone has joined to begin the submissions phase!</p>
-      <button className="link-btn" id="start-button">Start</button>
-      </>
-    } else {
-      hostControls = <p className="room-blurb">Waiting for the host to start...</p>
-    }
-
-    let showcase;
-    if (this.props.location.state) {
-      !this.props.location.state.showcase ? showcase = null : showcase = this.showcaseUsers()
-    }
-    return (
-      <div className="content">
-        <div className="nav">
-          <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
-        </div>
-        <h1 className="title room-code">{this.props.room.code}</h1>
-        <h2 className="room-subtitle">Room Code</h2>
-        {showcase}
-        <ul id="usernames" className="room-users-container">
-        </ul>
-        {hostControls}
-      </div>
-    );
-  }
-
   showcaseIdeas() {
     if (this.state.showcaseIdeas.length > 0) {
       this.state.showcaseIdeas.forEach(ideaName => {
@@ -231,19 +198,54 @@ class Room extends React.Component{
     }
   }
 
+
   showcaseUsers() {
     return (
-      <ul>
-      {this.state.showcaseUsers.map((username, i) => (
+      this.state.showcaseUsers.map((username, i) => (
         <li key={`${i}-${username}`} className="room-user-item">{username}</li>
-      ))}
-      </ul>
-    )
+      ))
+    );
   }
 
 
   resetIdeas() {
     this.setState({ ideaList: [] });
+  }
+
+
+  room() {
+    let showcase = null;
+    let controlBlurb = "Click Start when everyone has joined to begin the submissions phase!";
+    if (this.props.location.state) {
+      if (this.props.location.state.showcase) {
+        showcase = this.showcaseUsers();
+        controlBlurb = "You and four friends need to pick a restaurant to go to. Press Start and enter some restaurant ideas!"
+      }
+    }
+
+    let hostControls;
+    if (this.isHost) {
+      hostControls = <>
+      <p className="room-blurb">{controlBlurb}</p>
+      <button className="link-btn" id="start-button">Start</button>
+      </>
+    } else {
+      hostControls = <p className="room-blurb">Waiting for the host to start...</p>
+    }
+
+    return (
+      <div className="content">
+        <div className="nav">
+          <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
+        </div>
+        <h1 className="title room-code">{this.props.room.code}</h1>
+        <h2 className="room-subtitle">Room Code</h2>
+        <ul id="usernames" className="room-users-container">
+        {showcase}
+        </ul>
+        {hostControls}
+      </div>
+    );
   }
 
 
