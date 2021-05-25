@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SocketClass from "../../util/socket_class";
+import ClientSocket from "../../util/socket_util";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./join.css"
 
@@ -18,7 +18,7 @@ class Join extends React.Component {
   }
 
   componentDidMount(){
-    const socket = new SocketClass(this.props.roomCode);
+    const socket = new ClientSocket(this.props.roomCode);
     const form = document.getElementById('join-form-modal');
     const input = document.getElementById('join-input-modal');
     input.focus();

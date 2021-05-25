@@ -30,6 +30,17 @@ io.on('connection', (socket) => {
     room.emitUsernames();
   })
 
+  socket.on('join showcase', (code) => {
+    let room = rooms.get(code);
+    if (!room) {
+      room = new ActiveRoom(code);
+      rooms.set(code, room);
+    }
+
+    room.addSocket(socket);
+    room.emitShowcaseUsernames();
+  });
+
   // maps room codes to ActiveRoom instance
   socket.on('join room', (code) => {
     let room = rooms.get(code);

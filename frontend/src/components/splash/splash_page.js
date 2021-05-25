@@ -71,7 +71,7 @@ class SplashPage extends React.Component {
 
   handleDemo() {
     if (!this.props.loggedIn){
-      this.props.processForm({ email: "demo@demo.com", password: "123456" })
+      this.props.addGuest()
         .then(() => this.joinShowcase());
     } else {
       this.joinShowcase();

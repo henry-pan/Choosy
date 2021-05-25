@@ -4,7 +4,7 @@ class ActiveRoom {
   constructor(code) {
     this.code = code;
     this.usernames = [];
-    this.dummyUsernames = ['ben', 'henry', 'nat', 'tommy'];
+    this.showcaseUsernames = ['DemoUser', 'Ben', 'Henry', 'Nat', 'Sou'];
     this.started = false;
   }
 
@@ -17,6 +17,12 @@ class ActiveRoom {
   }
 
   emitUsernames(){
+    this.emit('load usernames', this.usernames);
+  }
+
+  emitShowcaseUsernames(){
+    this.usernames.push(...this.showcaseUsernames);
+
     this.emit('load usernames', this.usernames);
   }
 

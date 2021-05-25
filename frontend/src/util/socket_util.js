@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 
-class SocketClass {
+class ClientSocket {
   constructor(roomCode) {
     this.roomCode = roomCode;
 
@@ -64,6 +64,10 @@ class SocketClass {
   joinRoom(){
     this.socket.emit('join room', this.roomCode);
   }
+
+  joinShowcase(){
+    this.socket.emit('join showcase', this.roomCode);
+  }
 }
 
-export default SocketClass;
+export default ClientSocket;

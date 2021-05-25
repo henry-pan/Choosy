@@ -1,5 +1,5 @@
 import React from "react";
-import SocketClass from "../../util/socket_class";
+import SocketClass from "../../util/socket_util";
 import { Link } from "react-router-dom";
 import IdeaSubmissionContainer from "../idea_submission/idea_submission_container";
 import VotingResultsContainer from "../voting_results/voting_results_container";
@@ -45,13 +45,17 @@ class Room extends React.Component{
     );
     
     const socket = new SocketClass(this.props.room.code);
-    socket.joinRoom();
+    if (this.props.location.state) {
+      this.setState({ showcase: true });
+      socket.joinShowcase();
+    } else {
+      socket.joinRoom();
+    }
+    
     socket.error();
     if (this.props.currentUser.name !== "Guest" ){
       socket.addUsername(this.props.currentUser.name);
     }
-
-    if (this.props.location.state) this.setState({ showcase: true });
 
     socket.startPhases(this.handleRoomStart);
     const start = document.getElementById('start-button');
@@ -218,7 +222,7 @@ class Room extends React.Component{
     let controlBlurb = "Click Start when everyone has joined to begin the submissions phase!";
     if (this.props.location.state) {
       if (this.props.location.state.showcase) {
-        showcase = this.showcaseUsers();
+        // showcase = this.showcaseUsers();
         controlBlurb = "You and four friends need to pick a restaurant to go to. Press Start and enter some restaurant ideas!"
       }
     }
