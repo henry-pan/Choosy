@@ -12,7 +12,7 @@ export const subDivideArrByScore = (arr) => {
   let randArr = [];
   let startI = 0;
   for (let i = 0; i < newArr.length; i++) {
-    if ((newArr[i].__v < newArr[i + 1].__v || newArr[i + 1] === undefined)) {
+    if ((newArr[i].score < newArr[i + 1].score || newArr[i + 1] === undefined)) {
       randArr = randArr.concat([newArr.slice(startI, i + 1)]);
       startI = i + 1;
     };

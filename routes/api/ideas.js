@@ -83,12 +83,14 @@ router.post("/",
         newIdea = new Idea({
           user: req.user.id,
           roomId: req.body.roomId,
-          body: req.body.body
+          body: req.body.body,
+          score: 0
         });
       } else {
         newIdea = new Idea({
           user: req.user.id,
-          body: req.body.body
+          body: req.body.body,
+          score: 0
         });
       }
       newIdea.save()
@@ -115,7 +117,7 @@ router.patch("/:id",
     };
 
     Idea
-      .findByIdAndUpdate(req.params.id, {$inc: { __v: 1 }}, { new: true })
+      .findByIdAndUpdate(req.params.id, {$inc: { score: 1 }}, { new: true })
       .then(idea => res.json(idea))
       .catch(err => res.status(400).json(err));
   }
