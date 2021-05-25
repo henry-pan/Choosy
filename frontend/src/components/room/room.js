@@ -49,7 +49,7 @@ class Room extends React.Component{
     if (this.props.location.state) {
       this.setState({ showcase: true });
       socket.joinShowcase();
-      this.props.loggedIn ? socket.addUsername(this.props.currentUser.name) : socket.signedOutShowcaseUsername()
+      this.props.currentUser.name !== "Guest" ? socket.addUsername(this.props.currentUser.name) : socket.signedOutShowcaseUsername()
     } else {
       socket.joinRoom();
       if (this.props.currentUser.name !== "Guest") {
