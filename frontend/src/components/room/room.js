@@ -49,7 +49,7 @@ class Room extends React.Component{
     if (this.props.location.state) {
       this.setState({ showcase: true });
       socket.joinShowcase();
-      socket.signedOutShowcaseUsername();
+      this.props.loggedIn ? socket.addUsername(this.props.currentUser.name) : socket.signedOutShowcaseUsername()
     } else {
       socket.joinRoom();
       if (this.props.currentUser.name !== "Guest") {
@@ -57,7 +57,7 @@ class Room extends React.Component{
       }
     }
     
-    
+
     socket.startPhases(this.handleRoomStart);
     const start = document.getElementById('start-button');
     socket.startButton(start);
