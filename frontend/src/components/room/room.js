@@ -122,12 +122,14 @@ class Room extends React.Component{
     switch (phase) {
       case "idea-submission": //moves to results
         if (this.state.showcase) this.addShowcaseIdeas();
-        this.props.fetchUserIdeas(this.props.currentUser.id);
-        this.props.fetchRoomIdeas(this.props.room._id);
+        setTimeout(() => {
+          this.props.fetchUserIdeas(this.props.currentUser.id);
+          this.props.fetchRoomIdeas(this.props.room._id);
+        }, 500);
 
         setTimeout(() => {
           this.setState({ phase: "results", timer: RESULTS_TIME, userIdeas: this.props.userIdeas, roomIdeas: this.props.roomIdeas });
-        }, 800);
+        }, 1300);
         break;
       case "results": //moves to voting
         this.props.fetchRoomIdeas(this.props.room._id)
@@ -251,7 +253,7 @@ class Room extends React.Component{
     );
 
     if (!this.props.currentUser) return null;
-    if (this.state.timer === 0 && this.state.phase !== "winner") return this.loading();
+    if (this.state.timer <= 0 && this.state.phase !== "winner") return this.loading();
 
     switch (this.state.phase) {
       case "room":
