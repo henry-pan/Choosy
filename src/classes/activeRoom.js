@@ -22,7 +22,6 @@ class ActiveRoom {
 
   emitShowcaseUsernames(){
     this.usernames.push(...this.showcaseUsernames);
-
     this.emit('load usernames', this.showcaseUsernames);
   }
 

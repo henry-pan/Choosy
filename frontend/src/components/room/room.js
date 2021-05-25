@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./room.css";
 
-const SUBMISSION_TIME = 60;
+const SUBMISSION_TIME = 10;
 const RESULTS_TIME = 7;
 const VOTING_TIME = 8; // TOTAL time, including countdown and after
 
@@ -232,6 +232,18 @@ class Room extends React.Component{
     );
   }
 
+  
+  loading() {
+    return (
+      <div className="content">
+        <div className="nav">
+          <Link className="btn-circle" to="/"><FontAwesomeIcon icon={faTimes} /></Link>
+        </div>
+        <h1 className="title loading">Loading...</h1>
+      </div>
+    );
+  }
+
 
   render() {
     const roomIdeas = this.state.roomIdeas.sort(
@@ -239,6 +251,7 @@ class Room extends React.Component{
     );
 
     if (!this.props.currentUser) return null;
+    if (this.state.timer === 0 && this.state.phase !== "winner") return this.loading();
 
     switch (this.state.phase) {
       case "room":

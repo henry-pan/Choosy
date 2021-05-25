@@ -153,6 +153,10 @@ a:hover {
   text-align: center;
 }
 
+.loading {
+  margin-top: 100px;
+}
+
 .divider {
   margin: 1.5em auto;
   position: relative;

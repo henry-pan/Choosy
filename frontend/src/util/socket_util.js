@@ -23,7 +23,7 @@ class ClientSocket {
   }
 
   addUsername(name){
-      this.socket.emit('add username', name, this.roomCode);
+    this.socket.emit('add username', name, this.roomCode);
   }
 
   signedOutShowcaseUsername(){
