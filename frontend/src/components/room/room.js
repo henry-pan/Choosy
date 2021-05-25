@@ -1,5 +1,5 @@
 import React from "react";
-import SocketClass from "../../util/socket_class";
+import SocketClass from "../../util/socket_util";
 import { Link } from "react-router-dom";
 import IdeaSubmissionContainer from "../idea_submission/idea_submission_container";
 import VotingResultsContainer from "../voting_results/voting_results_container";
@@ -19,9 +19,7 @@ class Room extends React.Component{
     
     this.state = {
       showcase: false,
-      showcaseUsers: ["Ben", "Henry", "Nat", "Tommy"],
       showcaseIdeas: ["McDonald's", "Gas Station Sushi", "Pho King", "Taco Bell", "Costco Pizza", "Chipotle", "In-N-Out Burger"],
-      hasNick: false,
       phase: "room",
       round: 1,
       winner: false,
@@ -45,13 +43,17 @@ class Room extends React.Component{
     );
     
     const socket = new SocketClass(this.props.room.code);
-    socket.joinRoom();
     socket.error();
-    if (this.props.currentUser.name !== "Guest" ){
-      socket.addUsername(this.props.currentUser.name);
+    if (this.props.location.state) {
+      this.setState({ showcase: true });
+      socket.joinShowcase();
+      this.props.currentUser.name !== "Guest" ? socket.addUsername(this.props.currentUser.name) : socket.signedOutShowcaseUsername()
+    } else {
+      socket.joinRoom();
+      if (this.props.currentUser.name !== "Guest") {
+        socket.addUsername(this.props.currentUser.name);
+      }
     }
-
-    if (this.props.location.state) this.setState({ showcase: true });
 
     socket.startPhases(this.handleRoomStart);
     const start = document.getElementById('start-button');
@@ -197,25 +199,14 @@ class Room extends React.Component{
   }
 
 
-  showcaseUsers() {
-    return (
-      this.state.showcaseUsers.map((username, i) => (
-        <li key={`${i}-${username}`} className="room-user-item">{username}</li>
-      ))
-    );
-  }
-
-
   resetIdeas() {
     this.setState({ ideaList: [] });
   }
 
 
   room() {
-    let showcase = null;
     let controlBlurb = "Click Start when everyone has joined to begin the submissions phase!";
     if (this.props.location.state && this.props.location.state.showcase) {
-      showcase = this.showcaseUsers();
       controlBlurb = "You and four friends need to pick a restaurant to go to. Press Start and enter some restaurant ideas!"
     }
 
@@ -235,7 +226,6 @@ class Room extends React.Component{
         <h1 className="title room-code">{this.props.room.code}</h1>
         <h2 className="room-subtitle">Room Code</h2>
         <ul id="usernames" className="room-users-container">
-          {showcase}
         </ul>
         {hostControls}
       </div>
