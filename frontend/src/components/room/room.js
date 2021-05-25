@@ -214,21 +214,17 @@ class Room extends React.Component{
   room() {
     let showcase = null;
     let controlBlurb = "Click Start when everyone has joined to begin the submissions phase!";
-    if (this.props.location.state) {
-      if (this.props.location.state.showcase) {
-        showcase = this.showcaseUsers();
-        controlBlurb = "You and four friends need to pick a restaurant to go to. Press Start and enter some restaurant ideas!"
-      }
+    if (this.props.location.state && this.props.location.state.showcase) {
+      showcase = this.showcaseUsers();
+      controlBlurb = "You and four friends need to pick a restaurant to go to. Press Start and enter some restaurant ideas!"
     }
 
-    let hostControls;
+    let hostControls = <p className="room-blurb">Waiting for the host to start...</p>;
     if (this.isHost) {
       hostControls = <>
-      <p className="room-blurb">{controlBlurb}</p>
-      <button className="link-btn" id="start-button">Start</button>
+        <p className="room-blurb">{controlBlurb}</p>
+        <button className="link-btn" id="start-button">Start</button>
       </>
-    } else {
-      hostControls = <p className="room-blurb">Waiting for the host to start...</p>
     }
 
     return (
