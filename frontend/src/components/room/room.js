@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./room.css";
 
-const SUBMISSION_TIME = 60;
+const SUBMISSION_TIME = 10;
 const RESULTS_TIME = 7;
 const VOTING_TIME = 8; // TOTAL time, including countdown and after
 
@@ -120,6 +120,7 @@ class Room extends React.Component{
     switch (phase) {
       case "idea-submission": //moves to results
         this.props.fetchUserIdeas(this.props.currentUser.id); // why is it done this way? why not in the idea_submission_index.js file?
+        if (this.state.showcase) this.addShowcaseIdeas();
         this.props.fetchRoomIdeas(this.props.room._id);
 
         setTimeout(() => {
@@ -183,19 +184,16 @@ class Room extends React.Component{
   }
 
 
-  showcaseIdeas() {
-    if (this.state.showcaseIdeas.length > 0) {
-      this.state.showcaseIdeas.forEach(ideaName => {
-        let currentIdea = { 
-          roomId: this.props.room._id,
-          user: this.props.currentUser,
-          body: ideaName,
-          score: 0
-        };
-        this.props.addIdea(currentIdea);
-      });
-      this.setState({ showcaseIdeas: [] });
-    }
+  addShowcaseIdeas() {
+    this.state.showcaseIdeas.forEach(ideaName => {
+      let currentIdea = { 
+        roomId: this.props.room._id,
+        user: this.props.currentUser,
+        body: ideaName,
+        score: 0
+      };
+      this.props.addIdea(currentIdea);
+    });
   }
 
 
@@ -241,7 +239,7 @@ class Room extends React.Component{
         <h1 className="title room-code">{this.props.room.code}</h1>
         <h2 className="room-subtitle">Room Code</h2>
         <ul id="usernames" className="room-users-container">
-        {showcase}
+          {showcase}
         </ul>
         {hostControls}
       </div>
@@ -262,7 +260,6 @@ class Room extends React.Component{
       case "idea-submission":
         return <IdeaSubmissionContainer timer={this.state.timer} room={this.props.room._id}/>
       case "results":
-        if (this.state.showcase) this.showcaseIdeas();
         return <VotingResultsContainer round={this.state.round} timer={this.state.timer}/>
       case "voting":
         return <VotingPhaseContainer
