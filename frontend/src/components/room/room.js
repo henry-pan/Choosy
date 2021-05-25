@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./room.css";
 
-const SUBMISSION_TIME = 60;
+const SUBMISSION_TIME = 10;
 const RESULTS_TIME = 7;
 const VOTING_TIME = 8; // TOTAL time, including countdown and after
 
@@ -19,9 +19,7 @@ class Room extends React.Component{
     
     this.state = {
       showcase: false,
-      showcaseUsers: ["Ben", "Henry", "Nat", "Tommy"],
       showcaseIdeas: ["McDonald's", "Gas Station Sushi", "Pho King", "Taco Bell", "Costco Pizza", "Chipotle", "In-N-Out Burger"],
-      hasNick: false,
       phase: "room",
       round: 1,
       winner: false,
@@ -56,7 +54,6 @@ class Room extends React.Component{
         socket.addUsername(this.props.currentUser.name);
       }
     }
-    
 
     socket.startPhases(this.handleRoomStart);
     const start = document.getElementById('start-button');
@@ -125,6 +122,7 @@ class Room extends React.Component{
     switch (phase) {
       case "idea-submission": //moves to results
         this.props.fetchUserIdeas(this.props.currentUser.id); // why is it done this way? why not in the idea_submission_index.js file?
+        if (this.state.showcase) this.addShowcaseIdeas();
         this.props.fetchRoomIdeas(this.props.room._id);
 
         setTimeout(() => {
@@ -188,28 +186,16 @@ class Room extends React.Component{
   }
 
 
-  showcaseIdeas() {
-    if (this.state.showcaseIdeas.length > 0) {
-      this.state.showcaseIdeas.forEach(ideaName => {
-        let currentIdea = { 
-          roomId: this.props.room._id,
-          user: this.props.currentUser,
-          body: ideaName,
-          score: 0
-        };
-        this.props.addIdea(currentIdea);
-      });
-      this.setState({ showcaseIdeas: [] });
-    }
-  }
-
-
-  showcaseUsers() {
-    return (
-      this.state.showcaseUsers.map((username, i) => (
-        <li key={`${i}-${username}`} className="room-user-item">{username}</li>
-      ))
-    );
+  addShowcaseIdeas() {
+    this.state.showcaseIdeas.forEach(ideaName => {
+      let currentIdea = { 
+        roomId: this.props.room._id,
+        user: this.props.currentUser,
+        body: ideaName,
+        score: 0
+      };
+      this.props.addIdea(currentIdea);
+    });
   }
 
 
@@ -219,23 +205,17 @@ class Room extends React.Component{
 
 
   room() {
-    let showcase = null;
     let controlBlurb = "Click Start when everyone has joined to begin the submissions phase!";
-    if (this.props.location.state) {
-      if (this.props.location.state.showcase) {
-        // showcase = this.showcaseUsers();
-        controlBlurb = "You and four friends need to pick a restaurant to go to. Press Start and enter some restaurant ideas!"
-      }
+    if (this.props.location.state && this.props.location.state.showcase) {
+      controlBlurb = "You and four friends need to pick a restaurant to go to. Press Start and enter some restaurant ideas!"
     }
 
-    let hostControls;
+    let hostControls = <p className="room-blurb">Waiting for the host to start...</p>;
     if (this.isHost) {
       hostControls = <>
-      <p className="room-blurb">{controlBlurb}</p>
-      <button className="link-btn" id="start-button">Start</button>
+        <p className="room-blurb">{controlBlurb}</p>
+        <button className="link-btn" id="start-button">Start</button>
       </>
-    } else {
-      hostControls = <p className="room-blurb">Waiting for the host to start...</p>
     }
 
     return (
@@ -246,7 +226,6 @@ class Room extends React.Component{
         <h1 className="title room-code">{this.props.room.code}</h1>
         <h2 className="room-subtitle">Room Code</h2>
         <ul id="usernames" className="room-users-container">
-        {showcase}
         </ul>
         {hostControls}
       </div>
@@ -267,7 +246,6 @@ class Room extends React.Component{
       case "idea-submission":
         return <IdeaSubmissionContainer timer={this.state.timer} room={this.props.room._id}/>
       case "results":
-        if (this.state.showcase) this.showcaseIdeas();
         return <VotingResultsContainer round={this.state.round} timer={this.state.timer}/>
       case "voting":
         return <VotingPhaseContainer
