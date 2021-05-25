@@ -22,7 +22,7 @@ router.get("/code/:code", (req, res) => {
     .findOne({ code: req.params.code })
     .then(room => {
       if (!room) {
-        errors.code = "This room does not exist";
+        errors.code = "Room code is invalid!";
         return res.status(400).json(errors);
       } else {
         return res.json(room);
@@ -35,7 +35,7 @@ router.get("/:id", (req, res) => {
   Room
     .findById(req.params.id)
     .then(room => res.json(room))
-    .catch(err => res.status(400).json({ noroomfound: "This room does not exist"}));
+    .catch(err => res.status(400).json({ noroomfound: "Please enter a room code!"}));
 
 });
 

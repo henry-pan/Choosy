@@ -7,15 +7,15 @@ module.exports = function validateRoomCode(data) {
   data.code = validText(data.code) ? data.code : '';
 
   if (Validator.isEmpty(data.code)) {
-    errors.code = 'Code is required';
+    errors.code = 'Room code is required.';
   }
 
   if (!Validator.isLength(data.code, { min : 6, max: 6 })) {
-    errors.code = "Code must have a length of 6";
+    errors.code = "Room codes are 6 numbers long!";
   }
 
   if (!Validator.isNumeric(data.code, { no_symbols: true})) {
-    errors.code = "Code must all be numbers";
+    errors.code = "Room codes are all numbers!";
   }
 
   return {
