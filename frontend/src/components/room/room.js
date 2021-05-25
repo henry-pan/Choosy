@@ -45,18 +45,19 @@ class Room extends React.Component{
     );
     
     const socket = new SocketClass(this.props.room.code);
+    socket.error();
     if (this.props.location.state) {
       this.setState({ showcase: true });
       socket.joinShowcase();
+      socket.signedOutShowcaseUsername();
     } else {
       socket.joinRoom();
+      if (this.props.currentUser.name !== "Guest") {
+        socket.addUsername(this.props.currentUser.name);
+      }
     }
     
-    socket.error();
-    if (this.props.currentUser.name !== "Guest" ){
-      socket.addUsername(this.props.currentUser.name);
-    }
-
+    
     socket.startPhases(this.handleRoomStart);
     const start = document.getElementById('start-button');
     socket.startButton(start);

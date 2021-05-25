@@ -26,6 +26,10 @@ class ClientSocket {
       this.socket.emit('add username', name, this.roomCode);
   }
 
+  signedOutShowcaseUsername(){
+    this.socket.emit('add username', 'demo', this.roomCode);
+  }
+
   startButton(start){
     if (start) {
       start.addEventListener('click', (e) => {
