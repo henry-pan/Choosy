@@ -28,9 +28,30 @@ router.get("/user/:user_id", (req, res) => { // note the :user_id wildcard
 //WORKS -- USE THIS TO REFACTOR THE ROOM FLOW
 // gets all the ideas by a given room
 router.get("/room/:room_id", (req, res) => {
+  const ideaSet = new Set();
+  const returnIdeas = new Set();
+  const deleteIdeas = [];
+
   Idea
     .find({ roomId: req.params.room_id })
-    .then(ideas => res.json(ideas))
+    .then(ideas => {
+      for (const idea of ideas) {
+        if (ideaSet.has(idea.body)) {
+          deleteIdeas.push(idea);
+        } else {
+          ideaSet.add(idea.body); 
+          returnIdeas.add(idea);
+        }
+      }
+      res.json(Array.from(returnIdeas));
+    })
+    .then(() => {
+      for (const deleteIdea of deleteIdeas) {
+        Idea.findByIdAndDelete(deleteIdea.id)
+        .then(deleteIdeas.delete(deleteIdea))
+        .catch(err => res.status(400).json(err));
+      }
+    })
     .catch(err => res.status(400).json(err));
 });
 

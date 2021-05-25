@@ -45,7 +45,7 @@ class ClientSocket {
       if (!usernamesEl) return;
       usernamesEl.innerHTML = '';
       for (const username of usernames) {
-        var item = document.createElement('li');
+        let item = document.createElement('li');
         item.textContent = username;
         item.classList.add('room-user-item');
         usernamesEl.appendChild(item);
