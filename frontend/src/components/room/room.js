@@ -121,8 +121,8 @@ class Room extends React.Component{
 
     switch (phase) {
       case "idea-submission": //moves to results
-        this.props.fetchUserIdeas(this.props.currentUser.id); // why is it done this way? why not in the idea_submission_index.js file?
         if (this.state.showcase) this.addShowcaseIdeas();
+        this.props.fetchUserIdeas(this.props.currentUser.id);
         this.props.fetchRoomIdeas(this.props.room._id);
 
         setTimeout(() => {

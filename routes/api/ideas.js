@@ -25,35 +25,37 @@ router.get("/user/:user_id", (req, res) => { // note the :user_id wildcard
     .catch(err => res.status(400).json(err));
 });
 
-//WORKS -- USE THIS TO REFACTOR THE ROOM FLOW
 // gets all the ideas by a given room
 router.get("/room/:room_id", (req, res) => {
   const ideaSet = new Set();
   const returnIdeas = new Set();
-  const deleteIdeas = [];
+  const deleteIdeasArr = [];
+  const deleteIdeas = function(array) {
+    while (array.length > 0) {
+      Idea.findByIdAndDelete(array.pop())
+        .catch(err => res.status(400).json(err));
+    }
+  }
 
   Idea
     .find({ roomId: req.params.room_id })
     .then(ideas => {
       for (const idea of ideas) {
-        if (ideaSet.has(idea.body)) {
-          deleteIdeas.push(idea);
+        if (ideaSet.has(idea.body.toLowerCase())) {
+          deleteIdeasArr.push(idea);
         } else {
-          ideaSet.add(idea.body); 
+          ideaSet.add(idea.body.toLowerCase()); 
           returnIdeas.add(idea);
         }
       }
       res.json(Array.from(returnIdeas));
     })
-    .then(() => {
-      for (const deleteIdea of deleteIdeas) {
-        Idea.findByIdAndDelete(deleteIdea.id)
-        .then(deleteIdeas.delete(deleteIdea))
-        .catch(err => res.status(400).json(err));
-      }
+    .then((res2) => {
+      deleteIdeas(deleteIdeasArr);
     })
     .catch(err => res.status(400).json(err));
 });
+
 
 // gets a specific idea by its id
 router.get("/:id", (req, res) => {
