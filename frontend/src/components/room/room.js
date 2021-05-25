@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./room.css";
 
-const SUBMISSION_TIME = 10;
+const SUBMISSION_TIME = 60;
 const RESULTS_TIME = 7;
 const VOTING_TIME = 8; // TOTAL time, including countdown and after
 
