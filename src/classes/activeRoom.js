@@ -4,7 +4,7 @@ class ActiveRoom {
   constructor(code) {
     this.code = code;
     this.usernames = [];
-    this.showcaseUsernames = ['Ben', 'Henry', 'Nat', 'Sou'];
+    this.showcaseUsernames = ['Ben', 'Henry', 'Nat', 'Tommy'];
     this.started = false;
   }
 
