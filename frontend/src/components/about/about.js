@@ -56,9 +56,9 @@ const About = ({ closeModal }) => {
           <span>Tommy Lee</span>
           <div className="about-member-links">
             <a href="https://github.com/SouVangLee" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
-            <a href="https://www.linkedin.com/in/sou-vang-tommy-lee/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>
+            <a href="https://www.linkedin.com/in/souvanglee/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>
             <a href="https://angel.co/u/souvanglee" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faAngellist} /></a>
-            <a href="https://github.com/SouVangLee" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLink} /></a>
+            <a href="https://www.souvanglee.com" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLink} /></a>
           </div>
         </div>
       </div>
