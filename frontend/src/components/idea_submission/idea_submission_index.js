@@ -35,6 +35,7 @@ class IdeaSubmissionIndex extends React.Component {
   handleIdeaSubmit(e) {
     e.preventDefault();
     this.props.addIdea(this.state.currentIdea);
+    this.setState({ currentIdea: { body: "" } });
     e.target.reset();
   }
 
