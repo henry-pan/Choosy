@@ -21,7 +21,13 @@ Choosy is built using the MERN stack, with the voting and logic on the frontend,
 
 * Create Room
 
-Users who are logged in can create a room, which has a room code. Other users can enter this room code on the front page to join the room, regardless of logged in status. If a guest isn't logged in, they are prompted to enter a name. In the room lobby, all users can see other people who have joined the room.
+Users who are logged in can create a room by clicking the "Create Room" button the front page, becoming the host of the room. There is a room code listed on the page, along with a list of users waiting in the room lobby.
+
+Other users can use the room code to join the room. By entering the room code in the "Enter room code" field on the front page, users can join the room. If a user isn't logged in, they are prompted to enter a name. In the room lobby, all users can see other people who have joined the room. The lobby is updated in real-time using socket.io.
+
+![Joining](https://github.com/henry-pan/Choosy/blob/main/images/joining.gif)
+
+The room host can begin the idea submission phase by clicking the "Start" button.
 
 * Idea Submissions
 
