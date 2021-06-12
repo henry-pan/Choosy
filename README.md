@@ -38,16 +38,21 @@ The room host can begin the idea submission phase by clicking the "Start" button
 
 During the idea submissions phase, users are given one minute to enter their ideas. Users can delete an idea by clicking on the trash icon button next to the idea. When time is up, the user's ideas list is then combined with other users' ideas list to form one big list of ideas.
 
+![Submission](https://github.com/henry-pan/Choosy/blob/main/images/submission.gif)
+
 ## Voting
 
 On the voting phase, each idea in the combined list of ideas is presented to the user. The user has the option to pick "like" or "dislike", indicated by thumbs up and thumbs down buttons. Users will only have a limited time to vote, and if they didn't vote in time, the app will automatically and randomly choose for them!
 
 Each user in the room will vote on the same ideas, at the same time.
 
-## Idea Culling
+![Voting](https://github.com/henry-pan/Choosy/blob/main/images/voting.gif)
 
-After the end of the voting phase, users are shown the results. Every idea will have a numerical score next to them, displaying the number of total "like" votes it has received. Only the ideas that receive the most votes are allowed to move on to the next round of voting. All ideas with zero votes are removed, then half of all remaining ideas are culled every round. This ensures that there will be no ties, and guarantees an outcome that is favored by most or all the users in the room.
+## Idea Culling / Winners
 
+After the end of the voting phase, users are shown the results. Every idea will have a numerical score next to them, displaying the number of total "like" votes it has received. Only the ideas that receive the most votes are allowed to move on to the next round of voting. All ideas with zero votes are removed, then half of all remaining ideas are culled every round. This ensures that there will be no ties, and guarantees an outcome that is favored by most or all of the users in the room.
+
+![Winner](https://github.com/henry-pan/Choosy/blob/main/images/winner.png)
 
 # Contributors
 * **Henry Pan** - Team Lead
